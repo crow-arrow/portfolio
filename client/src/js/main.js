@@ -1,6 +1,22 @@
 import "../css/styles.css";
 import SunCalc from "suncalc";
 
+import jinn1 from "../../Images/jinn-1.png";
+import jinn2 from "../../Images/jinn-2.png";
+import jinn3 from "../../Images/jinn-3.png";
+import jinn4 from "../../Images/jinn-4.png";
+import jinn5 from "../../Images/jinn-5.png";
+import jinn6 from "../../Images/jinn-6.png";
+import jinn7 from "../../Images/jinn-7.png";
+import jinn8 from "../../Images/jinn-8.png";
+import jinn9 from "../../Images/jinn-9.png";
+import jinn10 from "../../Images/jinn-10.png";
+import jinnFull from "../../Images/jinn-full.png";
+import copa from "../../Images/copa.png";
+import copa2 from "../../Images/co-pa.png";
+import portfolio from "../../Images/portfolio.png";
+import comingsoon from "../../Images/coming_soon_2.jpg";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const isTouchDevice = () => {
@@ -165,7 +181,29 @@ window.addEventListener("resize", setWrapperHeight);
 window.addEventListener("load", setWrapperHeight);
 
 // Modal for experience images
-document.querySelectorAll(".portfolio-wrapper").forEach((wrapper) => {
+const portfolioImages = [
+  [
+    "/Images/jinn-1.png",
+    "/Images/jinn-2.png",
+    "/Images/jinn-3.png",
+    "./Images/jinn-4.png",
+    "./Images/jinn-5.png",
+    "./Images/jinn-6.png",
+    "./Images/jinn-7.png",
+    "./Images/jinn-8.png",
+    "./Images/jinn-9.png",
+    "./Images/jinn-10.png",
+    "./Images/jinn-full.png",
+  ],
+  ["./Images/copa.png"],
+  ["./Images/portfolio.png"],
+  ["./Images/coming_soon_2.jpg"],
+];
+
+document.querySelectorAll(".portfolio-wrapper").forEach((wrapper, index) => {
+  // В каждом wrapper, добавляем атрибут data-images с соответствующими изображениями
+  wrapper.dataset.images = JSON.stringify(portfolioImages[index]);
+
   wrapper.addEventListener("click", function () {
     const images = JSON.parse(this.dataset.images);
     openModal(images);
