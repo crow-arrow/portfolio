@@ -15,7 +15,7 @@ export async function getAccessToken() {
   try {
     // Получаем токен доступа
     const { token } = await oauth2Client.getAccessToken();
-    return token; // Возвращаем токен
+    return token;
   } catch (error) {
     console.error("Error generating access token:", error);
     throw new Error("Error generating access token");

@@ -3,9 +3,11 @@ import nodemailer from "nodemailer";
 import { getAccessToken } from "./getTokens.js";
 import cors from "cors";
 import dotenv from "dotenv";
-dotenv.config({ path: ".env" });
+
+dotenv.config({ path: "../../.env" });
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 const ORIGIN = process.env.CORS_ORIGIN;
 
 app.use(
@@ -13,8 +15,6 @@ app.use(
     origin: ORIGIN,
     methods: "GET, POST, PUT, DELETE",
     allowedHeaders: "Content-Type,Authorization",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
   })
 );
 
@@ -39,10 +39,10 @@ const transporter = nodemailer.createTransport({
 app.post("/api/send", async (req, res) => {
   const { fname, lname, email, phone, description } = req.body;
 
-  console.log("Received data:", req.body);
-
   if (!fname || !lname || !email || !description) {
-    return res.status(400).send("Please fill in all required fields.");
+    return res
+      .status(400)
+      .json({ error: "Please fill in all required fields." });
   }
 
   try {
@@ -60,9 +60,10 @@ app.post("/api/send", async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    res.send("Message sent successfully");
+    res.json({ message: "Message sent successfully" });
   } catch (error) {
-    res.status(500).send("Submit error.");
+    console.error("Error sending email:", error);
+    res.status(500).json({ error: "Submit error." });
   }
 });
 
