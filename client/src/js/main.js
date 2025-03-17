@@ -183,21 +183,21 @@ window.addEventListener("load", setWrapperHeight);
 // Modal for experience images
 const portfolioImages = [
   [
-    "/Images/jinn-1.png",
-    "/Images/jinn-2.png",
-    "/Images/jinn-3.png",
-    "./Images/jinn-4.png",
-    "./Images/jinn-5.png",
-    "./Images/jinn-6.png",
-    "./Images/jinn-7.png",
-    "./Images/jinn-8.png",
-    "./Images/jinn-9.png",
-    "./Images/jinn-10.png",
-    "./Images/jinn-full.png",
+    jinn1,
+    jinn2,
+    jinn3,
+    jinn4,
+    jinn5,
+    jinn6,
+    jinn7,
+    jinn8,
+    jinn9,
+    jinn10,
+    jinnFull,
   ],
-  ["./Images/copa.png"],
-  ["./Images/portfolio.png"],
-  ["./Images/coming_soon_2.jpg"],
+  [copa],
+  [portfolio],
+  [comingsoon],
 ];
 
 document.querySelectorAll(".portfolio-wrapper").forEach((wrapper, index) => {
