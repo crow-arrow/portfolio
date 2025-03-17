@@ -4,10 +4,9 @@ import { getAccessToken } from "./getTokens.js";
 import cors from "cors";
 import dotenv from "dotenv";
 
-dotenv.config({ path: "../../.env" });
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 const ORIGIN = process.env.CORS_ORIGIN;
 
 app.use(
@@ -44,6 +43,7 @@ app.post("/api/send", async (req, res) => {
   const { fname, lname, email, phone, description } = req.body;
 
   if (!fname || !lname || !email || !description) {
+    console.log("Missing required fields");
     return res
       .status(400)
       .json({ error: "Please fill in all required fields." });
@@ -63,7 +63,9 @@ app.post("/api/send", async (req, res) => {
       `,
     };
 
+    console.log("Sending email...");
     await transporter.sendMail(mailOptions);
+    console.log("Email sent successfully");
     res.json({ message: "Message sent successfully" });
   } catch (error) {
     console.error("Error sending email:", error);
