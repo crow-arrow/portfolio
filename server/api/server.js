@@ -1,12 +1,11 @@
 import express from "express";
 import nodemailer from "nodemailer";
-import { getAccessToken } from "./getTokens.js"; // Импортируйте вашу функцию получения токена
+import { getAccessToken } from "./getTokens.js";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config({ path: ".env" });
 
 const app = express();
-const PORT = process.env.PORT || 443;
 const ORIGIN = process.env.CORS_ORIGIN;
 
 app.use(
@@ -18,7 +17,6 @@ app.use(
     optionsSuccessStatus: 204,
   })
 );
-app.options("/api/send", cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -68,4 +66,4 @@ app.post("/api/send", async (req, res) => {
   }
 });
 
-app.listen(PORT);
+export default app;

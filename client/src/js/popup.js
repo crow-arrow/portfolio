@@ -69,7 +69,7 @@ document.getElementById("form").addEventListener("submit", function (event) {
     data[key] = value;
   });
 
-  fetch(`${API_BASE_URL}/api/send`, {
+  fetch("/api/send", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
