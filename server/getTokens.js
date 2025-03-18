@@ -13,6 +13,9 @@ oauth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
 // Функция для получения токена доступа
 export async function getAccessToken() {
   try {
+    // Логируем текущее состояние клиента
+    console.log("OAuth2 Client credentials:", oauth2Client.credentials);
+
     // Получаем токен доступа
     const { token } = await oauth2Client.getAccessToken();
     return token;
