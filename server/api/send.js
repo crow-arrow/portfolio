@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { getAccessToken } from "../../getTokens.js"; // Если файл getTokens.js находится на уровне выше
+import { getAccessToken } from "../getTokens"; // Если файл getTokens.js находится на уровне выше
 import dotenv from "dotenv";
 
 dotenv.config();
