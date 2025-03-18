@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { getAccessToken } from "../getTokens.js";
+import { getAccessToken } from "./getTokens.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method === "POST") {
     const { fname, lname, email, phone, description } = req.body;
 
@@ -52,4 +52,4 @@ export default async function handler(req, res) {
   } else {
     res.status(405).json({ error: "Method Not Allowed" });
   }
-}
+};

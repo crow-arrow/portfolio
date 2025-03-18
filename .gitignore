@@ -139,3 +139,4 @@ dist
 .vite/
 client/.vite/deps/
 .DS_Store
+.vercel

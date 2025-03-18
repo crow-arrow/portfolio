@@ -60,40 +60,38 @@ document
     });
   });
 
-document.getElementById("form").addEventListener("submit", function (event) {
-  event.preventDefault();
+document
+  .getElementById("form")
+  .addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-  const formData = new FormData(event.target);
-  const data = {};
-  formData.forEach((value, key) => {
-    data[key] = value;
-  });
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
 
-  fetch("/api/send", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      if (response.ok) {
-        Toastify({
-          text: "Message sent successfully!",
-          duration: 3000,
-          backgroundColor: "#26dfae",
-        }).showToast();
-        event.target.reset();
-        popup.classList.add("hiden");
-      } else {
-        throw new Error("Error sending message");
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error message sending");
       }
-    })
-    .catch((error) => {
+
+      Toastify({
+        text: "Message sent successfully!",
+        duration: 3000,
+        backgroundColor: "#26dfae",
+      }).showToast();
+
+      event.target.reset();
+      document.getElementById("popup")?.classList.add("hidden");
+    } catch (error) {
       Toastify({
         text: "There was an error sending the message.",
         duration: 3000,
         backgroundColor: "#df2666",
       }).showToast();
-    });
-});
+    }
+  });
