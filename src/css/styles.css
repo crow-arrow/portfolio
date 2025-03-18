@@ -558,6 +558,12 @@ html.litemode #theme-switch .material-symbols-outlined:nth-child(2) {
   }
 }
 
+.button:disabled {
+  box-shadow:var(--shadowAfter);
+  color: var(--color-input);
+  background: var(--color-background-button);
+}
+
 /* About Section */
 
 .about-title {
