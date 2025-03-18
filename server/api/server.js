@@ -38,6 +38,8 @@ const transporter = nodemailer.createTransport({
 app.get("/api/test", (req, res) => {
   res.json({ message: "API is working!" });
 });
+console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log("CLIENT_ID:", process.env.CLIENT_ID);
 
 app.post("/api/send", async (req, res) => {
   const { fname, lname, email, phone, description } = req.body;
