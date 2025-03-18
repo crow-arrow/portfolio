@@ -1,24 +1,8 @@
-import express from "express";
 import nodemailer from "nodemailer";
-import { getAccessToken } from "./getTokens.js";
-import cors from "cors";
+import { getAccessToken } from "../../getTokens.js"; // Если файл getTokens.js находится на уровне выше
 import dotenv from "dotenv";
 
 dotenv.config();
-
-const app = express();
-const ORIGIN = process.env.CORS_ORIGIN;
-
-app.use(
-  cors({
-    origin: ORIGIN,
-    methods: "GET, POST, PUT, DELETE",
-    allowedHeaders: "Content-Type,Authorization",
-  })
-);
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -35,44 +19,37 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-console.log("NodeMailer transporter:", transporter);
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    const { fname, lname, email, phone, description } = req.body;
 
-app.get("/api/test", (req, res) => {
-  res.json({ message: "API is working!" });
-});
+    if (!fname || !lname || !email || !description) {
+      return res
+        .status(400)
+        .json({ error: "Please fill in all required fields." });
+    }
 
-app.post("/api/send", async (req, res) => {
-  const { fname, lname, email, phone, description } = req.body;
+    try {
+      const mailOptions = {
+        from: `"${fname} ${lname}" <${process.env.EMAIL_USER}>`,
+        to: process.env.EMAIL_USER,
+        subject: "New job enquiry",
+        html: `
+          <h1>New job enquiry</h1>
+          <p><strong>Name:</strong> ${fname} ${lname}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone || "Null"}</p>
+          <p><strong>Description:</strong> ${description}</p>
+        `,
+      };
 
-  if (!fname || !lname || !email || !description) {
-    console.log("Missing required fields");
-    return res
-      .status(400)
-      .json({ error: "Please fill in all required fields." });
+      await transporter.sendMail(mailOptions);
+      res.status(200).json({ message: "Message sent successfully" });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      res.status(500).json({ error: "Submit error." });
+    }
+  } else {
+    res.status(405).json({ error: "Method Not Allowed" });
   }
-
-  try {
-    const mailOptions = {
-      from: `"${fname} ${lname}" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
-      subject: "New job enquiry",
-      html: `
-        <h1>New job enquiry</h1>
-        <p><strong>Name:</strong> ${fname} ${lname}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone || "Null"}</p>
-        <p><strong>Description:</strong> ${description}</p>
-      `,
-    };
-
-    console.log("Sending email...");
-    await transporter.sendMail(mailOptions);
-    console.log("Email sent successfully");
-    res.json({ message: "Message sent successfully" });
-  } catch (error) {
-    console.error("Error sending email:", error);
-    res.status(500).json({ error: "Submit error." });
-  }
-});
-
-export default app;
+}
