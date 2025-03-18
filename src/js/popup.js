@@ -68,6 +68,27 @@ document
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
 
+    // Регулярное выражение для проверки телефона
+    const phoneRegex = /^\+([0-9]{1,4})?([0-9]{7,15})$/;
+
+    if (!phoneRegex.test(data.phone)) {
+      const phoneInput = document.getElementById("phone");
+      phoneInput.classList.add("invalid");
+      phoneInput.style.border = "1px solid #df2666";
+      phoneInput.style.animation = "shake 0.3s 0s 3";
+      const asterix = phoneInput.closest(".textbox").querySelector(".asterix");
+      if (asterix) {
+        asterix.style.opacity = "1";
+        asterix.style.animation = "shake 0.3s 0s 3";
+      }
+      Toastify({
+        text: "Phone number is invalid. It must start with '+' and contain 7-15 digits.",
+        duration: 3000,
+        backgroundColor: "#df2666",
+      }).showToast();
+      return; // Останавливаем отправку формы
+    }
+
     try {
       const response = await fetch("/api/send", {
         method: "POST",
