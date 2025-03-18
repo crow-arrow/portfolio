@@ -1,4 +1,3 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const openButton = document.querySelector("#open_pop_up");
 const popup = document.querySelector(".pop_up");
 const popupBody = document.querySelector(".pop_up_body");
@@ -69,7 +68,7 @@ document
     const data = Object.fromEntries(formData.entries());
 
     // Регулярное выражение для проверки телефона
-    const phoneRegex = /^\+([0-9]{1,4})?([0-9]{7,15})$/;
+    const phoneRegex = /^\+([0-9]{1,4})?([0-9]{7,15})(?:\s?[0-9]{1,4})*$/;
 
     if (!phoneRegex.test(data.phone)) {
       const phoneInput = document.getElementById("phone");
@@ -88,6 +87,21 @@ document
       }).showToast();
       return; // Останавливаем отправку формы
     }
+
+    // Получаем кнопку submit
+    const submitButton = event.target.querySelector("button[type='submit']");
+
+    // Создаём прелоадер (анимированное изображение)
+    const loader = document.createElement("img");
+    const preloader = "path/to/your/preload.gif";
+    loader.src = preloader; // Используем путь к вашему gif-файлу
+    loader.alt = "Loading..."; // Добавляем описание для доступности
+    loader.classList.add("loader"); // Можно добавить свой класс стилей для анимации
+
+    // Добавляем прелоадер на кнопку и отключаем её
+    submitButton.disabled = true;
+    submitButton.innerHTML = ""; // Очистим текст кнопки, чтобы оставить только прелоадер
+    submitButton.appendChild(loader);
 
     try {
       const response = await fetch("/api/send", {
@@ -114,5 +128,8 @@ document
         duration: 3000,
         backgroundColor: "#df2666",
       }).showToast();
+    } finally {
+      submitButton.disabled = false;
+      submitButton.innerHTML = "Submit"; // Возвращаем текст кнопки
     }
   });

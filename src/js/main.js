@@ -1,6 +1,4 @@
 import "../css/styles.css";
-import SunCalc from "suncalc";
-
 import jinn1 from "../../Images/jinn-1.png";
 import jinn2 from "../../Images/jinn-2.png";
 import jinn3 from "../../Images/jinn-3.png";
@@ -13,7 +11,6 @@ import jinn9 from "../../Images/jinn-9.png";
 import jinn10 from "../../Images/jinn-10.png";
 import jinnFull from "../../Images/jinn-full.png";
 import copa from "../../Images/copa.png";
-import copa2 from "../../Images/co-pa.png";
 import portfolio from "../../Images/portfolio.png";
 import comingsoon from "../../Images/coming_soon_2.jpg";
 
