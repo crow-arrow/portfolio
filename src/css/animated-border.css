@@ -1,0 +1,62 @@
+@property --a {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+:root {
+  --border-gradient: conic-gradient(
+    from var(--a),
+    transparent, transparent, transparent, #ff6900,
+    transparent, transparent, transparent, #ff6900, transparent
+  );
+  --border-width: 5px;
+}
+
+.hero__inner {
+  columns: 2;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hero-section {
+  width: 40vw;
+  min-width: 300px;
+  max-width: 600px;
+  height: auto;
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 50%;
+  box-shadow: var(--box-shadow-inset);
+  overflow: hidden;
+  filter: drop-shadow(var(--box-shadow));
+}
+
+.profile-picture {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  
+  /* mix-blend-mode: lighten; */
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit; /* Наследуем скругление углов */
+  padding: var(--border-width);
+  background-image: var(--border-gradient);
+  animation: rotate 6s linear infinite;
+  mask: 
+    conic-gradient(#000 0 0) content-box exclude,
+    conic-gradient(#000 0 0)
+  ;
+}
+
+@keyframes rotate {
+  to {
+    --a: 1turn;
+  }
+}
