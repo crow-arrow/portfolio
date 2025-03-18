@@ -1,3 +1,5 @@
+import preloader from "../../public/preload.gif";
+
 const openButton = document.querySelector("#open_pop_up");
 const popup = document.querySelector(".pop_up");
 const popupBody = document.querySelector(".pop_up_body");
@@ -85,14 +87,12 @@ document
         duration: 3000,
         backgroundColor: "#df2666",
       }).showToast();
-      return; // Останавливаем отправку формы
+      return;
     }
 
-    // Получаем кнопку submit
     const submitButton = event.target.querySelector("button[type='submit']");
 
     const loader = document.createElement("img");
-    const preloader = "../../icons/preloader.gif";
     loader.src = preloader;
     loader.alt = "Loading...";
     loader.classList.add("loader");
