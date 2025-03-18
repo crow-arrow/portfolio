@@ -35,17 +35,17 @@ document
     input.addEventListener("blur", function () {
       const isPhone = this.id === "phone";
       const isEmpty = this.value.trim() === "";
+      const asterix = this.closest(".textbox").querySelector(".asterix");
 
       if (!isPhone && isEmpty) {
         this.classList.add("invalid");
-        const asterix = this.closest(".textbox").querySelector(".asterix");
+
         if (asterix) {
           asterix.style.opacity = "1";
           asterix.style.animation = "shake 0.3s 0s 3";
         }
       } else {
         this.classList.remove("invalid");
-        const asterix = this.closest(".textbox").querySelector(".asterix");
         if (asterix) {
           asterix.style.opacity = "0";
           asterix.style.animation = "none";
@@ -86,7 +86,7 @@ document
       }).showToast();
 
       event.target.reset();
-      document.getElementById("popup")?.classList.add("hidden");
+      popup.classList.add("hiden");
     } catch (error) {
       Toastify({
         text: "There was an error sending the message.",

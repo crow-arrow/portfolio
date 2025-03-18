@@ -29,6 +29,14 @@ export default async function handler(req, res) {
         .json({ error: "Please fill in all required fields." });
     }
 
+    const phoneRegex = /^\+([0-9]{1,4})?([0-9]{7,15})$/;
+    if (!phone || !phoneRegex.test(phone)) {
+      return res.status(400).json({
+        error:
+          "Invalid phone number. It must start with a '+' and contain 7-15 digits.",
+      });
+    }
+
     try {
       const mailOptions = {
         from: `"${fname} ${lname}" <${process.env.EMAIL_USER}>`,
