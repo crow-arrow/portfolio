@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method === "POST") {
     const { fname, lname, email, phone, description } = req.body;
 
@@ -52,4 +52,4 @@ module.exports = async function handler(req, res) {
   } else {
     res.status(405).json({ error: "Method Not Allowed" });
   }
-};
+}
