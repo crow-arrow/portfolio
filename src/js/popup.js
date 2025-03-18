@@ -91,16 +91,14 @@ document
     // Получаем кнопку submit
     const submitButton = event.target.querySelector("button[type='submit']");
 
-    // Создаём прелоадер (анимированное изображение)
     const loader = document.createElement("img");
-    const preloader = "path/to/your/preload.gif";
-    loader.src = preloader; // Используем путь к вашему gif-файлу
-    loader.alt = "Loading..."; // Добавляем описание для доступности
-    loader.classList.add("loader"); // Можно добавить свой класс стилей для анимации
+    const preloader = "../../icons/preloader.gif";
+    loader.src = preloader;
+    loader.alt = "Loading...";
+    loader.classList.add("loader");
 
-    // Добавляем прелоадер на кнопку и отключаем её
     submitButton.disabled = true;
-    submitButton.innerHTML = ""; // Очистим текст кнопки, чтобы оставить только прелоадер
+    submitButton.innerHTML = "";
     submitButton.appendChild(loader);
 
     try {
@@ -130,6 +128,6 @@ document
       }).showToast();
     } finally {
       submitButton.disabled = false;
-      submitButton.innerHTML = "Submit"; // Возвращаем текст кнопки
+      submitButton.innerHTML = "Submit";
     }
   });
