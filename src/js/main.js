@@ -70,7 +70,7 @@ function trackElementClicks() {
 
   elements.forEach((element) => {
     element.addEventListener("click", (event) => {
-      const clickedElement = event.target;
+      const clickedElement = event.target.closest("a, button");
       console.log(
         `User clicked on: ${clickedElement.tagName} with ID: ${
           clickedElement.id || "No ID"
