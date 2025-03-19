@@ -13,6 +13,9 @@ import jinnFull from "../../Images/jinn-full.png";
 import copa from "../../Images/copa.png";
 import portfolio from "../../Images/portfolio.png";
 import comingsoon from "../../Images/coming_soon_2.jpg";
+import { inject } from "@vercel/analytics";
+
+inject();
 
 gsap.registerPlugin(ScrollTrigger);
 
