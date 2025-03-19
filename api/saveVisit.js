@@ -2,7 +2,7 @@ import { neon } from "@neondatabase/serverless";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { session_id, visit_start, visit_end } = req.body;
+    const { session_id, visit_start, visit_end, referrer } = req.body;
 
     if (!session_id || !visit_start || !visit_end) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -12,8 +12,8 @@ export default async function handler(req, res) {
       const sql = neon(process.env.DATABASE_URL);
 
       await sql(
-        "INSERT INTO visitors (session_id, visit_start, visit_end) VALUES ($1, $2, $3)",
-        [session_id, visit_start, visit_end]
+        "INSERT INTO visitors (session_id, visit_start, visit_end, referrer) VALUES ($1, $2, $3, $4)",
+        [session_id, visit_start, visit_end, referrer]
       );
 
       return res.status(200).json({ message: "Visit data saved successfully" });
