@@ -34,8 +34,9 @@ function getVisitStart() {
 const visitStart = getVisitStart();
 const sessionId = sessionStorage.getItem("session_id") || crypto.randomUUID();
 sessionStorage.setItem("session_id", sessionId);
+const referrer = document.referrer || "direct";
 
-async function saveVisitData(visitStart, sessionId, visitEnd = null) {
+async function saveVisitData(visitStart, sessionId, visitEnd = null, referrer) {
   try {
     const response = await fetch("/api/saveVisit", {
       method: "POST",
@@ -44,6 +45,7 @@ async function saveVisitData(visitStart, sessionId, visitEnd = null) {
         session_id: sessionId,
         visit_start: visitStart,
         visit_end: visitEnd,
+        referrer: referrer,
       }),
     });
 
@@ -59,7 +61,7 @@ async function saveVisitData(visitStart, sessionId, visitEnd = null) {
 
 window.addEventListener("beforeunload", () => {
   const visitEnd = new Date().toISOString();
-  saveVisitData(visitStart, sessionId, visitEnd);
+  saveVisitData(visitStart, sessionId, visitEnd, referrer);
 });
 
 gsap.registerPlugin(ScrollTrigger);
