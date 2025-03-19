@@ -64,6 +64,51 @@ window.addEventListener("beforeunload", () => {
   saveVisitData(visitStart, sessionId, visitEnd, referrer);
 });
 
+//  track clicks buttons and links
+function trackElementClicks() {
+  const elements = document.querySelectorAll("button, a");
+
+  elements.forEach((element) => {
+    element.addEventListener("click", (event) => {
+      const clickedElement = event.target;
+      console.log(
+        `User clicked on: ${clickedElement.tagName} with ID: ${
+          clickedElement.id || "No ID"
+        } and Text: ${clickedElement.textContent}`
+      );
+
+      sendClickDataToServer(clickedElement);
+    });
+  });
+}
+
+function sendClickDataToServer(element) {
+  const data = {
+    elementTag: element.tagName,
+    elementId: element.id || null,
+    elementText: element.textContent,
+    timestamp: new Date().toISOString(),
+  };
+
+  fetch("/api/saveClickData", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      if (response.ok) {
+        console.log("Click data saved successfully");
+      } else {
+        console.error("Failed to save click data");
+      }
+    })
+    .catch((error) => {
+      console.error("Error sending click data:", error);
+    });
+}
+
+trackElementClicks();
+
 gsap.registerPlugin(ScrollTrigger);
 
 const isTouchDevice = () => {
