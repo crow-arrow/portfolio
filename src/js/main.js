@@ -50,7 +50,10 @@ async function saveVisitData(visitStart, sessionId, visitEnd = null, referrer) {
     });
 
     if (response.ok) {
-      console.log("Visit data saved successfully");
+      const data = await response.json();
+      const visitor_id = data.visitor_id;
+      console.log("Visit data saved successfully, visitor_id:", visitor_id);
+      return visitor_id;
     } else {
       console.error("Failed to save visit data");
     }
@@ -82,8 +85,9 @@ function trackElementClicks() {
   });
 }
 
-function sendClickDataToServer(element) {
+function sendClickDataToServer(element, sessionId) {
   const data = {
+    session_id: sessionId,
     elementTag: element.tagName,
     elementId: element.id || null,
     elementText: element.textContent,
