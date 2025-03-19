@@ -36,7 +36,7 @@ const sessionId = sessionStorage.getItem("session_id") || crypto.randomUUID();
 sessionStorage.setItem("session_id", sessionId);
 const referrer = document.referrer || "direct";
 
-async function saveVisitData(visitStart, sessionId, visitEnd = null, referrer) {
+async function saveVisitData(sessionId, visitStart, referrer) {
   try {
     const response = await fetch("/api/saveVisit", {
       method: "POST",
@@ -44,16 +44,12 @@ async function saveVisitData(visitStart, sessionId, visitEnd = null, referrer) {
       body: JSON.stringify({
         session_id: sessionId,
         visit_start: visitStart,
-        visit_end: visitEnd,
         referrer: referrer,
       }),
     });
 
     if (response.ok) {
-      const data = await response.json();
-      const visitor_id = data.visitor_id;
-      console.log("Visit data saved successfully, visitor_id:", visitor_id);
-      return visitor_id;
+      console.log("Visit data saved successfully");
     } else {
       console.error("Failed to save visit data");
     }
@@ -62,10 +58,27 @@ async function saveVisitData(visitStart, sessionId, visitEnd = null, referrer) {
   }
 }
 
-window.addEventListener("beforeunload", () => {
-  const visitEnd = new Date().toISOString();
-  saveVisitData(visitStart, sessionId, visitEnd, referrer);
-});
+async function updateVisitData(sessionId, visitEnd, updatedAt) {
+  try {
+    const response = await fetch("/api/updateVisit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        session_id: sessionId,
+        visit_end: visitEnd,
+        updated_at: updatedAt,
+      }),
+    });
+
+    if (response.ok) {
+      console.log("Visit data updated successfully");
+    } else {
+      console.error("Failed to update visit data");
+    }
+  } catch (error) {
+    console.error("Error updating visit data:", error);
+  }
+}
 
 function trackElementClicks() {
   const elements = document.querySelectorAll("button, a");
@@ -109,6 +122,13 @@ async function sendClickDataToServer(element, sessionId) {
     console.error("Error sending click data:", error);
   }
 }
+
+window.addEventListener("beforeunload", () => {
+  const visitEnd = new Date().toISOString();
+  const updatedAt = new Date().toISOString();
+  saveVisitData(sessionId, visitStart, referrer);
+  updateVisitData(sessionId, visitEnd, updatedAt);
+});
 
 trackElementClicks();
 
