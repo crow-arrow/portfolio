@@ -14,8 +14,48 @@ import copa from "../../Images/copa.png";
 import portfolio from "../../Images/portfolio.png";
 import comingsoon from "../../Images/coming_soon_2.jpg";
 import { inject } from "@vercel/analytics";
+import { injectSpeedInsights } from "@vercel/speed-insights";
 
 inject();
+injectSpeedInsights();
+
+// Visitors session time
+const sessionId = crypto.randomUUID();
+
+const visitStart = new Date().toISOString();
+
+localStorage.setItem("session_start", visitStart);
+localStorage.setItem("session_id", sessionId);
+
+async function saveVisitData(visitStart, sessionId, visitEnd = null) {
+  try {
+    const response = await fetch("/api/save-visit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        session_id: sessionId,
+        visit_start: visitStart,
+        visit_end: visitEnd,
+      }),
+    });
+
+    if (response.ok) {
+      console.log("Visit data saved successfully");
+    } else {
+      console.error("Failed to save visit data");
+    }
+  } catch (error) {
+    console.error("Error sending visit data:", error);
+  }
+}
+
+window.addEventListener("beforeunload", () => {
+  const visitEnd = new Date().toISOString();
+  const visitStart = localStorage.getItem("session_start");
+  const sessionId = localStorage.getItem("session_id");
+
+  saveVisitData(visitStart, sessionId, visitEnd);
+});
 
 gsap.registerPlugin(ScrollTrigger);
 
