@@ -109,6 +109,7 @@ function sendClickDataToServer(element) {
 
 trackElementClicks();
 
+// Animation on scroll
 gsap.registerPlugin(ScrollTrigger);
 
 const isTouchDevice = () => {
