@@ -29,7 +29,7 @@ localStorage.setItem("session_id", sessionId);
 
 async function saveVisitData(visitStart, sessionId, visitEnd = null) {
   try {
-    const response = await fetch("/api/save-visit", {
+    const response = await fetch("/api/saveVisit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
