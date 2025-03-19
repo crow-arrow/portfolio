@@ -67,7 +67,6 @@ window.addEventListener("beforeunload", () => {
   saveVisitData(visitStart, sessionId, visitEnd, referrer);
 });
 
-//  track clicks buttons and links
 function trackElementClicks() {
   const elements = document.querySelectorAll("button, a");
 
@@ -80,12 +79,12 @@ function trackElementClicks() {
         } and Text: ${clickedElement.textContent}`
       );
 
-      sendClickDataToServer(clickedElement);
+      sendClickDataToServer(clickedElement, sessionId);
     });
   });
 }
 
-function sendClickDataToServer(element, sessionId) {
+async function sendClickDataToServer(element, sessionId) {
   const data = {
     session_id: sessionId,
     elementTag: element.tagName,
@@ -94,21 +93,21 @@ function sendClickDataToServer(element, sessionId) {
     timestamp: new Date().toISOString(),
   };
 
-  fetch("/api/saveClickData", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      if (response.ok) {
-        console.log("Click data saved successfully");
-      } else {
-        console.error("Failed to save click data");
-      }
-    })
-    .catch((error) => {
-      console.error("Error sending click data:", error);
+  try {
+    const response = await fetch("/api/saveClickData", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     });
+
+    if (response.ok) {
+      console.log("Click data saved successfully");
+    } else {
+      console.error("Failed to save click data");
+    }
+  } catch (error) {
+    console.error("Error sending click data:", error);
+  }
 }
 
 trackElementClicks();
