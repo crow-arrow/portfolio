@@ -20,12 +20,20 @@ inject();
 injectSpeedInsights();
 
 // Visitors session time
-const sessionId = crypto.randomUUID();
+function getVisitStart() {
+  let visitStart = sessionStorage.getItem("visit_start");
 
-const visitStart = new Date().toISOString();
+  if (!visitStart) {
+    visitStart = new Date().toISOString();
+    sessionStorage.setItem("visit_start", visitStart);
+  }
 
-localStorage.setItem("session_start", visitStart);
-localStorage.setItem("session_id", sessionId);
+  return visitStart;
+}
+
+const visitStart = getVisitStart();
+const sessionId = sessionStorage.getItem("session_id") || crypto.randomUUID();
+sessionStorage.setItem("session_id", sessionId);
 
 async function saveVisitData(visitStart, sessionId, visitEnd = null) {
   try {
@@ -51,9 +59,6 @@ async function saveVisitData(visitStart, sessionId, visitEnd = null) {
 
 window.addEventListener("beforeunload", () => {
   const visitEnd = new Date().toISOString();
-  const visitStart = localStorage.getItem("session_start");
-  const sessionId = localStorage.getItem("session_id");
-
   saveVisitData(visitStart, sessionId, visitEnd);
 });
 
