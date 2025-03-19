@@ -16,11 +16,7 @@ export default async function handler(req, res) {
         [session_id, visit_start, referrer]
       );
 
-      const visitor_id = result[0].id;
-
-      return res
-        .status(200)
-        .json({ message: "Visit data saved successfully", visitor_id });
+      return res.status(200).json({ message: "Visit data saved successfully" });
     } catch (error) {
       console.error("Error saving visit data:", error);
       return res.status(500).json({ message: "Error saving visit data" });
