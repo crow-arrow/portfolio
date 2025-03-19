@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     try {
       const sql = neon(process.env.DATABASE_URL);
 
-      const result = await sql(
+      await sql(
         "SELECT id FROM visitors WHERE (session_id, visit_start, referrer) = ($1, $2, $3)",
         [session_id, visit_start, referrer]
       );
