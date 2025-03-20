@@ -36,6 +36,9 @@ const sessionId = sessionStorage.getItem("session_id") || crypto.randomUUID();
 sessionStorage.setItem("session_id", sessionId);
 const referrer = document.referrer || "direct";
 
+let visitorId = null;
+
+// Сохранение данных о визите
 async function saveVisitData(visitStart, sessionId, referrer) {
   try {
     const response = await fetch("/api/saveVisit", {
@@ -49,7 +52,12 @@ async function saveVisitData(visitStart, sessionId, referrer) {
     });
 
     if (response.ok) {
+      const data = await response.json();
+      visitorId = data.visitor_id;
       console.log("Visit data saved successfully");
+
+      // Запускаем отслеживание кликов только после получения visitorId
+      trackElementClicks();
     } else {
       console.error("Failed to save visit data");
     }
@@ -62,29 +70,36 @@ window.addEventListener("DOMContentLoaded", () => {
   saveVisitData(visitStart, sessionId, referrer);
 });
 
-//  track clicks buttons and links
+// Отслеживание кликов по кнопкам и ссылкам
 function trackElementClicks() {
-  const elements = document.querySelectorAll("button, a");
+  if (!visitorId) {
+    console.warn("visitorId is not available yet, click tracking is delayed.");
+    return;
+  }
 
-  elements.forEach((element) => {
-    element.addEventListener("click", (event) => {
-      const clickedElement = event.target.closest("a, button");
-      console.log(
-        `User clicked on: ${clickedElement.tagName} with ID: ${
-          clickedElement.id || "No ID"
-        } and Text: ${clickedElement.textContent}`
-      );
+  document.body.addEventListener("click", (event) => {
+    const clickedElement = event.target.closest("a, button");
+    if (!clickedElement) return;
 
-      sendClickDataToServer(clickedElement);
-    });
+    console.log(
+      `User clicked on: ${clickedElement.tagName} with ID: ${
+        clickedElement.id || "No ID"
+      } and Text: ${clickedElement.textContent}`
+    );
+
+    sendClickDataToServer(clickedElement);
   });
 }
 
+// Отправка данных о клике на сервер
 function sendClickDataToServer(element) {
+  if (!visitorId) return;
+
   const data = {
+    visitor_id: visitorId,
     elementTag: element.tagName,
     elementId: element.id || null,
-    elementText: element.textContent,
+    elementText: element.textContent.trim(),
     timestamp: new Date().toISOString(),
   };
 
@@ -104,8 +119,6 @@ function sendClickDataToServer(element) {
       console.error("Error sending click data:", error);
     });
 }
-
-trackElementClicks();
 
 async function saveVisitEnd(sessionId) {
   try {
