@@ -146,7 +146,8 @@ async function saveVisitEnd(sessionId) {
 }
 
 window.addEventListener("beforeunload", () => {
-  saveVisitEnd(sessionId);
+  const visitEnd = new Date().toISOString();
+  saveVisitData(visitEnd);
 });
 
 // Animation on scroll
