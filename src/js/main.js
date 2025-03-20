@@ -154,6 +154,10 @@ window.addEventListener("beforeunload", () => {
   }
 });
 
+window.addEventListener("unload", () => {
+  sessionStorage.removeItem("visit_end_saved");
+});
+
 // Animation on scroll
 gsap.registerPlugin(ScrollTrigger);
 
