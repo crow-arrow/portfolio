@@ -125,7 +125,6 @@ function sendClickDataToServer(element) {
 
 async function saveVisitEnd(sessionId) {
   try {
-    const visitEnd = new Date().toISOString();
     const response = await fetch("/api/saveVisitEnd", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -147,7 +146,7 @@ async function saveVisitEnd(sessionId) {
 
 window.addEventListener("beforeunload", () => {
   const visitEnd = new Date().toISOString();
-  saveVisitData(visitEnd);
+  saveVisitEnd(visitEnd);
 });
 
 // Animation on scroll
