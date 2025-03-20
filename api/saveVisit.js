@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       const sql = neon(process.env.DATABASE_URL);
 
       const result = await sql(
-        "INSERT INTO visitors (session_id, visit_start, referrer) VALUES ($1, $2, $3)",
+        "INSERT INTO visitors (session_id, visit_start, referrer) VALUES ($1, $2, $3) RETURNING id",
         [session_id, visit_start, referrer]
       );
 
