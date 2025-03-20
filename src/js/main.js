@@ -36,7 +36,7 @@ const sessionId = sessionStorage.getItem("session_id") || crypto.randomUUID();
 sessionStorage.setItem("session_id", sessionId);
 const referrer = document.referrer || "direct";
 
-async function saveVisitData(visitStart, sessionId, visitEnd = null, referrer) {
+async function saveVisitData(visitStart, sessionId, referrer) {
   try {
     const response = await fetch("/api/saveVisit", {
       method: "POST",
@@ -44,7 +44,6 @@ async function saveVisitData(visitStart, sessionId, visitEnd = null, referrer) {
       body: JSON.stringify({
         session_id: sessionId,
         visit_start: visitStart,
-        visit_end: visitEnd,
         referrer: referrer,
       }),
     });
@@ -59,9 +58,8 @@ async function saveVisitData(visitStart, sessionId, visitEnd = null, referrer) {
   }
 }
 
-window.addEventListener("beforeunload", () => {
-  const visitEnd = new Date().toISOString();
-  saveVisitData(visitStart, sessionId, visitEnd, referrer);
+window.addEventListener("DOMContentLoaded", () => {
+  saveVisitData(visitStart, sessionId, referrer);
 });
 
 //  track clicks buttons and links
@@ -108,6 +106,32 @@ function sendClickDataToServer(element) {
 }
 
 trackElementClicks();
+
+async function saveVisitEnd(sessionId) {
+  try {
+    const visitEnd = new Date().toISOString();
+    const response = await fetch("/api/saveVisitEnd", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        session_id: sessionId,
+        visit_end: visitEnd,
+      }),
+    });
+
+    if (response.ok) {
+      console.log("Visit end saved successfully");
+    } else {
+      console.error("Failed to save visit end");
+    }
+  } catch (error) {
+    console.error("Error sending visit end data:", error);
+  }
+}
+
+window.addEventListener("beforeunload", () => {
+  saveVisitEnd(sessionId);
+});
 
 // Animation on scroll
 gsap.registerPlugin(ScrollTrigger);
