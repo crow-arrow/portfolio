@@ -125,6 +125,7 @@ function sendClickDataToServer(element) {
 
 async function saveVisitEnd(sessionId) {
   try {
+    const visitEnd = new Date().toISOString();
     const response = await fetch("/api/saveVisitEnd", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -144,9 +145,16 @@ async function saveVisitEnd(sessionId) {
   }
 }
 
+// Добавляем флаг в sessionStorage для отслеживания завершения визита
 window.addEventListener("beforeunload", () => {
-  const visitEnd = new Date().toISOString();
-  saveVisitEnd(visitEnd);
+  // Проверяем, была ли уже сохранена информация о завершении визита
+  const isVisitEndSaved = sessionStorage.getItem("visit_end_saved");
+
+  // Если визит еще не завершен, сохраняем завершение визита
+  if (!isVisitEndSaved) {
+    saveVisitEnd(sessionId); // Отправляем данные о завершении визита
+    sessionStorage.setItem("visit_end_saved", "true"); // Помечаем визит как завершённый
+  }
 });
 
 // Animation on scroll
