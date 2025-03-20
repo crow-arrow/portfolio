@@ -36,10 +36,15 @@ const sessionId = sessionStorage.getItem("session_id") || crypto.randomUUID();
 sessionStorage.setItem("session_id", sessionId);
 const referrer = document.referrer || "direct";
 
-let visitorId = null;
+let visitorId = sessionStorage.getItem("visitor_id");
 
-// Сохранение данных о визите
 async function saveVisitData(visitStart, sessionId, referrer) {
+  if (visitorId) {
+    console.log("Visitor already exists with ID:", visitorId);
+    trackElementClicks();
+    return;
+  }
+
   try {
     const response = await fetch("/api/saveVisit", {
       method: "POST",
@@ -54,9 +59,9 @@ async function saveVisitData(visitStart, sessionId, referrer) {
     if (response.ok) {
       const data = await response.json();
       visitorId = data.visitor_id;
+      sessionStorage.setItem("visitor_id", visitorId);
       console.log("Visit data saved successfully");
 
-      // Запускаем отслеживание кликов только после получения visitorId
       trackElementClicks();
     } else {
       console.error("Failed to save visit data");
@@ -70,7 +75,6 @@ window.addEventListener("DOMContentLoaded", () => {
   saveVisitData(visitStart, sessionId, referrer);
 });
 
-// Отслеживание кликов по кнопкам и ссылкам
 function trackElementClicks() {
   if (!visitorId) {
     console.warn("visitorId is not available yet, click tracking is delayed.");
@@ -91,7 +95,6 @@ function trackElementClicks() {
   });
 }
 
-// Отправка данных о клике на сервер
 function sendClickDataToServer(element) {
   if (!visitorId) return;
 
