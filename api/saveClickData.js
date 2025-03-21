@@ -2,10 +2,10 @@ import { neon } from "@neondatabase/serverless";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { visitor_id, element_tag, element_id, element_text, timestamp } =
+    const { visitor_id, elementTag, elementId, elementText, timestamp } =
       req.body;
 
-    if (!visitor_id || !element_tag || !timestamp) {
+    if (!visitor_id || !elementTag || !timestamp) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
       await sql(
         "INSERT INTO clicks (visitor_id, element_tag, element_id, element_text, timestamp) VALUES ($1, $2, $3, $4, $5)",
-        [visitor_id, element_tag, element_id, element_text, timestamp]
+        [visitor_id, elementTag, elementId, elementText, timestamp]
       );
 
       return res.status(200).json({ message: "Click data saved successfully" });

@@ -1,18 +1,18 @@
 import "../css/styles.css";
-import jinn1 from "../../Images/jinn-1.png";
-import jinn2 from "../../Images/jinn-2.png";
-import jinn3 from "../../Images/jinn-3.png";
-import jinn4 from "../../Images/jinn-4.png";
-import jinn5 from "../../Images/jinn-5.png";
-import jinn6 from "../../Images/jinn-6.png";
-import jinn7 from "../../Images/jinn-7.png";
-import jinn8 from "../../Images/jinn-8.png";
-import jinn9 from "../../Images/jinn-9.png";
-import jinn10 from "../../Images/jinn-10.png";
-import jinnFull from "../../Images/jinn-full.png";
-import copa from "../../Images/copa.png";
-import portfolio from "../../Images/portfolio.png";
-import comingsoon from "../../Images/coming_soon_2.jpg";
+import jinn1 from "../../images/jinn-1.png";
+import jinn2 from "../../images/jinn-2.png";
+import jinn3 from "../../images/jinn-3.png";
+import jinn4 from "../../images/jinn-4.png";
+import jinn5 from "../../images/jinn-5.png";
+import jinn6 from "../../images/jinn-6.png";
+import jinn7 from "../../images/jinn-7.png";
+import jinn8 from "../../images/jinn-8.png";
+import jinn9 from "../../images/jinn-9.png";
+import jinn10 from "../../images/jinn-10.png";
+import jinnFull from "../../images/jinn-full.png";
+import copa from "../../images/copa.png";
+import portfolio from "../../images/portfolio.png";
+import comingsoon from "../../images/coming_soon_2.jpg";
 import { inject } from "@vercel/analytics";
 import { injectSpeedInsights } from "@vercel/speed-insights";
 
@@ -36,7 +36,15 @@ const sessionId = sessionStorage.getItem("session_id") || crypto.randomUUID();
 sessionStorage.setItem("session_id", sessionId);
 const referrer = document.referrer || "direct";
 
-async function saveVisitData(sessionId, visitStart, referrer) {
+let visitorId = sessionStorage.getItem("visitor_id");
+
+async function saveVisitData(visitStart, sessionId, referrer) {
+  if (visitorId) {
+    console.log("Visitor already exists with ID:", visitorId);
+    trackElementClicks();
+    return;
+  }
+
   try {
     const response = await fetch("/api/saveVisit", {
       method: "POST",
@@ -49,7 +57,12 @@ async function saveVisitData(sessionId, visitStart, referrer) {
     });
 
     if (response.ok) {
+      const data = await response.json();
+      visitorId = data.visitor_id;
+      sessionStorage.setItem("visitor_id", visitorId);
       console.log("Visit data saved successfully");
+
+      trackElementClicks();
     } else {
       console.error("Failed to save visit data");
     }
@@ -58,80 +71,94 @@ async function saveVisitData(sessionId, visitStart, referrer) {
   }
 }
 
-async function updateVisitData(sessionId, visitEnd, updatedAt) {
+window.addEventListener("DOMContentLoaded", () => {
+  saveVisitData(visitStart, sessionId, referrer);
+});
+
+function trackElementClicks() {
+  if (!visitorId) {
+    console.warn("visitorId is not available yet, click tracking is delayed.");
+    return;
+  }
+
+  document.body.addEventListener("click", (event) => {
+    const clickedElement = event.target.closest("a, button");
+    if (!clickedElement) return;
+
+    console.log(
+      `User clicked on: ${clickedElement.tagName} with ID: ${
+        clickedElement.id || "No ID"
+      } and Text: ${clickedElement.textContent}`
+    );
+
+    sendClickDataToServer(clickedElement);
+  });
+}
+
+function sendClickDataToServer(element) {
+  if (!visitorId) return;
+
+  const data = {
+    visitor_id: visitorId,
+    elementTag: element.tagName,
+    elementId: element.id || null,
+    elementText: element.textContent.trim(),
+    timestamp: new Date().toISOString(),
+  };
+
+  fetch("/api/saveClickData", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      if (response.ok) {
+        console.log("Click data saved successfully");
+      } else {
+        console.error("Failed to save click data");
+      }
+    })
+    .catch((error) => {
+      console.error("Error sending click data:", error);
+    });
+}
+
+async function saveVisitEnd(sessionId) {
   try {
-    const response = await fetch("/api/updateVisit", {
+    const visitEnd = new Date().toISOString();
+    const response = await fetch("/api/saveVisitEnd", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         session_id: sessionId,
         visit_end: visitEnd,
-        updated_at: updatedAt,
       }),
     });
 
     if (response.ok) {
-      console.log("Visit data updated successfully");
+      console.log("Visit end saved successfully");
     } else {
-      console.error("Failed to update visit data");
+      console.error("Failed to save visit end");
     }
   } catch (error) {
-    console.error("Error updating visit data:", error);
-  }
-}
-
-function trackElementClicks() {
-  const elements = document.querySelectorAll("button, a");
-
-  elements.forEach((element) => {
-    element.addEventListener("click", (event) => {
-      const clickedElement = event.target.closest("a, button");
-      console.log(
-        `User clicked on: ${clickedElement.tagName} with ID: ${
-          clickedElement.id || "No ID"
-        } and Text: ${clickedElement.textContent}`
-      );
-
-      sendClickDataToServer(clickedElement, sessionId);
-    });
-  });
-}
-
-async function sendClickDataToServer(element, sessionId) {
-  const data = {
-    session_id: sessionId,
-    elementTag: element.tagName,
-    elementId: element.id || null,
-    elementText: element.textContent,
-    timestamp: new Date().toISOString(),
-  };
-
-  try {
-    const response = await fetch("/api/saveClickData", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      console.log("Click data saved successfully");
-    } else {
-      console.error("Failed to save click data");
-    }
-  } catch (error) {
-    console.error("Error sending click data:", error);
+    console.error("Error sending visit end data:", error);
   }
 }
 
 window.addEventListener("beforeunload", () => {
-  const visitEnd = new Date().toISOString();
-  const updatedAt = new Date().toISOString();
-  saveVisitData(sessionId, visitStart, referrer);
-  updateVisitData(sessionId, visitEnd, updatedAt);
+  const isVisitEndSaved = sessionStorage.getItem("visit_end_saved");
+
+  if (!isVisitEndSaved) {
+    saveVisitEnd(sessionId);
+    sessionStorage.setItem("visit_end_saved", "true");
+  }
 });
 
-trackElementClicks();
+window.addEventListener("unload", () => {
+  sessionStorage.removeItem("visit_end_saved");
+});
 
+// Animation on scroll
 gsap.registerPlugin(ScrollTrigger);
 
 const isTouchDevice = () => {
@@ -296,7 +323,7 @@ window.addEventListener("resize", setWrapperHeight);
 window.addEventListener("load", setWrapperHeight);
 
 // Modal for experience images
-const portfolioImages = [
+const portfolioimages = [
   [
     jinn1,
     jinn2,
@@ -317,7 +344,7 @@ const portfolioImages = [
 
 document.querySelectorAll(".portfolio-wrapper").forEach((wrapper, index) => {
   // В каждом wrapper, добавляем атрибут data-images с соответствующими изображениями
-  wrapper.dataset.images = JSON.stringify(portfolioImages[index]);
+  wrapper.dataset.images = JSON.stringify(portfolioimages[index]);
 
   wrapper.addEventListener("click", function () {
     const images = JSON.parse(this.dataset.images);
