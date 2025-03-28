@@ -324,6 +324,9 @@ window.addEventListener("load", setWrapperHeight);
 
 // Modal for experience images
 const portfolioimages = [
+  [comingsoon],
+  [portfolio],
+  [copa],
   [
     jinn1,
     jinn2,
@@ -337,9 +340,6 @@ const portfolioimages = [
     jinn10,
     jinnFull,
   ],
-  [copa],
-  [portfolio],
-  [comingsoon],
 ];
 
 document.querySelectorAll(".portfolio-wrapper").forEach((wrapper, index) => {
