@@ -5,7 +5,7 @@
 
 @font-face {
   font-family:  "Rubik";
-  src: url(../../fonts/Rubik-Light.woff2) format('woff2');
+  src: url(../../public/fonts/Rubik-Light.woff2) format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap; 
@@ -13,7 +13,7 @@
 
 @font-face {
   font-family: 'Rubik';
-  src: url(../../fonts/Rubik-Bold.woff2) format('woff2');
+  src: url(../../public/fonts/Rubik-Bold.woff2) format('woff2');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -21,7 +21,7 @@
 
 @font-face {
   font-family: 'M PLUS Code Latin';
-  src: url(../../fonts/MPLUSCodeLatin-Thin.woff2) format('woff2');
+  src: url(../../public/fonts/MPLUSCodeLatin-Thin.woff2) format('woff2');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -29,15 +29,29 @@
 
 @font-face {
   font-family: 'M PLUS Code Latin';
-  src: url(../../fonts/MPLUSCodeLatin-Light.woff2) format('woff2');
+  src: url(../../public/fonts/MPLUSCodeLatin-Light.woff2) format('woff2');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Material Symbols Outlined 28pt';
-  src: url(../../fonts/MaterialSymbolsOutlined28pt-Regular.woff2) format('woff2');
+  src: url(../../public/fonts/MaterialSymbolsOutlined28pt-Regular.woff2) format('woff2');
   font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Material Symbols Outlined 28pt';
+  src: url(../../public/fonts/MaterialSymbolsOutlined28pt-Medium.woff2) format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Material Symbols Outlined 28pt';
+  src: url(../../public/fonts/MaterialSymbolsOutlined28pt-Light.woff2) format('woff2');
+  font-weight: 200;
   font-style: normal;
   font-display: swap;
 }

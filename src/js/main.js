@@ -1,18 +1,19 @@
 import "../css/styles.css";
-import jinn1 from "../../images/jinn-1.avif";
-import jinn2 from "../../images/jinn-2.avif";
-import jinn3 from "../../images/jinn-3.avif";
-import jinn4 from "../../images/jinn-4.avif";
-import jinn5 from "../../images/jinn-5.avif";
-import jinn6 from "../../images/jinn-6.avif";
-import jinn7 from "../../images/jinn-7.avif";
-import jinn8 from "../../images/jinn-8.avif";
-import jinn9 from "../../images/jinn-9.avif";
-import jinn10 from "../../images/jinn-10.avif";
-import jinnFull from "../../images/jinn-full.avif";
-import copa from "../../images/copa.avif";
-import portfolio from "../../images/portfolio.avif";
-import comingsoon from "../../images/coming_soon_2.avif";
+import jinn1 from "../../public/images/jinn-1.avif";
+import jinn2 from "../../public/images/jinn-2.avif";
+import jinn3 from "../../public/images/jinn-3.avif";
+import jinn4 from "../../public/images/jinn-4.avif";
+import jinn5 from "../../public/images/jinn-5.avif";
+import jinn6 from "../../public/images/jinn-6.avif";
+import jinn7 from "../../public/images/jinn-7.avif";
+import jinn8 from "../../public/images/jinn-8.avif";
+import jinn9 from "../../public/images/jinn-9.avif";
+import jinn10 from "../../public/images/jinn-10.avif";
+import jinn10 from "../../public/sw.js";
+import jinnFull from "../../public/images/jinn-full.avif";
+import copa from "../../public/images/copa.avif";
+import portfolio from "../../public/images/portfolio.avif";
+import comingsoon from "../../public/images/coming_soon_2.avif";
 import { inject } from "@vercel/analytics";
 import { injectSpeedInsights } from "@vercel/speed-insights";
 
@@ -22,7 +23,7 @@ injectSpeedInsights();
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("../../sw.js")
+      .register("/sw.js")
       .then((registration) => {
         console.log("Service Worker зарегистрирован:", registration);
       })

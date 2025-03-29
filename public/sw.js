@@ -55,7 +55,7 @@ const FILES_TO_CACHE = [
   "/icons/photoshop.svg",
   "/icons/PostCSS.svg",
   "/icons/postgresql.svg",
-  "/icons/react.svg",
+  "/icons/React.svg",
   "/icons/redux.svg",
   "/icons/scrum.svg",
   "/icons/slack.svg",
