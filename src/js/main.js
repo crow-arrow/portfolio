@@ -20,14 +20,16 @@ inject();
 injectSpeedInsights();
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .register("/sw.js", { type: "module" })
-    .then((registration) => {
-      console.log("Service Worker registered:", registration);
-    })
-    .catch((error) => {
-      console.log("Service Worker registration failed:", error);
-    });
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js", { scope: "/" })
+      .then((registration) => {
+        console.log("Service Worker registred:", registration);
+      })
+      .catch((error) => {
+        console.log("Error registration Service Worker:", error);
+      });
+  });
 }
 
 // Visitors session time
