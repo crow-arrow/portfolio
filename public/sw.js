@@ -1,13 +1,5 @@
 const CACHE_NAME = "my-cache-v1";
 
-const imageFiles = import.meta.glob("/public/images/*.avif", { eager: true });
-const iconFiles = import.meta.glob("/public/icons/*.{svg,webp,avif,ico}", {
-  eager: true,
-});
-
-const imagesToCache = Object.values(imageFiles).map((file) => file.default);
-const iconsToCache = Object.values(iconFiles).map((file) => file.default);
-
 const FILES_TO_CACHE = [
   "/",
   "/index.html",
@@ -21,8 +13,58 @@ const FILES_TO_CACHE = [
   "/fonts/MPLUSCodeLatin-Thin.woff2",
   "/fonts/Rubik-Bold.woff2",
   "/fonts/Rubik-Light.woff2",
-  ...imagesToCache,
-  ...iconsToCache,
+  "/images/logo.svg",
+  "/images/profile.avif",
+  "/images/co-pa.avif",
+  "/images/coming_soon_2.avif",
+  "/images/copa.avif",
+  "/images/jinn-1.avif",
+  "/public/images/jinn-2.avif",
+  "/public/images/jinn-3.avif",
+  "/public/images/jinn-4.avif",
+  "/public/images/jinn-5.avif",
+  "/public/images/jinn-6.avif",
+  "/public/images/jinn-7.avif",
+  "/public/images/jinn-8.avif",
+  "/public/images/jinn-9.avif",
+  "/public/images/jinn-10.avif",
+  "/public/images/jinn-full.avif",
+  "/public/images/portfolio.avif",
+  "/icons/favicon.ico",
+  "/icons/Canva.svg",
+  "/icons/chatgpt.svg",
+  "/icons/confluence.svg",
+  "/icons/css.svg",
+  "/icons/discord.svg",
+  "/icons/elementor.svg",
+  "/icons/figma.webp",
+  "/icons/git.svg",
+  "/icons/google.svg",
+  "/icons/hamburger.svg",
+  "/icons/html5.svg",
+  "/icons/jira.svg",
+  "/icons/kanban.svg",
+  "/icons/klaviyo.svg",
+  "/icons/Microsoft_365.webp",
+  "/icons/microsoft.svg",
+  "/icons/miro.svg",
+  "/icons/mongodb.svg",
+  "/icons/mySQL.webp",
+  "/icons/notion.svg",
+  "/icons/photoshop.svg",
+  "/icons/PostCSS.svg",
+  "/icons/postgresql.svg",
+  "/icons/React.svg",
+  "/icons/redux.svg",
+  "/icons/scrum.svg",
+  "/icons/slack.svg",
+  "/icons/slider-revolution.avif",
+  "/icons/tailwind_css.svg",
+  "/icons/tui.webp",
+  "/icons/vite.svg",
+  "/icons/vitest.webp",
+  "/icons/wordpress.svg",
+  "/icons/zoom.webp",
 ];
 
 self.addEventListener("install", (event) => {
@@ -61,7 +103,9 @@ self.addEventListener("activate", (event) => {
       return Promise.all(
         cacheNames
           .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name))
+          .map((name) => {
+            return caches.delete(name);
+          })
       );
     })
   );
