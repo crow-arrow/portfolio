@@ -9,7 +9,6 @@ import jinn7 from "../../public/images/jinn-7.avif";
 import jinn8 from "../../public/images/jinn-8.avif";
 import jinn9 from "../../public/images/jinn-9.avif";
 import jinn10 from "../../public/images/jinn-10.avif";
-import jinn10 from "../../public/sw.js";
 import jinnFull from "../../public/images/jinn-full.avif";
 import copa from "../../public/images/copa.avif";
 import portfolio from "../../public/images/portfolio.avif";
