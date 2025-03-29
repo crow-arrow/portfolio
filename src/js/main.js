@@ -22,7 +22,7 @@ injectSpeedInsights();
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("/public/sw.js", { scope: "/public/" })
+      .register("/sw.js", { scope: "/" })
       .then((registration) => {
         console.log("Service Worker registred:", registration);
       })
