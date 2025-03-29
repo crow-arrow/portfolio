@@ -22,12 +22,12 @@ injectSpeedInsights();
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("/sw.js")
+      .register("/public/sw.js", { scope: "/public/" })
       .then((registration) => {
-        console.log("Service Worker зарегистрирован:", registration);
+        console.log("Service Worker registred:", registration);
       })
       .catch((error) => {
-        console.log("Ошибка регистрации Service Worker:", error);
+        console.log("Error registration Service Worker:", error);
       });
   });
 }
