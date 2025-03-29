@@ -72,27 +72,30 @@ self.addEventListener("install", (event) => {
     caches
       .open(CACHE_NAME)
       .then((cache) => {
+        console.log("🚀 Кешируем файлы:", FILES_TO_CACHE); // Логируем список файлов
         return cache.addAll(FILES_TO_CACHE);
       })
       .catch((error) => {
-        console.error("❌ Caching error:", error);
+        console.error("❌ Ошибка кеширования:", error);
       })
   );
 });
 
 self.addEventListener("fetch", (event) => {
+  console.log("🔍 Запрос:", event.request.url);
   event.respondWith(
     caches
       .match(event.request)
       .then((response) => {
+        if (response) {
+          console.log("✅ Отдаем из кеша:", event.request.url);
+        } else {
+          console.log("🌐 Загружаем с сервера:", event.request.url);
+        }
         return response || fetch(event.request);
       })
       .catch((error) => {
-        console.error(
-          "⚠️ Error processing the request:",
-          event.request.url,
-          error
-        );
+        console.error("⚠️ Ошибка обработки запроса:", event.request.url, error);
       })
   );
 });
@@ -100,10 +103,12 @@ self.addEventListener("fetch", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
+      console.log("📦 Доступные кеши:", cacheNames);
       return Promise.all(
         cacheNames
           .filter((name) => name !== CACHE_NAME)
           .map((name) => {
+            console.log("🗑 Удаляем кеш:", name);
             return caches.delete(name);
           })
       );
