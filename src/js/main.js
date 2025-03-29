@@ -19,6 +19,17 @@ import { injectSpeedInsights } from "@vercel/speed-insights";
 inject();
 injectSpeedInsights();
 
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/sw.js", { type: "module" })
+    .then((registration) => {
+      console.log("Service Worker registered:", registration);
+    })
+    .catch((error) => {
+      console.log("Service Worker registration failed:", error);
+    });
+}
+
 // Visitors session time
 function getVisitStart() {
   let visitStart = sessionStorage.getItem("visit_start");
