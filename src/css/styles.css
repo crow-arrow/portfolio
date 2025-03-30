@@ -538,7 +538,6 @@ html.litemode #theme-switch .material-symbols-outlined:nth-child(2) {
 }
 
 .header-button {
-  color: var(--color-text);
   background-color: var(--color-accent);
   padding-inline: 0;
   width: 8rem;
@@ -552,9 +551,14 @@ html.litemode #theme-switch .material-symbols-outlined:nth-child(2) {
   width: 100%;
   height: 100%;
   font-size: max(1vw, 14px);
+  color: #001d26;
 }
 
-.header-button-link:hover {
+#open_pop_up {
+  color: #001d26;
+}
+
+#open_pop_up:hover {
   color: var(--color-accent);
 }
 
