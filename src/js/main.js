@@ -102,7 +102,7 @@ function sendClickDataToServer(element) {
     visitor_id: visitorId,
     elementTag: element.tagName,
     elementId: element.id || null,
-    elementText: element.textContent.trim(),
+    elementText: element.textContent.trim().slice(0, 100),
     timestamp: new Date().toISOString(),
   };
 
@@ -145,16 +145,18 @@ async function saveVisitEnd(sessionId) {
   }
 }
 
-window.addEventListener("beforeunload", () => {
-  const isVisitEndSaved = sessionStorage.getItem("visit_end_saved");
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    const isVisitEndSaved = sessionStorage.getItem("visit_end_saved");
 
-  if (!isVisitEndSaved) {
-    saveVisitEnd(sessionId);
-    sessionStorage.setItem("visit_end_saved", "true");
+    if (!isVisitEndSaved) {
+      saveVisitEnd(sessionId);
+      sessionStorage.setItem("visit_end_saved", "true");
+    }
   }
 });
 
-window.addEventListener("unload", () => {
+window.addEventListener("pagehide", () => {
   sessionStorage.removeItem("visit_end_saved");
 });
 
