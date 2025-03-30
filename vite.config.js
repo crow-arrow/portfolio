@@ -12,7 +12,7 @@ export default {
         description: "My App description",
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,woff2,svg,avif,webp,png,jpg}"],
+        globPatterns: ["**/*.{js,css,html,woff2,svg,ico,avif,webp,png,jpg}"],
       },
     }),
   ],

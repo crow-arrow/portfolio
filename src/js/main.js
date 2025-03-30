@@ -343,7 +343,6 @@ const portfolioimages = [
 ];
 
 document.querySelectorAll(".portfolio-wrapper").forEach((wrapper, index) => {
-  // В каждом wrapper, добавляем атрибут data-images с соответствующими изображениями
   wrapper.dataset.images = JSON.stringify(portfolioimages[index]);
 
   wrapper.addEventListener("click", function () {
@@ -361,9 +360,12 @@ let startX = 0,
   moveY = 0;
 
 function openModal(images) {
+  currentIndex = 0; // Сброс индекса
   const modal = createModal(images);
   document.body.appendChild(modal);
   modal.style.display = "flex";
+
+  document.addEventListener("keydown", (e) => handleKeyPress(e, images, modal));
 }
 
 function createModal(images) {
@@ -383,47 +385,49 @@ function createModal(images) {
   const nextButton = modal.querySelector(".next");
   const modalImg = modal.querySelector(".modal-content");
 
-  closeButton.addEventListener("click", () => modal.remove());
-  prevButton.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    updateImage(images);
-    resetImagePosition(modalImg);
-  });
-  nextButton.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % images.length;
-    updateImage(images);
-  });
+  closeButton.addEventListener("click", () => closeModal(modal));
+  prevButton.addEventListener("click", () => updateImage(images, -1, modalImg));
+  nextButton.addEventListener("click", () => updateImage(images, 1, modalImg));
 
   modal.addEventListener("click", (e) => {
-    if (e.target.classList.contains("modal-background")) modal.remove();
+    if (e.target.classList.contains("modal-background")) closeModal(modal);
   });
 
-  setupImageInteractions(modalImg);
+  setupImageInteractions(modalImg, modal);
 
   return modal;
 }
 
-function updateImage(images) {
-  document.getElementById("modalImg").src = images[currentIndex];
+function updateImage(images, direction, modalImg) {
+  currentIndex = (currentIndex + direction + images.length) % images.length;
+  modalImg.src = images[currentIndex];
+  resetImagePosition(modalImg);
 }
 
-function setupImageInteractions(modalImg) {
+function setupImageInteractions(modalImg, modal) {
   modalImg.style.position = "relative";
 
-  modalImg.addEventListener("mousedown", (e) => handleMouseDown(e, modalImg));
-  document.addEventListener("mousemove", (e) => handleMouseMove(e, modalImg));
-  document.addEventListener("mouseup", handleMouseUp);
+  const mouseMoveHandler = (e) => handleMouseMove(e, modalImg);
+  const mouseUpHandler = () =>
+    handleMouseUp(modalImg, mouseMoveHandler, mouseUpHandler);
+
+  modalImg.addEventListener("mousedown", (e) =>
+    handleMouseDown(e, modalImg, mouseMoveHandler, mouseUpHandler)
+  );
   modalImg.addEventListener("wheel", (event) => handleWheel(event, modalImg));
   modalImg.addEventListener("click", () => handleImageClick(modalImg));
 }
 
-function handleMouseDown(e, modalImg) {
+function handleMouseDown(e, modalImg, mouseMoveHandler, mouseUpHandler) {
   if (e.button !== 0) return;
   e.preventDefault();
   isDragging = true;
   startX = e.clientX - moveX;
   startY = e.clientY - moveY;
   modalImg.style.cursor = "grabbing";
+
+  document.addEventListener("mousemove", mouseMoveHandler);
+  document.addEventListener("mouseup", mouseUpHandler);
 }
 
 function handleMouseMove(e, modalImg) {
@@ -433,37 +437,67 @@ function handleMouseMove(e, modalImg) {
   modalImg.style.transform = `scale(${scale}) translate(${moveX}px, ${moveY}px)`;
 }
 
-function handleMouseUp() {
+function handleMouseUp(modalImg, mouseMoveHandler, mouseUpHandler) {
   isDragging = false;
+  modalImg.style.cursor = "grab";
+
+  document.removeEventListener("mousemove", mouseMoveHandler);
+  document.removeEventListener("mouseup", mouseUpHandler);
 }
 
 function handleWheel(event, modalImg) {
   event.preventDefault();
+
+  const rect = modalImg.getBoundingClientRect();
+  const offsetX = (event.clientX - rect.left) / rect.width;
+  const offsetY = (event.clientY - rect.top) / rect.height;
+
+  const oldScale = scale;
   scale += event.deltaY * -0.01;
-  scale = Math.min(Math.max(1, scale), 10);
-  modalImg.style.transform = `scale(${scale})`;
+  scale = Math.min(Math.max(1, scale), 5);
+
+  moveX -= offsetX * rect.width * (scale - oldScale);
+  moveY -= offsetY * rect.height * (scale - oldScale);
+
+  modalImg.style.transform = `scale(${scale}) translate(${moveX}px, ${moveY}px)`;
   updateCursor(modalImg);
 }
 
 function handleImageClick(modalImg) {
   if (scale === 1) {
     scale = 2;
-    modalImg.style.transform = `scale(${scale})`;
+  } else {
+    scale = 1;
+    moveX = 0;
+    moveY = 0;
   }
+  modalImg.style.transform = `scale(${scale}) translate(${moveX}px, ${moveY}px)`;
   updateCursor(modalImg);
 }
 
 function resetImagePosition(modalImg) {
-  modalImg.style.transform = `scale(1)`;
-  modalImg.style.cursor = "grab";
-  modalImg.style.left = "0px";
-  modalImg.style.top = "0px";
+  scale = 1;
+  moveX = 0;
+  moveY = 0;
+  modalImg.style.transform = `scale(1) translate(0px, 0px)`;
+  modalImg.style.cursor = "zoom-in";
 }
 
 function updateCursor(modalImg) {
-  if (scale === 1) {
-    modalImg.style.cursor = "zoom-in";
-  } else {
-    modalImg.style.cursor = "grab";
+  modalImg.style.cursor = scale > 1 ? "grab" : "zoom-in";
+}
+
+function handleKeyPress(e, images, modal) {
+  if (e.key === "Escape") {
+    closeModal(modal);
+  } else if (e.key === "ArrowLeft") {
+    updateImage(images, -1, document.getElementById("modalImg"));
+  } else if (e.key === "ArrowRight") {
+    updateImage(images, 1, document.getElementById("modalImg"));
   }
+}
+
+function closeModal(modal) {
+  document.removeEventListener("keydown", handleKeyPress);
+  modal.remove();
 }
