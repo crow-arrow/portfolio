@@ -12,7 +12,17 @@ import jinn10 from "../../public/images/jinn-10.avif";
 import jinnFull from "../../public/images/jinn-full.avif";
 import copa from "../../public/images/copa.avif";
 import portfolio from "../../public/images/portfolio.avif";
-import comingsoon from "../../public/images/coming_soon_2.avif";
+import affiliate from "../../public/images/login.avif";
+import affiliate2 from "../../public/images/signup.avif";
+import affiliate3 from "../../public/images/request-for-passwor-recovery.avif";
+import affiliate4 from "../../public/images/passwor-recovery.avif";
+import affiliate5 from "../../public/images/email-confirmation.avif";
+import affiliate6 from "../../public/images/gold-overview.avif";
+import affiliate7 from "../../public/images/silver-overview.avif";
+import affiliate8 from "../../public/images/trips.avif";
+import affiliate9 from "../../public/images/settings-and-referral-link.avif";
+import affiliate10 from "../../public/images/all-orders.avif";
+import affiliate11 from "../../public/images/team.avif";
 import { inject } from "@vercel/analytics";
 import { injectSpeedInsights } from "@vercel/speed-insights";
 
@@ -326,7 +336,19 @@ window.addEventListener("load", setWrapperHeight);
 
 // Modal for experience images
 const portfolioimages = [
-  [comingsoon],
+  [
+    affiliate,
+    affiliate2,
+    affiliate3,
+    affiliate4,
+    affiliate5,
+    affiliate6,
+    affiliate7,
+    affiliate8,
+    affiliate9,
+    affiliate10,
+    affiliate11,
+  ],
   [portfolio],
   [copa],
   [
