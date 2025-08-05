@@ -20,36 +20,59 @@ const transporter = nodemailer.createTransport({
 });
 
 export default async function handler(req, res) {
-  if (req.method === "POST") {
-    const { fname, lname, email, phone, description } = req.body;
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method Not Allowed" });
+  }
 
-    if (!fname || !lname || !email || !description) {
-      return res
-        .status(400)
-        .json({ error: "Please fill in all required fields." });
+  const { fname, lname, email, phone, description, token } = req.body;
+
+  if (!fname || !lname || !email || !description || !token) {
+    return res
+      .status(400)
+      .json({ error: "Please fill in all required fields." });
+  }
+
+  // ✅ Проверка Google reCAPTCHA
+  try {
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    const verifyRes = await fetch(
+      "https://www.google.com/recaptcha/api/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `secret=${secretKey}&response=${token}`,
+      }
+    );
+
+    const verifyData = await verifyRes.json();
+
+    if (!verifyData.success || verifyData.score < 0.5) {
+      return res.status(400).json({ error: "Failed reCAPTCHA verification" });
     }
+  } catch (err) {
+    console.error("reCAPTCHA error:", err);
+    return res.status(500).json({ error: "reCAPTCHA verification failed" });
+  }
 
-    try {
-      const mailOptions = {
-        from: `"${fname} ${lname}" <${process.env.EMAIL_USER}>`,
-        to: process.env.EMAIL_USER,
-        subject: "New job enquiry",
-        html: `
-          <h1>New job enquiry</h1>
-          <p><strong>Name:</strong> ${fname} ${lname}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone || "Null"}</p>
-          <p><strong>Description:</strong> ${description}</p>
-        `,
-      };
+  // ✅ Отправка письма
+  try {
+    const mailOptions = {
+      from: `"${fname} ${lname}" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_USER,
+      subject: "New job enquiry",
+      html: `
+        <h1>New job enquiry</h1>
+        <p><strong>Name:</strong> ${fname} ${lname}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone || "Null"}</p>
+        <p><strong>Description:</strong> ${description}</p>
+      `,
+    };
 
-      await transporter.sendMail(mailOptions);
-      res.status(200).json({ message: "Message sent successfully" });
-    } catch (error) {
-      console.error("Error sending email:", error);
-      res.status(500).json({ error: "Submit error." });
-    }
-  } else {
-    res.status(405).json({ error: "Method Not Allowed" });
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Message sent successfully" });
+  } catch (error) {
+    console.error("Error sending form:", error);
+    res.status(500).json({ error: "Submit error." });
   }
 }

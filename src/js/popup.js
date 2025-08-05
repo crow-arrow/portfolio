@@ -101,6 +101,31 @@ document
     submitButton.innerHTML = "";
     submitButton.appendChild(loader);
 
+    // Honeypot check
+    const honeypot = document.getElementById("email_confirm")?.value;
+    if (honeypot) {
+      console.warn("Bot detected. Submission cancelled.");
+      submitButton.disabled = false;
+      submitButton.innerHTML = "Submit";
+      return;
+    }
+
+    // reCAPTCHA check
+    try {
+      const siteKey = document.getElementById("recaptcha")?.dataset?.sitekey;
+      const token = await grecaptcha.execute(siteKey, { action: "submit" });
+      data.token = token;
+    } catch (error) {
+      Toastify({
+        text: "Failed to verify reCAPTCHA.",
+        duration: 3000,
+        backgroundColor: "#df2666",
+      }).showToast();
+      submitButton.disabled = false;
+      submitButton.innerHTML = "Submit";
+      return;
+    }
+
     try {
       const response = await fetch("/api/send", {
         method: "POST",
