@@ -70,7 +70,6 @@ async function saveVisitData(visitStart, sessionId, referrer) {
       const data = await response.json();
       visitorId = data.visitor_id;
       sessionStorage.setItem("visitor_id", visitorId);
-      console.log("Visit data saved successfully");
 
       trackElementClicks();
     } else {
@@ -117,7 +116,7 @@ function sendClickDataToServer(element) {
   })
     .then((response) => {
       if (response.ok) {
-        console.log("Click data saved successfully");
+        // Click data saved successfully
       } else {
         console.error("Failed to save click data");
       }
