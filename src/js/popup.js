@@ -113,14 +113,24 @@ document
     // reCAPTCHA check
     try {
       const siteKey = document.getElementById("recaptcha")?.dataset?.sitekey;
+      console.log("siteKey:", siteKey);
+
+      if (!siteKey) {
+        Toastify({
+          text: "SiteKey not found",
+          duration: 3000,
+          backgroundColor: "#df2666",
+        }).showToast();
+        submitButton.disabled = false;
+        submitButton.innerHTML = "Submit";
+        return;
+      }
+
       const token = await grecaptcha.execute(siteKey, { action: "submit" });
+      console.log("Token:", token);
       data.token = token;
     } catch (error) {
-      Toastify({
-        text: "Failed to verify reCAPTCHA.",
-        duration: 3000,
-        backgroundColor: "#df2666",
-      }).showToast();
+      console.error("reCAPTCHA error:", error);
       submitButton.disabled = false;
       submitButton.innerHTML = "Submit";
       return;
