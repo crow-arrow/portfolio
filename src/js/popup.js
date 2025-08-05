@@ -125,8 +125,19 @@ document
         return;
       }
 
-      const token = await grecaptcha.execute(siteKey, { action: "submit" });
-      data.token = token;
+      // Dynamically load reCAPTCHA if not already loaded
+      await new Promise((resolve) => {
+        if (window.grecaptcha) return resolve();
+        const script = document.createElement("script");
+        script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+        script.onload = resolve;
+        document.head.appendChild(script);
+      });
+
+      await grecaptcha.ready(async function () {
+        const token = await grecaptcha.execute(siteKey, { action: "submit" });
+        data.token = token;
+      });
     } catch (error) {
       console.error("reCAPTCHA error:", error);
       submitButton.disabled = false;
