@@ -72,7 +72,7 @@ document
     // Регулярное выражение для проверки телефона
     const phoneRegex = /^\+([0-9]{1,4})?([0-9]{7,15})(?:\s?[0-9]{1,4})*$/;
 
-    if (!phoneRegex.test(data.phone)) {
+    if (data.phone && !phoneRegex.test(data.phone)) {
       const phoneInput = document.getElementById("phone");
       phoneInput.classList.add("invalid");
       phoneInput.style.border = "1px solid #df2666";
