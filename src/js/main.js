@@ -50,7 +50,6 @@ let visitorId = sessionStorage.getItem("visitor_id");
 
 async function saveVisitData(visitStart, sessionId, referrer) {
   if (visitorId) {
-    console.log("Visitor already exists with ID:", visitorId);
     trackElementClicks();
     return;
   }

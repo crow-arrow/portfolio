@@ -143,6 +143,10 @@ document
       });
 
       data.token = token;
+      const badge = document.querySelector(".grecaptcha-badge");
+      if (badge) {
+        badge.style.display = "none";
+      }
     } catch (error) {
       console.error("reCAPTCHA error:", error);
       submitButton.disabled = false;
