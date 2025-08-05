@@ -113,7 +113,6 @@ document
     // reCAPTCHA check
     try {
       const siteKey = document.getElementById("recaptcha")?.dataset?.sitekey;
-
       if (!siteKey) {
         Toastify({
           text: "SiteKey not found",
@@ -125,7 +124,7 @@ document
         return;
       }
 
-      // Dynamically load reCAPTCHA if not already loaded
+      // Dynamically load reCAPTCHA only when submitting the form
       await new Promise((resolve) => {
         if (window.grecaptcha) return resolve();
         const script = document.createElement("script");
@@ -134,10 +133,16 @@ document
         document.head.appendChild(script);
       });
 
-      await grecaptcha.ready(async function () {
-        const token = await grecaptcha.execute(siteKey, { action: "submit" });
-        data.token = token;
+      const token = await new Promise((resolve, reject) => {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha
+            .execute(siteKey, { action: "submit" })
+            .then(resolve)
+            .catch(reject);
+        });
       });
+
+      data.token = token;
     } catch (error) {
       console.error("reCAPTCHA error:", error);
       submitButton.disabled = false;
