@@ -40,7 +40,9 @@ export default async function handler(req, res) {
       {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `secret=${secretKey}&response=${token}`,
+        body: `secret=${secretKey}&response=${token}&remoteip=${
+          req.headers["x-forwarded-for"] || req.socket.remoteAddress
+        }`,
       }
     );
 
@@ -48,6 +50,14 @@ export default async function handler(req, res) {
 
     if (!verifyData.success || verifyData.score < 0.5) {
       return res.status(400).json({ error: "Failed reCAPTCHA verification" });
+    }
+
+    if (verifyData.action !== "submit") {
+      return res.status(400).json({ error: "Invalid reCAPTCHA action" });
+    }
+
+    if (verifyData.hostname !== "www.amalyuldashev.online") {
+      return res.status(400).json({ error: "Invalid reCAPTCHA hostname" });
     }
   } catch (err) {
     console.error("reCAPTCHA error:", err);
