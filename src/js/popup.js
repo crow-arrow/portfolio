@@ -1,3 +1,9 @@
+function hideRecaptchaBadge() {
+  const badge = document.querySelector(".grecaptcha-badge");
+  if (badge) {
+    badge.style.display = "none";
+  }
+}
 import preloader from "../../public/preload.gif";
 
 const openButton = document.querySelector("#open_pop_up");
@@ -143,10 +149,6 @@ document
       });
 
       data.token = token;
-      const badge = document.querySelector(".grecaptcha-badge");
-      if (badge) {
-        badge.style.display = "none";
-      }
     } catch (error) {
       console.error("reCAPTCHA error:", error);
       submitButton.disabled = false;
@@ -173,6 +175,7 @@ document
 
       event.target.reset();
       popup.classList.add("hiden");
+      hideRecaptchaBadge();
     } catch (error) {
       Toastify({
         text: "There was an error sending the message.",
