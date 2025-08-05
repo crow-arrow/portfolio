@@ -113,7 +113,6 @@ document
     // reCAPTCHA check
     try {
       const siteKey = document.getElementById("recaptcha")?.dataset?.sitekey;
-      console.log("siteKey:", siteKey);
 
       if (!siteKey) {
         Toastify({
@@ -127,7 +126,6 @@ document
       }
 
       const token = await grecaptcha.execute(siteKey, { action: "submit" });
-      console.log("Token:", token);
       data.token = token;
     } catch (error) {
       console.error("reCAPTCHA error:", error);

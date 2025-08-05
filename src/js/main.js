@@ -95,12 +95,6 @@ function trackElementClicks() {
     const clickedElement = event.target.closest("a, button");
     if (!clickedElement) return;
 
-    console.log(
-      `User clicked on: ${clickedElement.tagName} with ID: ${
-        clickedElement.id || "No ID"
-      } and Text: ${clickedElement.textContent}`
-    );
-
     sendClickDataToServer(clickedElement);
   });
 }
@@ -144,14 +138,11 @@ async function saveVisitEnd(sessionId) {
         visit_end: visitEnd,
       }),
     });
-
     if (response.ok) {
-      console.log("Visit end saved successfully");
-    } else {
-      console.error("Failed to save visit end");
+      // silently ignored
     }
   } catch (error) {
-    console.error("Error sending visit end data:", error);
+    // silently ignored
   }
 }
 
