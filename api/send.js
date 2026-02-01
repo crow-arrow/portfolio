@@ -26,42 +26,49 @@ export default async function handler(req, res) {
 
   const { fname, lname, email, phone, description, token } = req.body;
 
+  const isLocalhost = req.headers.host?.includes("localhost") || 
+    req.headers.host?.includes("127.0.0.1");
+  const skipRecaptchaForDev = process.env.SKIP_RECAPTCHA_LOCALHOST === "true";
+
   if (!fname || !lname || !email || !description || !token) {
     return res
       .status(400)
       .json({ error: "Please fill in all required fields." });
   }
 
-  // ✅ Проверка Google reCAPTCHA
-  try {
-    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-    const verifyRes = await fetch(
-      "https://www.google.com/recaptcha/api/siteverify",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `secret=${secretKey}&response=${token}&remoteip=${
-          req.headers["x-forwarded-for"] || req.socket.remoteAddress
-        }`,
+  if (isLocalhost && skipRecaptchaForDev) {
+    console.warn("⚠️ Skipping reCAPTCHA verification for localhost (development mode)");
+  } else {
+    try {
+      const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+      const verifyRes = await fetch(
+        "https://www.google.com/recaptcha/api/siteverify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `secret=${secretKey}&response=${token}&remoteip=${
+            req.headers["x-forwarded-for"] || req.socket.remoteAddress
+          }`,
+        }
+      );
+
+      const verifyData = await verifyRes.json();
+
+      if (!verifyData.success || verifyData.score < 0.5) {
+        return res.status(400).json({ error: "Failed reCAPTCHA verification" });
       }
-    );
 
-    const verifyData = await verifyRes.json();
+      if (verifyData.action !== "submit") {
+        return res.status(400).json({ error: "Invalid reCAPTCHA action" });
+      }
 
-    if (!verifyData.success || verifyData.score < 0.5) {
-      return res.status(400).json({ error: "Failed reCAPTCHA verification" });
+      if (verifyData.hostname !== "www.amalyuldashev.online") {
+        return res.status(400).json({ error: "Invalid reCAPTCHA hostname" });
+      }
+    } catch (err) {
+      console.error("reCAPTCHA error:", err);
+      return res.status(500).json({ error: "reCAPTCHA verification failed" });
     }
-
-    if (verifyData.action !== "submit") {
-      return res.status(400).json({ error: "Invalid reCAPTCHA action" });
-    }
-
-    if (verifyData.hostname !== "www.amalyuldashev.online") {
-      return res.status(400).json({ error: "Invalid reCAPTCHA hostname" });
-    }
-  } catch (err) {
-    console.error("reCAPTCHA error:", err);
-    return res.status(500).json({ error: "reCAPTCHA verification failed" });
   }
 
   // ✅ Отправка письма
