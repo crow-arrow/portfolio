@@ -137,11 +137,15 @@
             </div>
             <div class="content-sections">
                 <section class="section about" id="about">
+                    <div class="hero-sticker">
+                        <div class="sticker-bubble">
+                            <p class="sticker-text">Hi! I'm Amal, a Senior Frontend Developer and Software Engineer.</p>
+                        </div>
+                    </div>
                     <div class="hero__inner container">
                         <div class="title-body">
                             <h1 class="about-title"> 
-                                <div class="live-typing">Hi! My name is Amal Yuldashev. I am a frontend developer.</div>
-                                <div class="live-typing">My transformation: How I went from sport to creating a digital world.</div>
+                                <div class="live-typing">Building scalable solutions focused on performance, UX, and clean architecture.</div>
                             </h1>
                             <a href="./public/images/pdf/CV_Resume.pdf" download class="check-button button">Download CV</a>
                         </div>
@@ -163,52 +167,57 @@
                                 <ul class="skills-list grid grid--1">
                                     <li class="skills-item grid-item">
                                         <span class="skill-card element">
-                                          HTML (HTML5)
+                                            JavaScript (TypeScript), React.js, Vite, Vitest
                                         </span>
                                     </li>
                                     <li class="skills-item grid-item">
                                         <span class="skill-card element">
-                                          CSS (CSS3), SASS (SCSS), TailwindCSS
+                                            Node.js
                                         </span>
                                     </li>
                                     <li class="skills-item grid-item">
                                         <span class="skill-card element">
-                                          JavaScript, React, Vite, NPM
+                                            Python3
                                         </span>
                                     </li>
                                     <li class="skills-item grid-item">
                                         <span class="skill-card element">
-                                          Redux toolkit, REST API
+                                            Docker, Ansible - AWX, Terraform, Nginx, Linux - Ubuntu
                                         </span>
                                     </li>
                                     <li class="skills-item grid-item">
                                         <span class="skill-card element">
-                                          Node.js with Express (Basic)
+                                            Git, GitHub, GitHub Actions
                                         </span>
                                     </li>
                                     <li class="skills-item grid-item">
                                         <span class="skill-card element">
-                                          MongoDB, MySQL (Basic)
+                                            Atlassian Jira, Confluence & Bitbucket
                                         </span>
                                     </li>
                                     <li class="skills-item grid-item">
                                         <span class="skill-card element">
-                                          UX/UI design
+                                            Microsoft 365, Slack
                                         </span>
                                     </li>
                                     <li class="skills-item grid-item">
                                         <span class="skill-card element">
-                                          Agile, Waterfall, SCRUM, Git
+                                            HTML5, CSS, SASS, Tailwind CSS
                                         </span>
                                     </li>
                                     <li class="skills-item grid-item">
                                         <span class="skill-card element">
-                                          Confluence, Jira, Notion, Miro
+                                            MySQL & PostgreSQL - Prisma, MongoDB
                                         </span>
                                     </li>
                                     <li class="skills-item grid-item">
                                         <span class="skill-card element">
-                                          Microsoft 365
+                                            Redux toolkit, Zustand, REST API, WebSocket
+                                        </span>
+                                    </li>
+                                    <li class="skills-item grid-item">
+                                        <span class="skill-card element">
+                                            Figma, UX/UI design
                                         </span>
                                     </li>
                                 </ul>
@@ -289,6 +298,64 @@
                                 <li class="portfolio__item grid-item">
                                     <article class="portfolio-card card">
                                         <a class="portfolio-wrapper"
+                                            id="sib-image-modal" 
+                                            data-images='[sib]'
+                                        >
+                                            <img class="portfolio-wrapper-image" src="/public/images/sib.png" alt="Preview" width="400" height="290" loading="lazy">
+                                        </a>
+                                        <div class="portfolio-card__body">
+                                            <time class="portfolio-card__date" datetime="2024.07">September 2025</time>
+                                            <h3 class="portfolio-card__title">
+                                                <a href="https://sib-int.dev.polygran.io/" class="portfolio-card__title-link" target="_blank" title="Open the website in new tab">SIB Dashboard</a>
+                                                <span class="icon material-symbols-outlined">
+                                                    open_in_new
+                                                </span>
+                                            </h3>
+                                            <div class="portfolio-card__description">
+                                                Enterprise-grade business management platform designed for independent consultants and coaches. The system provides comprehensive workflow optimization tools including automated invoice generation, advanced analytics and reporting modules, and an integrated customer relationship management (CRM) database. Built with a modular architecture, it enables seamless data synchronization across multiple business processes. The platform features role-based access control, real-time data processing, and responsive design for cross-device accessibility.
+                                            </div>
+                                            <div class="stack">
+                                                <ul class="stack__list flow">
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/react.svg" alt="React" title="React" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image rounded-full" src="./public/icons/chakra-ui.png" alt="Chakra-UI" title="Chakra-UI" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/tailwind_css.svg" alt="Tailwind-CSS" title="Tailwind-CSS" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/typescript.png" alt="TypeScript" title="TypeScript" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/zustand.png" alt="Zustand" title="Zustand" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/storybook.png" alt="Storybook" title="Storybook" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/vitest.webp" alt="Vitest" title="Vite" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/vite.svg" alt="Vite" title="Vite" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                                <li class="portfolio__item grid-item">
+                                    <article class="portfolio-card card">
+                                        <a class="portfolio-wrapper"
                                             id="affiliate-image-modal" 
                                             data-images='[]'
                                         >
@@ -316,11 +383,15 @@
                                                         loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/shadcn.png" alt="Shadcn" title="Shadcn" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
                                                         <img class="stack__image" src="./public/icons/tailwind_css.svg" alt="Tailwind-CSS" title="Tailwind-CSS" weight="40" height="40"
                                                         loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/js.svg" alt="JavaScript" title="JavaScript" weight="40" height="40"
+                                                        <img class="stack__image" src="./public/icons/typescript.png" alt="TypeScript" title="TypeScript" weight="40" height="40"
                                                         loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
@@ -343,65 +414,15 @@
                                 <li class="portfolio__item grid-item">
                                     <article class="portfolio-card card">
                                         <a class="portfolio-wrapper" 
-                                            id="portfolio-image-modal"
-                                            data-images='[]'
-                                        >
-                                            <img class="portfolio-wrapper-image" src="/public/images/portfolio.avif" alt="Preview" width="400" height="290" loading="lazy">
-                                        </a>
-                                        <div class="portfolio-card__body">
-                                            <time class="portfolio-card__date" datetime="2024.07">November 2024</time>
-                                            <h3 class="portfolio-card__title">
-                                                <a href="https://amalyuldashev.online" class="portfolio-card__title-link" target="_blank" title="Open the website in new tab">Portfolio one-page website</a>
-                                                <span class="icon material-symbols-outlined">
-                                                    open_in_new
-                                                </span>
-                                            </h3>
-                                            <div class="portfolio-card__description">
-                                                A one-page resume website with a sleek, interactive design featuring smooth animations. The layout is well-organized, highlighting skills, experience, and projects. A contact form at the bottom allows for easy communication, and the site is fully optimized for mobile devices, providing a seamless experience on all screen sizes.
-                                            </div>
-                                            <div class="stack">
-                                                <ul class="stack__list flow">
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/html5.svg" alt="HTML5" title="HTML5" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/css.svg" alt="CSS" title="CSS" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/js.svg" alt="JavaScript" title="JavaScript" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/vite.svg" alt="Vite" title="Vite" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/figma.webp" alt="Figma" title="Figma" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/git.svg" alt="Git" title="Git" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="portfolio__item grid-item">
-                                    <article class="portfolio-card card">
-                                        <a class="portfolio-wrapper" 
                                             id="copa-image-modal"
                                             data-images='[]'
                                         >
-                                            <img class="portfolio-wrapper-image" src="/public/images/co-pa.avif" alt="Preview" width="400" height="290" loading="lazy">
+                                            <img class="portfolio-wrapper-image" src="/public/images/copa.avif" alt="Preview" width="400" height="290" loading="lazy">
                                         </a>
                                         <div class="portfolio-card__body">
                                             <time class="portfolio-card__date" datetime="2024.07">July 2024</time>
                                             <h3 class="portfolio-card__title">
-                                                <a href="https://co-pa.ai" class="portfolio-card__title-link" target="_blank" title="Open the website in new tab">Online AI courses</a>
+                                                <a href="https://co-pa.ai" class="portfolio-card__title-link" target="_blank" title="Open the website in new tab">Branding with AI</a>
                                                 <span class="icon material-symbols-outlined">
                                                     open_in_new
                                                 </span>
@@ -412,15 +433,19 @@
                                             <div class="stack">
                                                 <ul class="stack__list flow">
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/wordpress.svg" alt="WordPress" title="WordPress" weight="40" height="40"
+                                                        <img class="stack__image" src="./public/icons/react.svg" alt="React" title="React" weight="40" height="40"
                                                         loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/elementor.svg" alt="Elementor" title="Elementor" weight="40" height="40"
+                                                        <img class="stack__image" src="./public/icons/vercel.png" alt="Vercel" title="Vercel" weight="40" height="40"
                                                         loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/slider-revolution.avif" alt="Slider Revolution" title="Slider Revolution" weight="40" height="40"
+                                                        <img class="stack__image" src="./public/icons/next-js.png" alt="Next.js" title="Next.js" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/neon.png" alt="Neon" title="Neon" weight="40" height="40"
                                                         loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
@@ -432,7 +457,7 @@
                                                         loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/css.svg" alt="CSS" title="CSS" weight="40" height="40"
+                                                        <img class="stack__image" src="./public/icons/tailwind_css.svg" alt="Tailwind-CSS" title="Tailwind-CSS" weight="40" height="40"
                                                         loading="lazy">
                                                     </li>
                                                 </ul>
@@ -461,6 +486,14 @@
                                             </div>
                                             <div class="stack">
                                                 <ul class="stack__list flow">
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/php.png" alt="PHP" title="PHP" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/mysql.webp" alt="MySQL" title="MySQL" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
                                                     <li class="stack__item">
                                                         <img class="stack__image" src="./public/icons/wordpress.svg" alt="WordPress" title="WordPress" weight="40" height="40"
                                                         loading="lazy">
@@ -509,7 +542,85 @@
                                         <article class="experience-card card card--hoverable">
                                             <header class="experience-header">
                                                 <h3 class="experience-card__position">
-                                                    Web Developer
+                                                    Atlassian Solution Engineer & Senior Frontend Developer
+                                                </h3>
+                                                <time class="experience-card__date" datetime="2025.01">June2025 - Present
+                                                </time>
+                                            </header>
+                                            <div class="experience-card__title">
+                                                <a href="https://www.polygran.de/"
+                                                    class="experience-card__title-link" 
+                                                    target="_blank" 
+                                                    title="Open the website in new tab"
+                                                >
+                                                    <b>Polygran GmbH</b>
+                                                </a>
+                                                <span class="icon material-symbols-outlined">
+                                                    open_in_new
+                                                </span>
+                                            </div>
+                                            <div class="experience-card__description">
+                                                Ownership and administration of Atlassian stack (Jira, Confluence, Bitbucket) with deep understanding of workflows, permissions, automation and integrations. Design and maintenance of custom workflows, fields, ScriptRunner logic and integrations with external systems. Infrastructure and environment automation using Ansible, reducing manual operations and improving system reliability. Development of a multi-tenant enterprise dashboard for a banking client and its partners. Design and implementation of a complete invoicing platform: invoice generation and processing, financial and user activity analytics, reporting and data visualization. Close collaboration with business stakeholders, translating complex processes into scalable technical solutions.
+                                            </div>
+                                            <div class="stack">
+                                                <ul class="stack__list flow">
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/jira.svg" alt="Jira" title="Jira" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/confluence.svg" alt="Confluence" title="Confluence" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/bitbucket.png" alt="Bitbucket" title="Bitbucket" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/microsoft.svg" alt="Microsoft" title="Microsoft" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/React.svg" alt="React" title="React" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/typescript.png" alt="TypeScript" title="TypeScript" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/python.png" alt="Python" title="Python" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/chakra-ui.png" alt="Chakra-UI" title="Chakra-UI" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/ansible.svg" alt="Ansible" title="Ansible" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/linux.svg" alt="Linux" title="Linux" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/tailwind_css.svg" alt="Tailwind-CSS" title="Tailwind-CSS" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/git.svg" alt="Git" title="Git" weight="40" height="40"
+                                                        loading="lazy">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </article>
+                                    </li>
+                                    <li class="experience__item grid-item">
+                                        <article class="experience-card card card--hoverable">
+                                            <header class="experience-header">
+                                                <h3 class="experience-card__position">
+                                                    CEO & Software Engineer
                                                 </h3>
                                                 <time class="experience-card__date" datetime="2024.07">August 2024 - Present
                                                 </time>
@@ -520,23 +631,31 @@
                                                     target="_blank" 
                                                     title="Open the website in new tab"
                                                 >
-                                                    <b>Jinn Limited</b>
+                                                    <b>Jinn Limited LLC</b>
                                                 </a>
                                                 <span class="icon material-symbols-outlined">
                                                     open_in_new
                                                 </span>
                                             </div>
                                             <div class="experience-card__description">
-                                                I develop and maintain web applications and single-page applications (SPA) using React, Node.js, and MySQL. My work includes creating and optimizing backend APIs with Express.js, integrating Redux-toolkit for frontend and external service interactions, and developing an affiliate marketing system to track referrals and commissions. I handle payment system integration and implement email/SMS notifications using NodeMailer for user convenience.
+                                                Entwicklung großskaliger TypeScript-basierter Single-Page-Applikationen mit Fokus auf Performance, Skalierbarkeit und Wartbarkeit.
+                                                End-to-End-Verantwortung für die Produktionsinfrastruktur, einschließlich: Konfiguration von Nginx, Orchestrierung von Prozessen mit PM2, DNS-Setup und Konfiguration der Umgebungen.
+                                                Konzeption und Implementierung von CI/CD-Pipelines mit GitHub Actions für automatisierte Build- und Deployment-Prozesse.
+                                                Eigenständige End-to-End-Entwicklung einer Affiliate-Plattform, einschließlich: Backend-APIs, Frontend-Dashboards, Integrationen von Zahlungs-, E-Mail- und Benachrichtigungsdiensten.
+                                                Strategische und operative Verantwortung als CEO, einschließlich: Definition und Umsetzung der Unternehmensstrategie sowie der operativen Roadmap, Steuerung des Tagesgeschäfts und unternehmensübergreifender Prozesse, Koordination von Partnern, Affiliates und externen Dienstleistern, Überwachung der Produktlieferung, Zeitpläne und der geschäftlichen Performance.
                                             </div>
                                             <div class="stack">
                                                 <ul class="stack__list flow">
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/html5.svg" alt="HTML5" title="HTML5" weight="50" height="50"
+                                                        <img class="stack__image" src="./public/icons/terraform.svg" alt="Terraform" title="Terraform" weight="50" height="50"
                                                         loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/css.svg" alt="CSS" title="CSS" weight="40" height="40"
+                                                        <img class="stack__image" src="./public/icons/docker.svg" alt="Docker" title="Docker" weight="50" height="50"
+                                                        loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/n8n.png" alt="n8n" title="n8n" weight="40" height="40"
                                                         loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
@@ -906,7 +1025,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="copyright">© Amal Yuldashev 2025</div>
+                        <div class="copyright">© Amal Yuldashev <span id="current-year">2025</span></div>
                     </div>
                 </div>
             </footer>

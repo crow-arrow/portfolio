@@ -121,7 +121,7 @@
         margin-bottom: 0;
 }
 .material-hamburger.material-close {
-        transform: rotate(-180deg);
+        transform: rotate(-90deg);
 }
 .material-hamburger.material-close .material-patty:nth-child(1) {
         transform: translate(-10px, 4px) rotate(-45deg) scale(0.5, 1);
