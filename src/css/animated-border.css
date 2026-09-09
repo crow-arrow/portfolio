@@ -22,8 +22,8 @@
 
 .hero-section {
   width: 40vw;
-  min-width: 300px;
-  max-width: 600px;
+  min-width: 0;
+  max-width: min(600px, 100%);
   height: auto;
   flex-shrink: 0;
   position: relative;

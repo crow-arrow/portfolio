@@ -278,13 +278,15 @@ function initAboutAnimation() {
 
   titleLines.forEach((line) => {
     const text = line.textContent;
-    const originalWidth = line.offsetWidth;
+    const availableWidth = line.parentElement?.clientWidth || line.offsetWidth;
+    const originalWidth = Math.min(line.offsetWidth || availableWidth, availableWidth);
 
     const clone = line.cloneNode(true);
     clone.style.visibility = "hidden";
     clone.style.position = "absolute";
     clone.style.height = "auto";
     clone.style.width = originalWidth + "px";
+    clone.style.maxWidth = "100%";
     clone.style.whiteSpace = "normal";
     clone.style.wordWrap = "break-word";
     line.style.position = "relative";
@@ -292,7 +294,8 @@ function initAboutAnimation() {
 
     const height = clone.offsetHeight;
     line.style.minHeight = height + "px";
-    line.style.width = originalWidth + "px";
+    line.style.width = "100%";
+    line.style.maxWidth = "100%";
     line.style.whiteSpace = "normal";
     line.style.wordWrap = "break-word";
 
@@ -605,6 +608,7 @@ function openMenu(event) {
   content.classList.toggle("active");
 
   links.forEach((link) => link.classList.toggle("active"));
+  syncMenuWrapper();
 }
 
 function closeMenu(event) {
@@ -615,21 +619,29 @@ function closeMenu(event) {
     content.classList.remove("active");
 
     links.forEach((link) => link.classList.remove("active"));
+    syncMenuWrapper();
   }
 }
 
 circle.addEventListener("click", openMenu, false);
 win.addEventListener("click", closeMenu, false);
 
-function setWrapperHeight() {
-  const viewportHeight = window.innerHeight;
-  document.querySelector(
-    ".material-menu-wrapper"
-  ).style.height = `${viewportHeight}px`;
+function syncMenuWrapper() {
+  const wrapper = document.querySelector(".material-menu-wrapper");
+  if (!wrapper) return;
+
+  const isOpen = circle.classList.contains("active");
+  wrapper.classList.toggle("is-open", isOpen);
+
+  if (isOpen) {
+    wrapper.style.height = `${window.innerHeight}px`;
+  } else {
+    wrapper.style.removeProperty("height");
+  }
 }
 
-window.addEventListener("resize", setWrapperHeight);
-window.addEventListener("load", setWrapperHeight);
+window.addEventListener("resize", syncMenuWrapper);
+window.addEventListener("load", syncMenuWrapper);
 
 // Modal for experience images
 const portfolioimages = [
