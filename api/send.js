@@ -1,73 +1,67 @@
 import nodemailer from "nodemailer";
-import { getAccessToken } from "./getTokens.js";
+import { verifyAltchaPayload } from "./altcha-core.js";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    type: "OAuth2",
-    user: process.env.EMAIL_USER,
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    refreshToken: process.env.REFRESH_TOKEN,
-    accessToken: async () => {
-      const accessToken = await getAccessToken();
-      return accessToken;
+function createTransporter() {
+  const user = process.env.EMAIL_USER;
+  const appPassword = (process.env.EMAIL_PASS || "").replaceAll("-", "").replaceAll(" ", "");
+
+  // App password is more reliable locally: OAuth refresh tokens expire/revoke.
+  if (appPassword) {
+    return nodemailer.createTransport({
+      service: "gmail",
+      auth: { user, pass: appPassword },
+    });
+  }
+
+  return nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      type: "OAuth2",
+      user,
+      clientId: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      refreshToken: process.env.REFRESH_TOKEN,
     },
-  },
-});
+  });
+}
+
+const transporter = createTransporter();
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method Not Allowed" });
   }
 
-  const { fname, lname, email, phone, description, token } = req.body;
+  const { fname, lname, email, phone, description, altcha } = req.body;
 
-  const isLocalhost = req.headers.host?.includes("localhost") || 
+  const isLocalhost =
+    req.headers.host?.includes("localhost") ||
     req.headers.host?.includes("127.0.0.1");
-  const skipRecaptchaForDev = process.env.SKIP_RECAPTCHA_LOCALHOST === "true";
+  const skipAltchaForDev =
+    process.env.SKIP_ALTCHA_LOCALHOST === "true" ||
+    process.env.SKIP_RECAPTCHA_LOCALHOST === "true";
 
-  if (!fname || !lname || !email || !description || !token) {
+  if (!fname || !lname || !email || !description) {
     return res
       .status(400)
       .json({ error: "Please fill in all required fields." });
   }
 
-  if (isLocalhost && skipRecaptchaForDev) {
-    console.warn("⚠️ Skipping reCAPTCHA verification for localhost (development mode)");
+  if (isLocalhost && skipAltchaForDev) {
+    console.warn("Skipping ALTCHA verification for localhost (development mode)");
   } else {
     try {
-      const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-      const verifyRes = await fetch(
-        "https://www.google.com/recaptcha/api/siteverify",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: `secret=${secretKey}&response=${token}&remoteip=${
-            req.headers["x-forwarded-for"] || req.socket.remoteAddress
-          }`,
-        }
-      );
+      const { error, verification } = await verifyAltchaPayload(altcha);
 
-      const verifyData = await verifyRes.json();
-
-      if (!verifyData.success || verifyData.score < 0.5) {
-        return res.status(400).json({ error: "Failed reCAPTCHA verification" });
-      }
-
-      if (verifyData.action !== "submit") {
-        return res.status(400).json({ error: "Invalid reCAPTCHA action" });
-      }
-
-      if (verifyData.hostname !== "www.amalyuldashev.online") {
-        return res.status(400).json({ error: "Invalid reCAPTCHA hostname" });
+      if (error || !verification?.verified) {
+        return res.status(400).json({ error: "Failed ALTCHA verification" });
       }
     } catch (err) {
-      console.error("reCAPTCHA error:", err);
-      return res.status(500).json({ error: "reCAPTCHA verification failed" });
+      console.error("ALTCHA error:", err);
+      return res.status(500).json({ error: "ALTCHA verification failed" });
     }
   }
 

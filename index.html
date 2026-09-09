@@ -3,13 +3,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Amal Yuldashev's personal website">
-        <meta property="og:title" content="Amal Yuldashev">
-        <meta property="og:description" content="Unique websites that will make your business shine. Full-cycle web development services for an exceptional online presence and seamless user experience.">
+        <title>Amal Yuldashev — Solutions Engineer &amp; Full-Stack / DevOps Specialist</title>
+        <meta name="description" content="Amal Yuldashev — Solutions Engineer &amp; Full-Stack / DevOps Specialist. Building scalable web products, automating cloud infrastructure, and bridging technical architectures with real-world business needs.">
         <meta name="author" content="Amal Yuldashev">
-        <meta name="date" content="2025-01-06T00:00:00+00:00" scheme="ISO 8601">
+        <meta name="keywords" content="Solutions Engineer, Full-Stack Engineer, DevOps, FastAPI, React, TypeScript, Ansible, Grafana, CI/CD, Atlassian, Infrastructure Architecture">
+        <link rel="canonical" href="https://amal-yuldashev.com/">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://amal-yuldashev.com/">
+        <meta property="og:title" content="Amal Yuldashev — Solutions Engineer &amp; Full-Stack / DevOps Specialist">
+        <meta property="og:description" content="Building scalable web products, automating cloud infrastructure, and bridging technical architectures with real-world business needs.">
         <meta property="og:image" content="/public/images/preview.svg">
-        <title>Modern Web applications</title>
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Amal Yuldashev — Solutions Engineer &amp; Full-Stack / DevOps Specialist">
+        <meta name="twitter:description" content="Building scalable web products, automating cloud infrastructure, and bridging technical architectures with real-world business needs.">
+        <meta name="twitter:image" content="/public/images/preview.svg">
+        <meta name="date" content="2026-09-09T00:00:00+00:00" scheme="ISO 8601">
         <link rel="shortcut icon" href="./public/images/favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" sizes="180x180" href="./public/images/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="./public/images/favicon-32x32.png">
@@ -49,9 +57,21 @@
                 <div class="preloader__cube"></div>
             </div>
         </div>
+        <script>
+            (function () {
+                var pre = document.getElementById("preloader");
+                if (!pre) return;
+                pre.addEventListener("animationend", function (e) {
+                    if (e.target !== pre) return;
+                    pre.style.display = "none";
+                    pre.style.pointerEvents = "none";
+                    pre.setAttribute("aria-hidden", "true");
+                });
+            })();
+        </script>
         <header class="header">
             <div class="header__inner container">
-                <a class="header-logo" href="/" aria-label="Home Page" id="home">
+                <a class="header-logo" href="/" aria-label="Home Page" id="home" data-i18n-aria="nav.home">
                     <svg width="153" height="30" viewBox="0 0 153 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.5 21.6406C12.5 20.7656 12.7969 20.0312 13.3906 19.4375C14.0156 18.8125 14.7656 18.5 15.6406 18.5H22.8125L21.5938 15.0312C21.0938 13.75 20.5938 12.5469 20.0938 11.4219C19.625 10.2656 19.0781 9.21875 18.4531 8.28125C17.8906 7.34375 17.25 6.84375 16.5312 6.78125C15.7812 6.84375 15.1094 7.34375 14.5156 8.28125C13.9219 9.21875 13.375 10.2656 12.875 11.4219C12.4062 12.5469 11.9219 13.75 11.4219 15.0312L6.96875 27.2188C6.65625 27.875 6.25 28.4219 5.75 28.8594C5.28125 29.2656 4.5625 29.4688 3.59375 29.4688C2.6875 29.4688 1.9375 29.1562 1.34375 28.5312C0.78125 27.9062 0.53125 27.1562 0.59375 26.2812C0.625 25.875 0.71875 25.5 0.875 25.1562L6.03125 11.8438C7.46875 8.34375 8.90625 5.51562 10.3438 3.35938C11.75 1.23438 13.8125 0.15625 16.5312 0.125C19.2188 0.15625 21.2656 1.23438 22.6719 3.35938C24.1094 5.45312 25.5469 8.28125 26.9844 11.8438L32.1406 25.1562C32.2969 25.5 32.3906 25.875 32.4219 26.2812C32.4844 27.1562 32.2188 27.9062 31.625 28.5312C31.0625 29.1562 30.3281 29.4688 29.4219 29.4688C28.3906 29.4688 27.625 29.2656 27.125 28.8594C26.6562 28.4219 26.2656 27.875 25.9531 27.2188L25.0625 24.7812H15.6406C14.7656 24.7812 14.0312 24.4688 13.4375 23.8438C12.8125 23.25 12.5 22.5156 12.5 21.6406ZM47.0469 6.92188C48.1406 6.92188 49.2031 7.10938 50.2344 7.48438C51.2969 7.85938 52.3125 8.40625 53.2812 9.125C53.4375 9.28125 53.6094 9.4375 53.7969 9.59375C53.9531 9.4375 54.125 9.28125 54.3125 9.125C55.2812 8.40625 56.2812 7.85938 57.3125 7.48438C58.375 7.10938 59.4375 6.92188 60.5 6.92188C61.5938 6.92188 62.6562 7.10938 63.6875 7.48438C64.75 7.85938 65.75 8.42188 66.6875 9.17188C67.6562 9.89062 68.5 10.8594 69.2188 12.0781C69.9688 13.2969 70.3438 14.75 70.3438 16.4375V26.4219C70.1562 28.2969 69.125 29.3125 67.25 29.4688C66.375 29.4688 65.6094 29.1875 64.9531 28.625C64.3281 28.0312 64.0156 27.2969 64.0156 26.4219V16.8125C64.0156 16.0625 63.875 15.4375 63.5938 14.9375C63.3125 14.4062 63 14 62.6562 13.7188C62.3125 13.4062 61.9531 13.1875 61.5781 13.0625C61.2031 12.9062 60.8281 12.8281 60.4531 12.8281C60.0781 12.8281 59.7031 12.9062 59.3281 13.0625C58.9844 13.1875 58.6406 13.4062 58.2969 13.7188C57.9531 14 57.6406 14.4062 57.3594 14.9375C57.0781 15.4375 56.9219 16.0625 56.8906 16.8125V26.4219C56.7031 28.2969 55.6719 29.3125 53.7969 29.4688C52.9219 29.4688 52.1562 29.1875 51.5 28.625C50.875 28.0312 50.5625 27.2969 50.5625 26.4219V16.8125C50.5625 16.0625 50.4219 15.4375 50.1406 14.9375C49.8594 14.4062 49.5469 14 49.2031 13.7188C48.8594 13.4062 48.5 13.1875 48.125 13.0625C47.75 12.9062 47.375 12.8281 47 12.8281C46.625 12.8281 46.25 12.9062 45.875 13.0625C45.5312 13.1875 45.1875 13.4062 44.8438 13.7188C44.5 14 44.1875 14.4062 43.9062 14.9375C43.625 15.4375 43.4688 16.0625 43.4375 16.8125V26.4219C43.2812 28.2969 42.2656 29.3125 40.3906 29.4688C39.5156 29.4688 38.75 29.1875 38.0938 28.625C37.4688 28.0312 37.1562 27.2969 37.1562 26.4219V16.4375C37.2188 14.75 37.6094 13.2969 38.3281 12.0781C39.0469 10.8594 39.8906 9.89062 40.8594 9.17188C41.8281 8.42188 42.8281 7.85938 43.8594 7.48438C44.9219 7.10938 45.9844 6.92188 47.0469 6.92188ZM102.359 26.4219V15.125C102.359 14.3438 101.953 13.9375 101.141 13.9062H84.7344C84.1406 13.9375 83.625 14.2031 83.1875 14.7031C82.75 15.1719 82.4219 15.7344 82.2031 16.3906C82.0156 17.0156 81.9219 17.6562 81.9219 18.3125C81.9219 18.9375 82.0156 19.5781 82.2031 20.2344C82.4219 20.8594 82.75 21.4219 83.1875 21.9219C83.625 22.3906 84.1406 22.625 84.7344 22.625H96.7344C97.6094 22.625 98.3438 22.9375 98.9375 23.5625C99.5625 24.1562 99.875 24.8906 99.875 25.7656C99.875 26.6406 99.5625 27.375 98.9375 27.9688C98.3438 28.5938 97.6094 28.9062 96.7344 28.9062H84.9219C82.7344 28.875 80.9219 28.2656 79.4844 27.0781C78.0781 25.8594 77.0625 24.5 76.4375 23C75.8438 21.4688 75.5469 19.8906 75.5469 18.2656C75.5469 16.7031 75.8594 15.1719 76.4844 13.6719C77.1094 12.1406 78.125 10.7812 79.5312 9.59375C80.9375 8.375 83.0156 7.71875 85.7656 7.625H105.453C106.328 7.625 107.078 7.92188 107.703 8.51562C108.328 9.07812 108.656 9.79688 108.688 10.6719V26.4219C108.688 27.2969 108.359 28.0312 107.703 28.625C107.078 29.1875 106.328 29.4688 105.453 29.4688C103.578 29.3125 102.547 28.2969 102.359 26.4219ZM117.969 0.5C118.812 0.53125 119.531 0.84375 120.125 1.4375C120.719 2 121.031 2.70312 121.062 3.54688V26.5156C120.875 28.3906 119.844 29.4062 117.969 29.5625C117.094 29.5625 116.328 29.2812 115.672 28.7188C115.047 28.125 114.734 27.3906 114.734 26.5156V3.54688C114.766 2.67188 115.094 1.95312 115.719 1.39062C116.344 0.796875 117.094 0.5 117.969 0.5Z" fill="currentColor"/>
                         <path d="M147.844 29.6562C146.594 29.6562 145.547 29.2188 144.703 28.3438C143.891 27.4688 143.484 26.375 143.484 25.0625C143.484 23.75 143.891 22.6562 144.703 21.7812C145.547 20.9062 146.594 20.4688 147.844 20.4688C149.094 20.4688 150.141 20.9062 150.984 21.7812C151.828 22.6562 152.25 23.75 152.25 25.0625C152.25 26.375 151.828 27.4688 150.984 28.3438C150.141 29.2188 149.094 29.6562 147.844 29.6562Z" fill="#FF6900"/>
@@ -60,21 +80,26 @@
                 <nav class="header-menu hiden-mobile"> 
                     <ol class="header-menu-list">
                         <li class="header-menu-item">
-                            <a class="header-menu-link active" href="#about"> About </a>
+                            <a class="header-menu-link active" href="#about" data-i18n="nav.about">About</a>
                         </li>
                         <li class="header-menu-item">
-                            <a class="header-menu-link" href="#skills"> Skills </a>
+                            <a class="header-menu-link" href="#skills" data-i18n="nav.skills">Skills</a>
                         </li>
                         <li class="header-menu-item">
-                            <a class="header-menu-link" href="#portfolio"> Portfolio </a>
+                            <a class="header-menu-link" href="#portfolio" data-i18n="nav.portfolio">Portfolio</a>
                         </li>
                         <li class="header-menu-item">
-                            <a class="header-menu-link" href="#experience"> Experience </a>
+                            <a class="header-menu-link" href="#experience" data-i18n="nav.experience">Experience</a>
                         </li>
                     </ol>
                 </nav>
                 
                 <div class="header-actions">
+                    <div class="lang-switch" role="group" data-locale="en" data-i18n-aria="nav.language">
+                        <span class="lang-switch__glider" aria-hidden="true"></span>
+                        <button type="button" class="lang-switch__btn is-active" data-lang="en" aria-pressed="true">EN</button>
+                        <button type="button" class="lang-switch__btn" data-lang="de" aria-pressed="false">DE</button>
+                    </div>
                     <button class="button theme-switch" id="theme-switch">
                         <span class="icon material-symbols-outlined" id="theme-dark">
                             dark_mode
@@ -85,7 +110,10 @@
                     </button>
                 </div>
                 <button class="header-button button" type="button">
-                    <a href="#" id="open_pop_up" class="header-button-link">Hire me</a>
+                    <a href="#contact" id="open_pop_up" class="header-button-link js-open-popup">
+                        <i data-lucide="mail"></i>
+                        <span data-i18n="nav.hireMe">Hire me</span>
+                    </a>
                 </button>
             </div>
         </header>
@@ -136,150 +164,101 @@
                 </div>
             </div>
             <div class="content-sections">
-                <section class="section about" id="about">
+                <section class="section about" id="hero">
                     <div class="hero-sticker">
                         <div class="sticker-bubble">
-                            <p class="sticker-text">Hi! I'm Amal, a Senior Frontend Developer and Software Engineer.</p>
+                            <p class="sticker-text" data-i18n="hero.sticker">Hi! I'm Amal — Solutions Engineer &amp; Full-Stack / DevOps Specialist.</p>
                         </div>
                     </div>
                     <div class="hero__inner container">
                         <div class="title-body">
-                            <h1 class="about-title"> 
-                                <div class="live-typing">Building scalable solutions focused on performance, UX, and clean architecture.</div>
+                            <h1 class="about-title">
+                                <div class="live-typing" data-i18n="hero.title">Building scalable solutions focused on performance, UX, and clean architecture.</div>
                             </h1>
-                            <a href="./public/images/pdf/CV_Resume.pdf" download class="check-button button">Download CV</a>
+                            <a href="./public/images/pdf/CV_Resume.pdf" download class="check-button button">
+                                <i data-lucide="download"></i>
+                                <span data-i18n="hero.downloadCv">Download CV</span>
+                            </a>
                         </div>
                         <div class="hero-section">
-                            <img class="profile-picture" src="./public/images/profile.avif" alt="Profile picture" width="500" height="500">
+                            <img class="profile-picture" src="./public/images/profile.avif" alt="Portrait of Amal Yuldashev" width="500" height="500" data-i18n-alt="hero.portraitAlt">
                         </div>
                     </div>
                 </section>
+                <section class="section bio" id="about">
+                    <div class="bio-inner container">
+                        <header class="section-header">
+                            <h2 class="bio-title">
+                                <span data-i18n="about.titlePrefix">About</span>
+                                <span class="accent-color" data-i18n="about.titleAccent">me</span>
+                            </h2>
+                        </header>
+                        <p class="bio-text" data-i18n="about.bio">I'm a Full-Stack &amp; DevOps Engineer specializing in Python (FastAPI), React, TypeScript, and cloud infrastructure. At Schultech GmbH, I manage server architecture, CI/CD pipelines, and system observability with Grafana, while building media technology integrations. I also bring deep expertise in the Atlassian ecosystem, having built custom Ansible automation for enterprise Jira and Confluence syncing. As an extroverted engineer who loves working directly with clients, I thrive at the intersection of complex system design, infrastructure, and clear communication.</p>
+                        <aside class="visa-card" aria-label="Work authorization" data-i18n-aria="about.visaLabel">
+                            <h3 class="visa-card__title" data-i18n="about.visaTitle">Work authorization</h3>
+                            <p class="visa-card__text" data-i18n="about.visaText">I hold a valid German work visa and am fully authorized to work in Germany and the EU. No visa sponsorship, relocation paperwork, or additional immigration support is required from the employer.</p>
+                        </aside>
+                    </div>
+                </section>
                 <section class="section skills" id="skills">
-                    <div class="skills-inner grid grid--2 container">
-                        <div class="skills-column">
-                            <header class="section-header">
-                                <h2 class="skills-title">
-                                    <span class="accent-color">Hard</span>
-                                    skills
-                                </h2>
-                            </header>
-                            <div class="section-body">
-                                <ul class="skills-list grid grid--1">
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                            JavaScript (TypeScript), React.js, Vite, Vitest
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                            Node.js
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                            Python3
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                            Docker, Ansible - AWX, Terraform, Nginx, Linux - Ubuntu
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                            Git, GitHub, GitHub Actions
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                            Atlassian Jira, Confluence & Bitbucket
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                            Microsoft 365, Slack
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                            HTML5, CSS, SASS, Tailwind CSS
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                            MySQL & PostgreSQL - Prisma, MongoDB
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                            Redux toolkit, Zustand, REST API, WebSocket
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                            Figma, UX/UI design
-                                        </span>
-                                    </li>
+                    <div class="skills-inner container">
+                        <header class="section-header">
+                            <h2 class="skills-title">
+                                <span data-i18n="skills.titlePrefix">Skills &amp;</span>
+                                <span class="accent-color" data-i18n="skills.titleAccent">Tech Stack</span>
+                            </h2>
+                        </header>
+                        <div class="skills-categories">
+                            <div class="skills-column">
+                                <h3 class="skills-category-title" data-i18n="skills.backend">Full-Stack &amp; Architecture</h3>
+                                <ul class="skills-list">
+                                    <li class="skills-item"><i data-lucide="braces"></i><span>Python (FastAPI)</span></li>
+                                    <li class="skills-item"><i data-lucide="atom"></i><span>React</span></li>
+                                    <li class="skills-item"><i data-lucide="file-code"></i><span>TypeScript</span></li>
+                                    <li class="skills-item"><i data-lucide="webhook"></i><span data-i18n="skills.rest">RESTful APIs</span></li>
+                                    <li class="skills-item"><i data-lucide="waypoints"></i><span data-i18n="skills.systemDesign">System Design</span></li>
+                                    <li class="skills-item"><i data-lucide="hexagon"></i><span>Node.js</span></li>
+                                    <li class="skills-item"><i data-lucide="database"></i><span>PostgreSQL</span></li>
+                                    <li class="skills-item"><i data-lucide="layers"></i><span>Prisma</span></li>
+                                    <li class="skills-item"><i data-lucide="key-round"></i><span>SSO / OAuth2</span></li>
+                                    <li class="skills-item"><i data-lucide="shield-check"></i><span data-i18n="skills.enterpriseSecurity">Enterprise Security &amp; 2FA</span></li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="skills-column">
-                            <h2 class="skills-title">
-                                <span class="accent-color">Soft</span>
-                                skills
-                            </h2>
-                            <div class="skills- body">
-                              <ul class="skills-list grid grid--1">
-                                  <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                          Team leadership
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                          Problem-solving
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                          Communication
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                          Time Management
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                          Adaptability
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                          Critical Thinking
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                          Negotiation
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                          Emotional Intelligence
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                          Contact
-                                        </span>
-                                    </li>
-                                    <li class="skills-item grid-item">
-                                        <span class="skill-card element">
-                                          Competent written and oral speech
-                                        </span>
-                                    </li>
+                            <div class="skills-column">
+                                <h3 class="skills-category-title" data-i18n="skills.devops">DevOps, Infra &amp; Observability</h3>
+                                <ul class="skills-list">
+                                    <li class="skills-item"><i data-lucide="settings-2"></i><span>Ansible (IaC)</span></li>
+                                    <li class="skills-item"><i data-lucide="git-merge"></i><span data-i18n="skills.cicd">CI/CD Pipelines</span></li>
+                                    <li class="skills-item"><i data-lucide="chart-line"></i><span data-i18n="skills.grafana">Grafana (Monitoring / Alerting)</span></li>
+                                    <li class="skills-item"><i data-lucide="container"></i><span>Docker</span></li>
+                                    <li class="skills-item"><i data-lucide="globe"></i><span>Nginx</span></li>
+                                    <li class="skills-item"><i data-lucide="cloud"></i><span>Cloudflare</span></li>
+                                    <li class="skills-item"><i data-lucide="cpu"></i><span>PM2</span></li>
+                                    <li class="skills-item"><i data-lucide="terminal"></i><span data-i18n="skills.linux">Linux / VPS Admin</span></li>
+                                </ul>
+                            </div>
+                            <div class="skills-column">
+                                <h3 class="skills-category-title" data-i18n="skills.atlassian">Enterprise &amp; Atlassian</h3>
+                                <ul class="skills-list">
+                                    <li class="skills-item"><i data-lucide="layout-list"></i><span data-i18n="skills.jiraAdmin">Jira &amp; Confluence Enterprise Administration</span></li>
+                                    <li class="skills-item"><i data-lucide="arrow-left-right"></i><span data-i18n="skills.migration">Prod-to-Dev Migration Tools</span></li>
+                                    <li class="skills-item"><i data-lucide="cog"></i><span data-i18n="skills.automation">Custom Automation</span></li>
+                                </ul>
+                            </div>
+                            <div class="skills-column">
+                                <h3 class="skills-category-title" data-i18n="skills.ai">AI-Native Engineering</h3>
+                                <ul class="skills-list">
+                                    <li class="skills-item"><i data-lucide="sparkles"></i><span>Claude Code</span></li>
+                                    <li class="skills-item"><i data-lucide="mouse-pointer-2"></i><span>Cursor</span></li>
+                                    <li class="skills-item"><i data-lucide="bot"></i><span data-i18n="skills.aiApis">AI API Integrations</span></li>
+                                </ul>
+                            </div>
+                            <div class="skills-column">
+                                <h3 class="skills-category-title" data-i18n="skills.soft">Methodologies &amp; Soft Skills</h3>
+                                <ul class="skills-list">
+                                    <li class="skills-item"><i data-lucide="users"></i><span data-i18n="skills.stakeholders">Stakeholder Management</span></li>
+                                    <li class="skills-item"><i data-lucide="list-checks"></i><span data-i18n="skills.requirements">Requirement Engineering</span></li>
+                                    <li class="skills-item"><i data-lucide="kanban"></i><span>Agile (Scrum / Kanban)</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -289,64 +268,152 @@
                     <div class="portfolio-inner container">
                         <header class="section-header">
                             <h2 class="portfolio-title">
-                                My
-                                <span class="accent-color">Portfolio</span>
+                                <span data-i18n="portfolio.titlePrefix">Featured</span>
+                                <span class="accent-color" data-i18n="portfolio.titleAccent">Engineering Projects</span>
                             </h2>
                         </header>
                         <div class="section-body">
                             <ul class="portfolio-list grid">
                                 <li class="portfolio__item grid-item">
                                     <article class="portfolio-card card">
-                                        <a class="portfolio-wrapper"
-                                            id="sib-image-modal" 
-                                            data-images='[sib]'
-                                        >
-                                            <img class="portfolio-wrapper-image" src="/public/images/sib.png" alt="Preview" width="400" height="290" loading="lazy">
-                                        </a>
-                                        <div class="portfolio-card__body">
-                                            <time class="portfolio-card__date" datetime="2024.07">September 2025</time>
-                                            <h3 class="portfolio-card__title">
-                                                <a href="https://sib-int.dev.polygran.io/" class="portfolio-card__title-link" target="_blank" title="Open the website in new tab">SIB Dashboard</a>
-                                                <span class="icon material-symbols-outlined">
-                                                    open_in_new
-                                                </span>
-                                            </h3>
-                                            <div class="portfolio-card__description">
-                                                Enterprise-grade business management platform designed for independent consultants and coaches. The system provides comprehensive workflow optimization tools including automated invoice generation, advanced analytics and reporting modules, and an integrated customer relationship management (CRM) database. Built with a modular architecture, it enables seamless data synchronization across multiple business processes. The platform features role-based access control, real-time data processing, and responsive design for cross-device accessibility.
+                                        <div class="portfolio-placeholder" aria-hidden="true">
+                                            <div class="portfolio-placeholder__glow"></div>
+                                            <div class="portfolio-placeholder__grid"></div>
+                                            <div class="portfolio-placeholder__badge">
+                                                <span class="material-symbols-outlined portfolio-placeholder__icon">cloud</span>
+                                                <span data-i18n="portfolio.inProgress">Project in progress</span>
                                             </div>
+                                        </div>
+                                        <div class="portfolio-card__body">
+                                            <time class="portfolio-card__date" datetime="2025" data-i18n="portfolio.cloudManagerDate">In progress</time>
+                                            <h3 class="portfolio-card__title">
+                                                <span class="portfolio-card__title-text" data-i18n="portfolio.cloudManagerTitle">Cloud Manager</span>
+                                            </h3>
+                                            <div class="portfolio-card__description" data-i18n="portfolio.cloudManagerDescription">
+                                                Cloud platform for Schultech to remotely monitor, configure, and operate media technology in schools. It integrates with on-site hardware, surfaces analytics on device health and state, and uses a cloud proxy between the platform and classroom devices. A visual graphic editor lets teams design and apply AV configurations. Currently in active development.
+                                            </div>
+                                            <ul class="project-tags" aria-label="Tech stack" data-i18n-aria="portfolio.techStack">
+                                                <li><i data-lucide="atom"></i><span>React</span></li>
+                                                <li><i data-lucide="file-code"></i><span>TypeScript</span></li>
+                                                <li><i data-lucide="braces"></i><span>Python</span></li>
+                                                <li><i data-lucide="zap"></i><span>FastAPI</span></li>
+                                                <li><i data-lucide="chart-line"></i><span>Grafana</span></li>
+                                                <li><i data-lucide="waypoints"></i><span>System Design</span></li>
+                                                <li><i data-lucide="webhook"></i><span>REST APIs</span></li>
+                                                <li><i data-lucide="git-merge"></i><span>CI/CD</span></li>
+                                            </ul>
                                             <div class="stack">
                                                 <ul class="stack__list flow">
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/react.svg" alt="React" title="React" weight="40" height="40"
-                                                        loading="lazy">
+                                                        <img class="stack__image" src="./public/icons/react.svg" alt="React" title="React" width="40" height="40" loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image rounded-full" src="./public/icons/chakra-ui.png" alt="Chakra-UI" title="Chakra-UI" weight="40" height="40"
-                                                        loading="lazy">
+                                                        <img class="stack__image" src="./public/icons/typescript.png" alt="TypeScript" title="TypeScript" width="40" height="40" loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/tailwind_css.svg" alt="Tailwind-CSS" title="Tailwind-CSS" weight="40" height="40"
-                                                        loading="lazy">
+                                                        <img class="stack__image" src="./public/icons/python.png" alt="Python" title="Python" width="40" height="40" loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/typescript.png" alt="TypeScript" title="TypeScript" weight="40" height="40"
-                                                        loading="lazy">
+                                                        <img class="stack__image" src="./public/icons/vite.svg" alt="Vite" title="Vite" width="40" height="40" loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/zustand.png" alt="Zustand" title="Zustand" weight="40" height="40"
-                                                        loading="lazy">
+                                                        <img class="stack__image" src="./public/icons/tailwind_css.svg" alt="Tailwind CSS" title="Tailwind CSS" width="40" height="40" loading="lazy">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                                <li class="portfolio__item grid-item">
+                                    <article class="portfolio-card card">
+                                        <div class="portfolio-placeholder" aria-hidden="true">
+                                            <div class="portfolio-placeholder__glow"></div>
+                                            <div class="portfolio-placeholder__grid"></div>
+                                            <div class="portfolio-placeholder__badge">
+                                                <span class="material-symbols-outlined portfolio-placeholder__icon">home_storage</span>
+                                                <span data-i18n="portfolio.homelabBadge">Private homelab</span>
+                                            </div>
+                                        </div>
+                                        <div class="portfolio-card__body">
+                                            <div class="portfolio-card__meta">
+                                                <time class="portfolio-card__date" datetime="2025" data-i18n="portfolio.homelabDate">2025 – Present</time>
+                                                <span class="portfolio-card__role"><i data-lucide="house-plug"></i><span data-i18n="portfolio.homelabRole">Homelab Architect &amp; Admin</span></span>
+                                            </div>
+                                            <h3 class="portfolio-card__title">
+                                                <span class="portfolio-card__title-text" data-i18n="portfolio.homelabTitle">HomeLab: Family Cloud &amp; Secure Backup Infrastructure</span>
+                                            </h3>
+                                            <div class="portfolio-card__description" data-i18n="portfolio.homelabDescription">
+                                                Engineered a private family cloud setup hosting Immich for automated iPhone media backups. Configured a secure VPN tunnel (WireGuard/Tailscale) to eliminate exposed public ports while maintaining seamless remote access. Deployed and managed containerized services using Docker and Portainer, focusing on network security, storage efficiency, and zero-trust principles.
+                                            </div>
+                                            <ul class="project-tags" aria-label="Tech stack" data-i18n-aria="portfolio.techStack">
+                                                <li><i data-lucide="container"></i><span>Docker</span></li>
+                                                <li><i data-lucide="layout-dashboard"></i><span>Portainer</span></li>
+                                                <li><i data-lucide="house"></i><span>Self-Hosted</span></li>
+                                                <li><i data-lucide="lock"></i><span>VPN / WireGuard</span></li>
+                                                <li><i data-lucide="shield"></i><span>Network Security</span></li>
+                                                <li><i data-lucide="terminal"></i><span>Linux Admin</span></li>
+                                            </ul>
+                                            <div class="stack">
+                                                <ul class="stack__list flow">
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/docker.svg" alt="Docker" title="Docker" width="40" height="40" loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/storybook.png" alt="Storybook" title="Storybook" weight="40" height="40"
-                                                        loading="lazy">
+                                                        <img class="stack__image" src="./public/icons/linux.svg" alt="Linux" title="Linux" width="40" height="40" loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/vitest.webp" alt="Vitest" title="Vite" weight="40" height="40"
-                                                        loading="lazy">
+                                                        <img class="stack__image" src="./public/icons/nginx.svg" alt="Nginx" title="Nginx" width="40" height="40" loading="lazy">
                                                     </li>
                                                     <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/vite.svg" alt="Vite" title="Vite" weight="40" height="40"
-                                                        loading="lazy">
+                                                        <img class="stack__image" src="./public/icons/git.svg" alt="Git" title="Git" width="40" height="40" loading="lazy">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                                <li class="portfolio__item grid-item">
+                                    <article class="portfolio-card card">
+                                        <div class="portfolio-placeholder" aria-hidden="true">
+                                            <div class="portfolio-placeholder__glow"></div>
+                                            <div class="portfolio-placeholder__grid"></div>
+                                            <div class="portfolio-placeholder__badge">
+                                                <span class="material-symbols-outlined portfolio-placeholder__icon">payments</span>
+                                                <span data-i18n="portfolio.internalProject">Internal platform</span>
+                                            </div>
+                                        </div>
+                                        <div class="portfolio-card__body">
+                                            <div class="portfolio-card__meta">
+                                                <time class="portfolio-card__date" datetime="2025-09" data-i18n="portfolio.invoicingDate">September 2025</time>
+                                                <span class="portfolio-card__role"><i data-lucide="code"></i><span data-i18n="portfolio.invoicingRole">Full-Stack Engineer</span></span>
+                                            </div>
+                                            <h3 class="portfolio-card__title">
+                                                <span class="portfolio-card__title-text" data-i18n="portfolio.invoicingTitle">Invoicing &amp; Freelance Platform (Polygran)</span>
+                                            </h3>
+                                            <div class="portfolio-card__description" data-i18n="portfolio.invoicingDescription">
+                                                Developed the full-stack architecture for a fintech platform used to manage freelancers, invoice tracking, and affiliate payouts. Implemented strict access control logic, secure API routes, and reliable data validation to handle financial records safely across different user roles.
+                                            </div>
+                                            <ul class="project-tags" aria-label="Tech stack" data-i18n-aria="portfolio.techStack">
+                                                <li><i data-lucide="atom"></i><span>React</span></li>
+                                                <li><i data-lucide="file-code"></i><span>TypeScript</span></li>
+                                                <li><i data-lucide="zap"></i><span>FastAPI</span></li>
+                                                <li><i data-lucide="git-fork"></i><span>System Logic</span></li>
+                                                <li><i data-lucide="banknote"></i><span>Financial Data</span></li>
+                                                <li><i data-lucide="webhook"></i><span>RESTful APIs</span></li>
+                                            </ul>
+                                            <div class="stack">
+                                                <ul class="stack__list flow">
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/react.svg" alt="React" title="React" width="40" height="40" loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/typescript.png" alt="TypeScript" title="TypeScript" width="40" height="40" loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/python.png" alt="Python" title="Python" width="40" height="40" loading="lazy">
+                                                    </li>
+                                                    <li class="stack__item">
+                                                        <img class="stack__image" src="./public/icons/vite.svg" alt="Vite" title="Vite" width="40" height="40" loading="lazy">
                                                     </li>
                                                 </ul>
                                             </div>
@@ -359,19 +426,32 @@
                                             id="affiliate-image-modal" 
                                             data-images='[]'
                                         >
-                                            <img class="portfolio-wrapper-image" src="/public/images/login.avif" alt="Preview" width="400" height="290" loading="lazy">
+                                            <img class="portfolio-wrapper-image" src="/public/images/login.avif" alt="Preview" width="400" height="290" loading="lazy" data-i18n-alt="portfolio.previewAlt">
                                         </a>
                                         <div class="portfolio-card__body">
-                                            <time class="portfolio-card__date" datetime="2024.07">January 2025</time>
+                                            <div class="portfolio-card__meta">
+                                                <time class="portfolio-card__date" datetime="2024.07" data-i18n="portfolio.affiliateDate">January 2025</time>
+                                                <span class="portfolio-card__role"><i data-lucide="pencil-ruler"></i><span data-i18n="portfolio.affiliateRole">Architect &amp; Developer</span></span>
+                                            </div>
                                             <h3 class="portfolio-card__title">
-                                                <a href="https://partner.jinn-travel.com" class="portfolio-card__title-link" target="_blank" title="Open the website in new tab">Affiliate platform</a>
+                                                <a href="https://partner.jinn-travel.com" class="portfolio-card__title-link" target="_blank" title="Open the website in new tab" data-i18n="portfolio.affiliateTitle" data-i18n-title="portfolio.openSite">B2B Affiliate &amp; Developer Integration Platform (Pet Project / MVP)</a>
                                                 <span class="icon material-symbols-outlined">
                                                     open_in_new
                                                 </span>
                                             </h3>
-                                            <div class="portfolio-card__description">
-                                                Affiliate platform designed to empower users with referral links and coupon codes to drive sales. It features a tiered system of affiliate profiles (Bronze, Silver, Gold) that evolves based on performance. The platform includes intuitive dashboards for tracking referrals, sales, and commissions in real time. With a mobile-optimized design, it ensures seamless user experience across devices. Built with robust data security, it prioritizes transparency with clear policies and user controls.
+                                            <div class="portfolio-card__description" data-i18n="portfolio.affiliateDescription">
+                                                Engineered a functional MVP for a B2B affiliate platform to practice building custom API Developer Portals. Designed and implemented secure API key generation, rate-limiting, and authentication mechanisms to enable programmatic integrations with third-party partners. Built REST endpoints to aggregate travel booking metadata and commission logic in real time, focusing on scalable backend architecture and secure data flows.
                                             </div>
+                                            <ul class="project-tags" aria-label="Tech stack" data-i18n-aria="portfolio.techStack">
+                                                <li><i data-lucide="key-round"></i><span>API Key Auth</span></li>
+                                                <li><i data-lucide="unplug"></i><span>External APIs</span></li>
+                                                <li><i data-lucide="zap"></i><span>FastAPI</span></li>
+                                                <li><i data-lucide="file-code"></i><span>TypeScript</span></li>
+                                                <li><i data-lucide="atom"></i><span>React</span></li>
+                                                <li><i data-lucide="waypoints"></i><span>System Design</span></li>
+                                                <li><i data-lucide="gauge"></i><span>Rate-Limiting</span></li>
+                                                <li><i data-lucide="git-merge"></i><span>CI/CD</span></li>
+                                            </ul>
                                             <div class="stack">
                                                 <ul class="stack__list flow">
                                                     <li class="stack__item">
@@ -411,118 +491,6 @@
                                         </div>
                                     </article>
                                 </li>
-                                <li class="portfolio__item grid-item">
-                                    <article class="portfolio-card card">
-                                        <a class="portfolio-wrapper" 
-                                            id="copa-image-modal"
-                                            data-images='[]'
-                                        >
-                                            <img class="portfolio-wrapper-image" src="/public/images/copa.avif" alt="Preview" width="400" height="290" loading="lazy">
-                                        </a>
-                                        <div class="portfolio-card__body">
-                                            <time class="portfolio-card__date" datetime="2024.07">July 2024</time>
-                                            <h3 class="portfolio-card__title">
-                                                <a href="https://co-pa.ai" class="portfolio-card__title-link" target="_blank" title="Open the website in new tab">Branding with AI</a>
-                                                <span class="icon material-symbols-outlined">
-                                                    open_in_new
-                                                </span>
-                                            </h3>
-                                            <div class="portfolio-card__description">
-                                                The platform is designed with a clear, user-friendly layout, offering easy navigation between video lessons on AI tools. It features different subscription plans (Base, Advanced, Premium), with filtering options to find courses by skill level or topic. The mobile-optimized design ensures smooth browsing, while secure payment and transparent privacy policies prioritize user security.
-                                            </div>
-                                            <div class="stack">
-                                                <ul class="stack__list flow">
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/react.svg" alt="React" title="React" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/vercel.png" alt="Vercel" title="Vercel" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/next-js.png" alt="Next.js" title="Next.js" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/neon.png" alt="Neon" title="Neon" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/Canva.svg" alt="Canva" title="Canva" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/figma.webp" alt="Figma" title="Figma" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/tailwind_css.svg" alt="Tailwind-CSS" title="Tailwind-CSS" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="portfolio__item grid-item">
-                                    <article class="portfolio-card card">
-                                        <a class="portfolio-wrapper" 
-                                            id="jinn-image-modal"
-                                            data-images='[]'
-                                        >
-                                            <img class="portfolio-wrapper-image" src="/public/images/jinn-full.avif" alt="Preview" width="400" height="290" loading="lazy">
-                                        </a>
-                                        <div class="portfolio-card__body">
-                                            <time class="portfolio-card__date" datetime="2024.07">July 2024</time>
-                                            <h3 class="portfolio-card__title">
-                                                <a href="https://jinn-travel.com" class="portfolio-card__title-link" target="_blank" title="Open the website in new tab">Booking system for travel agency</a>
-                                                <span class="icon material-symbols-outlined">
-                                                    open_in_new
-                                                </span>
-                                            </h3>
-                                            <div class="portfolio-card__description">
-                                                Travel platform that allows users to browse, book, and customize trips with filtering options for duration, destinations, and tour types. It supports multi-currency pricing, features a mobile-optimized design, and offers detailed tour descriptions. The site also prioritizes data security and transparency with clear privacy policies.
-                                            </div>
-                                            <div class="stack">
-                                                <ul class="stack__list flow">
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/php.png" alt="PHP" title="PHP" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/mysql.webp" alt="MySQL" title="MySQL" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/wordpress.svg" alt="WordPress" title="WordPress" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/elementor.svg" alt="Elementor" title="Elementor" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/slider-revolution.avif" alt="Slider Revolution" title="Slider Revolution" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/klaviyo.svg" alt="Klaviyo" title="Klaviyo" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/Canva.svg" alt="Canva" title="Canva" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/css.svg" alt="CSS" title="CSS" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -531,8 +499,8 @@
                     <div class="section__inner container">
                         <header class="section__header">
                             <h2 class="experience-title">
-                                Work
-                                <span class="accent-color">Experience</span>
+                                <span data-i18n="experience.titlePrefix">Work</span>
+                                <span class="accent-color" data-i18n="experience.titleAccent">Experience</span>
                             </h2>
                         </header>
                         <div class="section__body">
@@ -541,77 +509,75 @@
                                     <li class="experience__item grid-item">
                                         <article class="experience-card card card--hoverable">
                                             <header class="experience-header">
-                                                <h3 class="experience-card__position">
-                                                    Atlassian Solution Engineer & Senior Frontend Developer
+                                                <h3 class="experience-card__position" data-i18n="experience.schultechRole">
+                                                    Full-Stack &amp; DevOps Engineer
                                                 </h3>
-                                                <time class="experience-card__date" datetime="2025.01">June2025 - Present
-                                                </time>
+                                                <time class="experience-card__date" datetime="2024-08" data-i18n="experience.schultechDate">August 2024 – Present</time>
+                                            </header>
+                                            <div class="experience-card__title">
+                                                <a href="https://schultech.de/"
+                                                    class="experience-card__title-link"
+                                                    target="_blank"
+                                                    title="Open the website in new tab"
+                                                    data-i18n-title="portfolio.openSite"
+                                                >
+                                                    <b>Schultech GmbH</b>
+                                                </a>
+                                                <span class="icon material-symbols-outlined">open_in_new</span>
+                                            </div>
+                                            <ul class="experience-highlights">
+                                                <li data-i18n-html="experience.schultech1"><strong>DevOps &amp; Infrastructure:</strong> Built and maintained server infrastructure from scratch; designed and automated CI/CD pipelines for zero-downtime deployments.</li>
+                                                <li data-i18n-html="experience.schultech2"><strong>Observability:</strong> Configured system-wide monitoring and alerting dashboards using <strong>Grafana</strong> to track server health, latency, and uptime.</li>
+                                                <li data-i18n-html="experience.schultech3"><strong>Cloud Manager &amp; Security:</strong> Built an internal Cloud Manager platform, implementing enterprise <strong>SSO (OAuth2)</strong>, <strong>two-factor authentication (2FA)</strong>, and strict RBAC access policies.</li>
+                                                <li data-i18n-html="experience.schultech4"><strong>Backend &amp; API Design:</strong> Engineered scalable microservices and REST APIs using <strong>Python (FastAPI)</strong> for media technology integration in educational institutions.</li>
+                                                <li data-i18n-html="experience.schultech5"><strong>Frontend &amp; UX:</strong> Developed responsive web interfaces using <strong>React</strong> &amp; <strong>TypeScript</strong>, turning complex stakeholder requirements into intuitive tools.</li>
+                                            </ul>
+                                            <div class="stack">
+                                                <ul class="stack__list flow">
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/python.png" alt="Python" title="Python" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/React.svg" alt="React" title="React" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/typescript.png" alt="TypeScript" title="TypeScript" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/docker.svg" alt="Docker" title="Docker" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/nginx.svg" alt="Nginx" title="Nginx" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/linux.svg" alt="Linux" title="Linux" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/git.svg" alt="Git" title="Git" width="40" height="40" loading="lazy"></li>
+                                                </ul>
+                                            </div>
+                                        </article>
+                                    </li>
+                                    <li class="experience__item grid-item">
+                                        <article class="experience-card card card--hoverable">
+                                            <header class="experience-header">
+                                                <h3 class="experience-card__position" data-i18n="experience.polygranRole">
+                                                    Atlassian Solution &amp; Software Engineer
+                                                </h3>
+                                                <time class="experience-card__date" datetime="2023-06" data-i18n="experience.polygranDate">June 2023 – August 2024</time>
                                             </header>
                                             <div class="experience-card__title">
                                                 <a href="https://www.polygran.de/"
-                                                    class="experience-card__title-link" 
-                                                    target="_blank" 
+                                                    class="experience-card__title-link"
+                                                    target="_blank"
                                                     title="Open the website in new tab"
+                                                    data-i18n-title="portfolio.openSite"
                                                 >
-                                                    <b>Polygran GmbH</b>
+                                                    <b>Polygran</b>
                                                 </a>
-                                                <span class="icon material-symbols-outlined">
-                                                    open_in_new
-                                                </span>
+                                                <span class="icon material-symbols-outlined">open_in_new</span>
                                             </div>
-                                            <div class="experience-card__description">
-                                                Ownership and administration of Atlassian stack (Jira, Confluence, Bitbucket) with deep understanding of workflows, permissions, automation and integrations. Design and maintenance of custom workflows, fields, ScriptRunner logic and integrations with external systems. Infrastructure and environment automation using Ansible, reducing manual operations and improving system reliability. Development of a multi-tenant enterprise dashboard for a banking client and its partners. Design and implementation of a complete invoicing platform: invoice generation and processing, financial and user activity analytics, reporting and data visualization. Close collaboration with business stakeholders, translating complex processes into scalable technical solutions.
-                                            </div>
+                                            <ul class="experience-highlights">
+                                                <li data-i18n-html="experience.polygran1"><strong>Infra Automation:</strong> Engineered an Ansible-based automation app to sync enterprise Atlassian instances across environments, cutting sync time from 40 to 5 minutes (87% reduction) and eliminating a single point of failure by enabling any authorized engineer to run updates safely.</li>
+                                                <li data-i18n-html="experience.polygran2"><strong>Software Development:</strong> Built the frontend for a banking application focused on freelancer management and invoice control (React/FastAPI).</li>
+                                                <li data-i18n-html="experience.polygran3"><strong>Enterprise Consulting:</strong> Managed complex Atlassian workflows and custom integrations while working directly with business stakeholders.</li>
+                                            </ul>
                                             <div class="stack">
                                                 <ul class="stack__list flow">
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/jira.svg" alt="Jira" title="Jira" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/confluence.svg" alt="Confluence" title="Confluence" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/bitbucket.png" alt="Bitbucket" title="Bitbucket" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/microsoft.svg" alt="Microsoft" title="Microsoft" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/React.svg" alt="React" title="React" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/typescript.png" alt="TypeScript" title="TypeScript" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/python.png" alt="Python" title="Python" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/chakra-ui.png" alt="Chakra-UI" title="Chakra-UI" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/ansible.svg" alt="Ansible" title="Ansible" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/linux.svg" alt="Linux" title="Linux" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/tailwind_css.svg" alt="Tailwind-CSS" title="Tailwind-CSS" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/git.svg" alt="Git" title="Git" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/jira.svg" alt="Jira" title="Jira" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/confluence.svg" alt="Confluence" title="Confluence" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/ansible.svg" alt="Ansible" title="Ansible" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/React.svg" alt="React" title="React" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/python.png" alt="Python" title="Python" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/typescript.png" alt="TypeScript" title="TypeScript" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/linux.svg" alt="Linux" title="Linux" width="40" height="40" loading="lazy"></li>
                                                 </ul>
                                             </div>
                                         </article>
@@ -619,236 +585,32 @@
                                     <li class="experience__item grid-item">
                                         <article class="experience-card card card--hoverable">
                                             <header class="experience-header">
-                                                <h3 class="experience-card__position">
-                                                    CEO & Software Engineer
-                                                </h3>
-                                                <time class="experience-card__date" datetime="2024.07">August 2024 - Present
-                                                </time>
-                                            </header>
-                                            <div class="experience-card__title">
-                                                <a href="https://jinn-travel.com" 
-                                                    class="experience-card__title-link" 
-                                                    target="_blank" 
-                                                    title="Open the website in new tab"
-                                                >
-                                                    <b>Jinn Limited LLC</b>
-                                                </a>
-                                                <span class="icon material-symbols-outlined">
-                                                    open_in_new
-                                                </span>
-                                            </div>
-                                            <div class="experience-card__description">
-                                                Entwicklung großskaliger TypeScript-basierter Single-Page-Applikationen mit Fokus auf Performance, Skalierbarkeit und Wartbarkeit.
-                                                End-to-End-Verantwortung für die Produktionsinfrastruktur, einschließlich: Konfiguration von Nginx, Orchestrierung von Prozessen mit PM2, DNS-Setup und Konfiguration der Umgebungen.
-                                                Konzeption und Implementierung von CI/CD-Pipelines mit GitHub Actions für automatisierte Build- und Deployment-Prozesse.
-                                                Eigenständige End-to-End-Entwicklung einer Affiliate-Plattform, einschließlich: Backend-APIs, Frontend-Dashboards, Integrationen von Zahlungs-, E-Mail- und Benachrichtigungsdiensten.
-                                                Strategische und operative Verantwortung als CEO, einschließlich: Definition und Umsetzung der Unternehmensstrategie sowie der operativen Roadmap, Steuerung des Tagesgeschäfts und unternehmensübergreifender Prozesse, Koordination von Partnern, Affiliates und externen Dienstleistern, Überwachung der Produktlieferung, Zeitpläne und der geschäftlichen Performance.
-                                            </div>
-                                            <div class="stack">
-                                                <ul class="stack__list flow">
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/terraform.svg" alt="Terraform" title="Terraform" weight="50" height="50"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/docker.svg" alt="Docker" title="Docker" weight="50" height="50"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/n8n.png" alt="n8n" title="n8n" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/tailwind_css.svg" alt="Tailwind-CSS" title="Tailwind-CSS" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/js.svg" alt="JavaScript" title="JavaScript" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/vite.svg" alt="Vite" title="Vite" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/mySQL.webp" alt="mySQL" title="mySQL" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/git.svg" alt="Git" title="Git" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/wordpress.svg" alt="WordPress" title="WordPress" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/notion.svg" alt="Notion" title="Notion" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/slack.svg" alt="Slack" title="Slack" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/jira.svg" alt="Jira" title="Jira" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </article>
-                                    </li>
-                                    <li class="experience__item grid-item">
-                                        <article class="experience-card card card--hoverable">
-                                            <header class="experience-header">
-                                                <h3 class="experience-card__position">
-                                                    Head of Department
-                                                </h3>
-                                                <time class="experience-card__date" datetime="2024.04">April - August 2024
-                                                </time>
-                                            </header>
-                                            <div class="experience-card__title">
-                                                <a href="https://careers.tuigroup.com/de" 
-                                                    class="experience-card__title-link" 
-                                                    target="_blank" 
-                                                    title="Open the website in new tab"
-                                                >
-                                                    <b>Tui</b>
-                                                </a>
-                                                <span class="icon material-symbols-outlined">
-                                                    open_in_new
-                                                </span>
-                                            </div>
-                                            <div class="experience-card__description">
-                                                Responsible for leading and optimizing departmental processes, team management, as well as developing innovative solutions to enhance customer satisfaction and efficiency.                                            </div>
-                                            <div class="stack">
-                                                <ul class="stack__list flow">
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/microsoft.svg" alt="Microsoft" title="Microsoft" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/Microsoft_365.webp" alt="Microsoft 365" title="Microsoft 365" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/notion.svg" alt="Notion" title="Notion" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/tui.webp" alt="Tui booking kit" title="Tui booking kit" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </article>
-                                    </li>
-                                    <li class="experience__item grid-item">
-                                        <article class="experience-card card card--hoverable">
-                                            <header class="experience-header">
-                                                <h3 class="experience-card__position">
-                                                    Project Manager Trainee
-                                                </h3>
-                                                <time class="experience-card__date" datetime="2024.04">March 2024
-                                                </time>
-                                            </header>
-                                            <div class="experience-card__title">
-                                                <a href="https://ame-creativeengineers.com" 
-                                                    class="experience-card__title-link" 
-                                                    target="_blank" 
-                                                    title="Open the website in new tab"
-                                                >
-                                                    <b>Âme creative engineers</b>
-                                                </a>
-                                                <span class="icon material-symbols-outlined">
-                                                    open_in_new
-                                                </span>
-                                            </div>
-                                            <div class="experience-card__description">
-                                                Intensive full-time Trainee Creating a project environment and templates for future projects. Practical application of project management skills aimed at achieving objectives and effectively executing design projects.
-                                            </div>
-                                            <div class="stack">
-                                                <ul class="stack__list flow">
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/microsoft.svg" alt="Microsoft" title="Microsoft" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/Microsoft_365.webp" alt="Microsoft" title="Microsoft" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/notion.svg" alt="Notion" title="Notion" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/discord.svg" alt="Discord AI" title="Discord AI" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/google.svg" alt="Google Workspace" title="Google Workspace" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </article>
-                                    </li>
-                                    <li class="experience__item grid-item">
-                                        <article class="experience-card card card--hoverable">
-                                            <header class="experience-header">
-                                                <h3 class="experience-card__position">
+                                                <h3 class="experience-card__position" data-i18n="experience.ameRole">
                                                     IT Project Manager Trainee
                                                 </h3>
-                                                <time class="experience-card__date" datetime="2024.04">February - March 2024
-                                                </time>
+                                                <time class="experience-card__date" datetime="2024-02" data-i18n="experience.ameDate">February 2024 – April 2024</time>
                                             </header>
                                             <div class="experience-card__title">
-                                                <a href="https://www.neuefische.de" class="experience-card__title-link" target="_blank" title="Open the website in new tab"
+                                                <a href="https://ame-creativeengineers.com"
+                                                    class="experience-card__title-link"
+                                                    target="_blank"
+                                                    title="Open the website in new tab"
+                                                    data-i18n-title="portfolio.openSite"
                                                 >
-                                                    <b>Neue Fische</b>
+                                                    <b>ÂME Creative Engineers / Neue Fische</b>
                                                 </a>
-                                                <span class="icon material-symbols-outlined">
-                                                    open_in_new
-                                                </span>
+                                                <span class="icon material-symbols-outlined">open_in_new</span>
                                             </div>
-                                            <div class="experience-card__description">
-                                                Intensive full-time bootcamp
-                                                180 hours of hands-on project management, focusing on developing project environments and templates for future projects, culminating in a comprehensive capstone project. Ready to apply acquired knowledge to achieve goals and successfully complete IT projects.                                                Training included:
-                                                Agile method,
-                                                Tools: Scrum, Kanban, Confluence, Slack & Miro,
-                                                Stakeholder Analysis,
-                                                Requirements engineering,
-                                                Risk management,
-                                                Engagement Plan,
-                                                Team leadership,
-                                                Project launch & control.
-                                            </div>
+                                            <ul class="experience-highlights">
+                                                <li data-i18n="experience.ame1">Completed 180+ hours of agile management training, leading stakeholder analysis and delivery process optimizations.</li>
+                                            </ul>
                                             <div class="stack">
                                                 <ul class="stack__list flow">
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/confluence.svg" alt="Confluence" title="Confluence" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/jira.svg" alt="Jira" title="Jira" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/scrum.svg" alt="Scrum methodology" title="Scrum methodology" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/kanban.svg" alt="Kanban methodology" title="Kanban methodology" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/miro.svg" alt="Miro" title="Miro" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/slack.svg" alt="Slack" title="Slack" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/jira.svg" alt="Jira" title="Jira" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/confluence.svg" alt="Confluence" title="Confluence" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/scrum.svg" alt="Scrum" title="Scrum" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/kanban.svg" alt="Kanban" title="Kanban" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/miro.svg" alt="Miro" title="Miro" width="40" height="40" loading="lazy"></li>
                                                 </ul>
                                             </div>
                                         </article>
@@ -856,73 +618,33 @@
                                     <li class="experience__item grid-item">
                                         <article class="experience-card card card--hoverable">
                                             <header class="experience-header">
-                                                <h3 class="experience-card__position">
-                                                    Frontend Entwickler
+                                                <h3 class="experience-card__position" data-i18n="experience.wemakeRole">
+                                                    Frontend Developer
                                                 </h3>
-                                                <time class="experience-card__date" datetime="2024.04">September 2019 - April 2023
-                                                </time>
+                                                <time class="experience-card__date" datetime="2019-09" data-i18n="experience.wemakeDate">September 2019 – April 2023</time>
                                             </header>
                                             <div class="experience-card__title">
-                                                <a href="https://wemakefab.ru" 
-                                                    class="experience-card__title-link" 
-                                                    target="_blank" 
+                                                <a href="https://wemakefab.ru"
+                                                    class="experience-card__title-link"
+                                                    target="_blank"
                                                     title="Open the website in new tab"
+                                                    data-i18n-title="portfolio.openSite"
                                                 >
-                                                    <b>Wemakefab</b>
+                                                    <b>WEMAKEFAB</b>
                                                 </a>
-                                                <span class="icon material-symbols-outlined">
-                                                    open_in_new
-                                                </span>
+                                                <span class="icon material-symbols-outlined">open_in_new</span>
                                             </div>
-                                            <div class="experience-card__description">
-                                                Developed and maintained web applications, created responsive user interfaces using modern JavaScript frameworks. Integrated APIs, optimized performance, and ensured compatibility across different browsers. Collaborated with designers and backend developers, participated in code reviews, and contributed to the improvement of development processes.                                                Projects: 
-                                                </br>
-                                                    • AMQ – Neugestaltung des Händlerkontos für ein in Dubai ansässiges Unternehmen, das sich auf den Währungsmarkt spezialisiert. Die Aufgabe umfasste die Aktualisierung sowohl des Designs als auch der technischen Aspekte des Handelssystems, um eine benutzerfreundliche und intuitive Erfahrung zu gewährleisten.</br>
-                                                    • Polesad – Entwicklung einer Webanwendung für Landwirte zur Analyse von Kosten und zur Ermittlung optimaler Wachstumsstrategien. Die Anwendung ersetzte Papierjournale und Tabellenkalkulationen und bot ein praktisches, auf Smartphones zugängliches Tool.</br>
-                                                    • SASCO – Erstellung einer Unternehmenswebsite für die Sakhalin Shipping Company.
-                                            </div>
+                                            <ul class="experience-highlights">
+                                                <li data-i18n="experience.wemake1">Developed modern web applications using React and TypeScript; designed a reusable UI component library that accelerated development speed by 30%.</li>
+                                            </ul>
                                             <div class="stack">
                                                 <ul class="stack__list flow">
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/html5.svg" alt="HTML5" title="HTML5" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/css.svg" alt="CSS" title="CSS" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/js.svg" alt="JavaScript" title="JavaScript" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/React.svg" alt="React" title="React" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/tailwind_css.svg" alt="Tailwind-CSS" title="Tailwind-CSS" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/postgresql.svg" alt="PostgreSQL" title="PostgreSQL" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/figma.webp" alt="Figma" title="Figma" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/wordpress.svg" alt="WordPress" title="WordPress" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/jira.svg" alt="Jira" title="Jira" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
-                                                    <li class="stack__item">
-                                                        <img class="stack__image" src="./public/icons/zoom.webp" alt="Zoom" title="Zoom" weight="40" height="40"
-                                                        loading="lazy">
-                                                    </li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/React.svg" alt="React" title="React" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/typescript.png" alt="TypeScript" title="TypeScript" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/js.svg" alt="JavaScript" title="JavaScript" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/html5.svg" alt="HTML5" title="HTML5" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/css.svg" alt="CSS" title="CSS" width="40" height="40" loading="lazy"></li>
+                                                    <li class="stack__item"><img class="stack__image" src="./public/icons/figma.webp" alt="Figma" title="Figma" width="40" height="40" loading="lazy"></li>
                                                 </ul>
                                             </div>
                                         </article>
@@ -936,40 +658,44 @@
             <div class="pop_up hiden">
                 <div class="pop_up_container">
                     <div class="pop_up_body">
-                        <p>Feel free to reach out if you require expert web services</p>
+                        <p data-i18n="form.intro">Let's talk about infrastructure, product, or a role where systems and stakeholders meet.</p>
                         <form class="form grid-container" id="form" action="/api/send" method="POST">
                             <div class="textbox item1">
-                                <label for="fname">First name:</label>
-                                <input class="input" id="fname" type="text" name="fname" placeholder="First name" autocomplete="given-name" enterkeyhint="go" required>
+                                <label for="fname" data-i18n="form.firstName">First name:</label>
+                                <input class="input" id="fname" type="text" name="fname" placeholder="First name" autocomplete="given-name" enterkeyhint="go" required data-i18n-placeholder="form.firstNamePlaceholder">
                                 <span class="asterix">*</span>
                             </div>
                             <div class="textbox item2">
-                                <label for="lname">Last name:</label>
-                                <input class="input" id="lname" type="text" name="lname" placeholder="Last name" autocomplete="family-name" required>
+                                <label for="lname" data-i18n="form.lastName">Last name:</label>
+                                <input class="input" id="lname" type="text" name="lname" placeholder="Last name" autocomplete="family-name" required data-i18n-placeholder="form.lastNamePlaceholder">
                                 <span class="asterix">*</span>
                             </div>
                             <div class="textbox item3">
-                                <label for="email">Email:</label>
-                                <input class="input" id="email" type="email" name="email" placeholder="Email address" autocomplete="email" required>
+                                <label for="email" data-i18n="form.email">Email:</label>
+                                <input class="input" id="email" type="email" name="email" placeholder="Email address" autocomplete="email" required data-i18n-placeholder="form.emailPlaceholder">
                                 <span class="asterix">*</span>
                             </div>
                             <div style="display:none;">
                               <input type="text" name="email_confirm" id="email_confirm">
                             </div>
                             <div class="textbox item4">
-                                <label for="phone">Phone number:</label>
-                                <input class="input" id="phone" type="tel" name="phone" placeholder="Phone number" autocomplete="tel">
+                                <label for="phone" data-i18n="form.phone">Phone number:</label>
+                                <input class="input" id="phone" type="tel" name="phone" placeholder="Phone number" autocomplete="tel" data-i18n-placeholder="form.phonePlaceholder">
                             </div>
                             <div class="textbox item5">
-                                <label for="description">Description</label>
-                                <textarea class="textarea" name="description" id="description" placeholder="Description" required></textarea>
+                                <label for="description" data-i18n="form.description">Description</label>
+                                <textarea class="textarea" name="description" id="description" placeholder="Description" required data-i18n-placeholder="form.descriptionPlaceholder"></textarea>
                                 <span class="asterix">*</span>
                             </div>
-                            <div id="recaptcha" data-sitekey="6LfO8JorAAAAAC5FxGEkuecuPllNfXtdkLdHFoHr" style="display: none;"></div>
-                            <button type="submit" class="submit button item6">Send message</button>
+                            <altcha-widget
+                                class="altcha-widget item-altcha"
+                                challenge="/api/altcha"
+                                auto="onsubmit"
+                            ></altcha-widget>
+                            <button type="submit" class="submit button item6" data-i18n="form.send">Send message</button>
                         </form>
-                        <div class="pop_up_close">
-                            <span class="material-symbols-outlined"  id="pop_up_close">Close</span>
+                        <div class="pop_up_close" role="button" tabindex="0" data-i18n-aria="form.close" aria-label="Close">
+                            <span class="material-symbols-outlined" id="pop_up_close" aria-hidden="true">close</span>
                         </div>
                     </div>
                 </div>
@@ -977,8 +703,8 @@
             <footer class="footer container" id="contact">
                 <div class="footer__inner card card--hoverable">
                     <div class="footer-left">
-                        <h3 class="footer-title">Contact</h3>
-                        <div class="date">From 10am to 4pm</div>
+                        <h3 class="footer-title" data-i18n="footer.contact">Contact</h3>
+                        <div class="date" data-i18n="footer.hours">From 10am to 4pm</div>
                     </div>
                     <div class="footer-right">
                         <ul class="social-list flow">
@@ -1025,11 +751,12 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="copyright">© Amal Yuldashev <span id="current-year">2025</span></div>
+                        <div class="copyright">© Amal Yuldashev <span id="current-year">2026</span></div>
                     </div>
                 </div>
             </footer>
         </main>
+        <script type="module" src="./src/js/i18n.js"></script>
         <script type="module" src="./src/js/main.js"></script>
         <script type="module" src="./src/js/popup.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.0/gsap.min.js"></script>

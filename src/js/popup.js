@@ -1,9 +1,36 @@
-function hideRecaptchaBadge() {
-  const badge = document.querySelector(".grecaptcha-badge");
-  if (badge) {
-    badge.style.display = "none";
-  }
+import "altcha";
+import "altcha/i18n/de";
+import { getLocale, t } from "./i18n.js";
+
+function getAltchaWidget() {
+  return document.querySelector("altcha-widget");
 }
+
+function syncAltchaLanguage() {
+  const widget = getAltchaWidget();
+  widget?.configure?.({ language: getLocale() });
+}
+
+function resetAltchaWidget() {
+  getAltchaWidget()?.reset?.();
+}
+
+async function getAltchaPayload(form) {
+  const existing = new FormData(form).get("altcha");
+  if (existing) {
+    return String(existing);
+  }
+
+  const widget = form.querySelector("altcha-widget");
+  if (!widget?.verify) {
+    return "";
+  }
+
+  const result = await widget.verify();
+  return result?.payload || "";
+}
+
+document.addEventListener("localechange", syncAltchaLanguage);
 
 function createFormPortal() {
   let portal = document.getElementById('form-portal');
@@ -23,11 +50,12 @@ function createFormPortal() {
   return portal;
 }
 
-const openButton = document.querySelector("#open_pop_up");
+const openButtons = document.querySelectorAll("#open_pop_up, .js-open-popup");
 const popup = document.querySelector(".pop_up");
 const popupBody = document.querySelector(".pop_up_body");
 const closeButton = document.querySelector(".pop_up_close");
 const form = document.getElementById("form");
+
 
 // Сохраняем исходный родительский элемент модалки
 let originalParent = popup.parentNode;
@@ -35,51 +63,33 @@ let originalNextSibling = popup.nextSibling;
 let scrollPosition = 0;
 
 function lockScroll() {
-  document.documentElement.style.overflow = 'hidden';
-  document.documentElement.style.position = 'fixed';
-  document.documentElement.style.top = `-${scrollPosition}px`;
-  document.documentElement.style.left = '0';
-  document.documentElement.style.right = '0';
-  document.documentElement.style.width = '100%';
-  
-  document.body.style.overflow = 'hidden';
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${scrollPosition}px`;
-  document.body.style.left = '0';
-  document.body.style.right = '0';
-  document.body.style.width = '100%';
+  document.documentElement.style.overflow = "hidden";
+  document.body.style.overflow = "hidden";
 }
 
 function unlockScroll() {
-  document.documentElement.style.overflow = '';
-  document.documentElement.style.position = '';
-  document.documentElement.style.top = '';
-  document.documentElement.style.left = '';
-  document.documentElement.style.right = '';
-  document.documentElement.style.width = '';
-  
-  document.body.style.overflow = '';
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.left = '';
-  document.body.style.right = '';
-  document.body.style.width = '';
-  
-  window.scrollTo(0, scrollPosition);
+  document.documentElement.style.overflow = "";
+  document.body.style.overflow = "";
+  window.scrollTo({ top: scrollPosition, left: 0, behavior: "instant" });
 }
 
 
-openButton.addEventListener("click", (event) => {
+function openPopup(event) {
   event.preventDefault();
   scrollPosition = window.pageYOffset || document.documentElement.scrollTop || window.scrollY;
-  
+
   const portal = createFormPortal();
-  portal.style.pointerEvents = 'auto';
+  portal.style.pointerEvents = "auto";
   portal.appendChild(popup);
   popup.classList.remove("hiden");
-  
+
   lockScroll();
+  syncAltchaLanguage();
   portal.addEventListener("click", handlePortalClick);
+}
+
+openButtons.forEach((button) => {
+  button.addEventListener("click", openPopup);
 });
 
 function handlePortalClick(event) {
@@ -92,6 +102,7 @@ function handlePortalClick(event) {
     
     form.reset();
     form.classList.remove("form-submitted");
+    resetAltchaWidget();
 
     document
       .querySelectorAll(".textbox input, .textbox textarea")
@@ -128,6 +139,7 @@ closeButton.addEventListener("click", () => {
 
   form.reset();
   form.classList.remove("form-submitted");
+  resetAltchaWidget();
 
   document
     .querySelectorAll(".textbox input, .textbox textarea")
@@ -149,6 +161,7 @@ document.addEventListener("keydown", (event) => {
     
     form.reset();
     form.classList.remove("form-submitted");
+    resetAltchaWidget();
 
     document
       .querySelectorAll(".textbox input, .textbox textarea")
@@ -216,7 +229,7 @@ document
         asterix.style.animation = "shake 0.3s 0s 3";
       }
       Toastify({
-        text: "Phone number is invalid. It must start with '+' and contain 7-15 digits.",
+        text: t("form.phoneInvalid"),
         duration: 3000,
         gravity: "bottom",
         position: "right",
@@ -242,16 +255,16 @@ document
     if (honeypot) {
       console.warn("Bot detected. Submission cancelled.");
       submitButton.disabled = false;
-      submitButton.innerHTML = "Send message";
+      submitButton.innerHTML = t("form.send");
       return;
     }
 
-    // reCAPTCHA check
+    // ALTCHA check
     try {
-      const siteKey = document.getElementById("recaptcha")?.dataset?.sitekey;
-      if (!siteKey) {
+      const payload = await getAltchaPayload(event.target);
+      if (!payload) {
         Toastify({
-          text: "SiteKey not found",
+          text: t("form.altchaFailed"),
           duration: 3000,
           gravity: "bottom",
           position: "right",
@@ -261,32 +274,25 @@ document
           }
         }).showToast();
         submitButton.disabled = false;
-        submitButton.innerHTML = "Send message";
+        submitButton.innerHTML = t("form.send");
         return;
       }
 
-      await new Promise((resolve) => {
-        if (window.grecaptcha) return resolve();
-        const script = document.createElement("script");
-        script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
-        script.onload = resolve;
-        document.head.appendChild(script);
-      });
-
-      const token = await new Promise((resolve, reject) => {
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute(siteKey, { action: "submit" })
-            .then(resolve)
-            .catch(reject);
-        });
-      });
-
-      data.token = token;
+      data.altcha = payload;
     } catch (error) {
-      console.error("reCAPTCHA error:", error);
+      console.error("ALTCHA error:", error);
+      Toastify({
+        text: t("form.altchaFailed"),
+        duration: 3000,
+        gravity: "bottom",
+        position: "right",
+        backgroundColor: "#df2666",
+        style: {
+          borderRadius: "10px"
+        }
+      }).showToast();
       submitButton.disabled = false;
-      submitButton.innerHTML = "Send message";
+      submitButton.innerHTML = t("form.send");
       return;
     }
 
@@ -302,7 +308,7 @@ document
       }
 
       Toastify({
-        text: "Message sent successfully!",
+        text: t("form.success"),
         duration: 3000,
         gravity: "bottom",
         position: "right",
@@ -313,11 +319,11 @@ document
       }).showToast();
 
       event.target.reset();
+      resetAltchaWidget();
       closePopup();
-      hideRecaptchaBadge();
     } catch (error) {
       Toastify({
-        text: "There was an error sending the message.",
+        text: t("form.error"),
         duration: 3000,
         gravity: "bottom",
         position: "right",
@@ -328,6 +334,6 @@ document
       }).showToast();
     } finally {
       submitButton.disabled = false;
-      submitButton.innerHTML = "Send message";
+      submitButton.innerHTML = t("form.send");
     }
   });

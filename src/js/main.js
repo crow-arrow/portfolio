@@ -1,17 +1,4 @@
 import "../css/styles.css";
-import jinn1 from "../../public/images/jinn-1.avif";
-import jinn2 from "../../public/images/jinn-2.avif";
-import jinn3 from "../../public/images/jinn-3.avif";
-import jinn4 from "../../public/images/jinn-4.avif";
-import jinn5 from "../../public/images/jinn-5.avif";
-import jinn6 from "../../public/images/jinn-6.avif";
-import jinn7 from "../../public/images/jinn-7.avif";
-import jinn8 from "../../public/images/jinn-8.avif";
-import jinn9 from "../../public/images/jinn-9.avif";
-import jinn10 from "../../public/images/jinn-10.avif";
-import jinnFull from "../../public/images/jinn-full.avif";
-import copa from "../../public/images/copa.avif";
-import portfolio from "../../public/images/portfolio.avif";
 import affiliate from "../../public/images/login.avif";
 import affiliate2 from "../../public/images/multitenancy.avif";
 import affiliate3 from "../../public/images/dashboard.avif";
@@ -19,9 +6,10 @@ import affiliate4 from "../../public/images/data-table.avif";
 import affiliate5 from "../../public/images/profile-settings.avif";
 import affiliate6 from "../../public/images/admin-settings-apikey.avif";
 import affiliate7 from "../../public/images/field-mapping.avif";
-import sib from "../../public/images/sib.png";
 import { inject } from "@vercel/analytics";
 import { injectSpeedInsights } from "@vercel/speed-insights";
+import { initI18n } from "./i18n.js";
+import { initBadgeIcons } from "./badges.js";
 
 inject();
 injectSpeedInsights();
@@ -161,15 +149,8 @@ function initSkillsAnimation() {
   const skillsSection = document.getElementById("skills");
   if (!skillsSection) return;
 
-  const skillsColumns = document.querySelectorAll(".skills-column");
-  if (skillsColumns.length === 0) return;
-
-  // Получаем элементы из каждой колонки
-  const hardSkillsItems = Array.from(skillsColumns[0]?.querySelectorAll(".skills-item") || []);
-  const softSkillsItems = Array.from(skillsColumns[1]?.querySelectorAll(".skills-item") || []);
-  
-  // Находим максимальное количество элементов для синхронизации
-  const maxItems = Math.max(hardSkillsItems.length, softSkillsItems.length);
+  const skillsItems = Array.from(skillsSection.querySelectorAll(".skills-item"));
+  if (skillsItems.length === 0) return;
 
   let animationTriggered = false;
   let lastScrollY = window.scrollY;
@@ -187,83 +168,69 @@ function initSkillsAnimation() {
         if (entry.isIntersecting && !animationTriggered) {
           animationTriggered = true;
 
-          // Сбрасываем все элементы
-          [...hardSkillsItems, ...softSkillsItems].forEach((item) => {
+          skillsItems.forEach((item) => {
             item.classList.remove("animate", "animate-reverse");
-            item.style.transform = isScrollingDown ? "translateX(-100px)" : "translateX(100px)";
+            item.style.transform = isScrollingDown ? "translateX(-24px)" : "translateX(24px)";
             item.style.opacity = "0";
           });
 
-          if (isScrollingDown) {
-            // Анимируем элементы с одинаковым индексом одновременно
-            for (let index = 0; index < maxItems; index++) {
-              setTimeout(() => {
-                // Hard Skills элемент
-                if (hardSkillsItems[index]) {
-                  hardSkillsItems[index].classList.add("animate");
-                }
-                // Soft Skills элемент (одновременно)
-                if (softSkillsItems[index]) {
-                  softSkillsItems[index].classList.add("animate");
-                }
-              }, index * 50);
-            }
-          } else {
-            // При скролле вверх анимируем в обратном порядке
-            for (let index = maxItems - 1; index >= 0; index--) {
-              setTimeout(() => {
-                // Hard Skills элемент
-                if (hardSkillsItems[index]) {
-                  hardSkillsItems[index].classList.add("animate-reverse");
-                }
-                // Soft Skills элемент (одновременно)
-                if (softSkillsItems[index]) {
-                  softSkillsItems[index].classList.add("animate-reverse");
-                }
-              }, (maxItems - 1 - index) * 50);
-            }
-          }
+          skillsItems.forEach((item, index) => {
+            const delay = isScrollingDown
+              ? index * 20
+              : (skillsItems.length - 1 - index) * 20;
+
+            setTimeout(() => {
+              item.classList.add(isScrollingDown ? "animate" : "animate-reverse");
+            }, delay);
+          });
         } else if (!entry.isIntersecting && animationTriggered) {
           animationTriggered = false;
-          [...hardSkillsItems, ...softSkillsItems].forEach((item) => {
+          skillsItems.forEach((item) => {
             item.classList.remove("animate", "animate-reverse");
           });
         }
       });
     },
     {
-      threshold: 0.2,
-      rootMargin: "0px 0px -100px 0px",
+      threshold: 0.15,
+      rootMargin: "0px 0px -80px 0px",
     }
   );
 
   observer.observe(skillsSection);
 }
 
-window.addEventListener("DOMContentLoaded", () => {
+function bootUi() {
+  initI18n();
+  initBadgeIcons();
   initSkillsAnimation();
   initAboutAnimation();
-});
+}
+
+if (document.readyState === "loading") {
+  window.addEventListener("DOMContentLoaded", bootUi);
+} else {
+  bootUi();
+}
 
 // Typewriter animation function using GSAP with cursor
 function addTypewriterToTimeline(timeline, element, text, speed = 0.08, position = 0) {
   element.textContent = "";
   element.style.opacity = "1";
-  
+
   const chars = text.split("");
-  let cursor = null; // Курсор будет создан только при начале печати
-  
+  let cursor = null;
+
   chars.forEach((char, index) => {
     timeline.call(
       () => {
-        // Создаем курсор только при печати первого символа
         if (index === 0 && !cursor) {
           cursor = document.createElement("span");
           cursor.className = "typewriter-cursor";
           cursor.textContent = "|";
           element.appendChild(cursor);
         }
-        
+
         // Добавляем символ перед курсором
         if (cursor) {
           element.insertBefore(document.createTextNode(char), cursor);
@@ -275,8 +242,7 @@ function addTypewriterToTimeline(timeline, element, text, speed = 0.08, position
       position + index * speed
     );
   });
-  
-  // Убираем курсор после завершения печати
+
   timeline.call(
     () => {
       if (cursor) {
@@ -286,7 +252,7 @@ function addTypewriterToTimeline(timeline, element, text, speed = 0.08, position
     null,
     position + chars.length * speed + 0.1
   );
-  
+
   return position + chars.length * speed + 0.1;
 }
 
@@ -299,55 +265,47 @@ function initAboutAnimation() {
   const aboutTitle = aboutSection.querySelector(".about-title");
   const titleLines = aboutSection.querySelectorAll(".live-typing");
   const cvButton = aboutSection.querySelector(".check-button");
+  const heroSubtitle = aboutSection.querySelector(".hero-subtitle");
   const profilePicture = aboutSection.querySelector(".profile-picture");
   const heroSection = aboutSection.querySelector(".hero-section");
 
   if (!titleBody || !aboutTitle || !cvButton || !profilePicture) return;
 
-  // Сохраняем оригинальный текст для каждой строки
   const originalTexts = Array.from(titleLines).map((line) => line.textContent);
 
-  // Устанавливаем начальное состояние для анимации
-  gsap.set(cvButton, { opacity: 0, y: 50 });
+  gsap.set([heroSubtitle, cvButton].filter(Boolean), { opacity: 0, y: 36 });
   gsap.set(profilePicture, { opacity: 0, scale: 0.8, rotation: -5 });
-  
-  // Резервируем место для текста, чтобы он не двигался вверх
+
   titleLines.forEach((line) => {
     const text = line.textContent;
     const originalWidth = line.offsetWidth;
-    
-    // Сохраняем оригинальную высоту и ширину через невидимый клон
+
     const clone = line.cloneNode(true);
     clone.style.visibility = "hidden";
     clone.style.position = "absolute";
     clone.style.height = "auto";
     clone.style.width = originalWidth + "px";
-    clone.style.whiteSpace = "normal"; // Используем нормальный перенос
+    clone.style.whiteSpace = "normal";
     clone.style.wordWrap = "break-word";
     line.style.position = "relative";
     line.parentNode.insertBefore(clone, line);
-    
-    // Устанавливаем фиксированную ширину и высоту на основе клона
+
     const height = clone.offsetHeight;
     line.style.minHeight = height + "px";
-    line.style.width = originalWidth + "px"; // Фиксируем ширину
-    line.style.whiteSpace = "normal"; // Используем нормальный перенос
+    line.style.width = originalWidth + "px";
+    line.style.whiteSpace = "normal";
     line.style.wordWrap = "break-word";
-    
-    // Очищаем видимый текст для typewriter эффекта
+
     line.textContent = "";
     line.style.opacity = "1";
-    
-    // Удаляем клон после небольшой задержки
+
     setTimeout(() => {
       clone.remove();
     }, 500);
   });
 
-  // Создаем timeline для анимации при загрузке
   const loadTl = gsap.timeline({ delay: 0.5 });
 
-  // Анимация изображения профиля с задержкой 3 секунды
   loadTl.to(
     profilePicture,
     {
@@ -357,33 +315,44 @@ function initAboutAnimation() {
       duration: 1.2,
       ease: "elastic.out(1, 0.5)",
     },
-    1.5 // Задержка 3 секунды от начала timeline
+    1.5
   );
 
-  // Анимация печатания для каждой строки (медленнее)
   let currentPosition = 0;
   titleLines.forEach((line, index) => {
     const text = originalTexts[index];
-    
+
     if (index === 0) {
-      currentPosition = addTypewriterToTimeline(loadTl, line, text, 0.08, 0);
+      currentPosition = addTypewriterToTimeline(loadTl, line, text, 0.04, 0);
     } else {
-      currentPosition = addTypewriterToTimeline(loadTl, line, text, 0.08, currentPosition + 0.5);
+      currentPosition = addTypewriterToTimeline(loadTl, line, text, 0.04, currentPosition + 0.3);
     }
   });
+
+  if (heroSubtitle) {
+    loadTl.to(
+      heroSubtitle,
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "+=0.15"
+    );
+  }
 
   loadTl.to(
     cvButton,
     {
       opacity: 1,
       y: 0,
-      duration: 0.8,
+      duration: 0.6,
       ease: "back.out(1.7)",
     },
-    "+=0.3"
+    "-=0.25"
   );
 
-  // Parallax эффект при скролле для изображения профиля (только для десктопа)
   if (heroSection) {
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     if (!isTouch) {
@@ -399,28 +368,23 @@ function initAboutAnimation() {
     }
   }
 
-  // Анимация при повторном появлении секции (при скролле вверх)
   let hasAnimated = false;
   ScrollTrigger.create({
     trigger: aboutSection,
     start: "top 80%",
     onEnter: () => {
-      // Пропускаем анимацию при первой загрузке (она уже выполнена выше)
       if (hasAnimated) {
-        // Восстанавливаем текст
         titleLines.forEach((line, index) => {
           line.textContent = originalTexts[index];
         });
-        
+
         const scrollTl = gsap.timeline();
-        
-        // Анимация печатания для строк
+
         let scrollPosition = 0;
         titleLines.forEach((line, index) => {
-          // Резервируем место
           const text = originalTexts[index];
           const originalWidth = line.offsetWidth;
-          
+
           const clone = line.cloneNode(true);
           clone.textContent = text;
           clone.style.visibility = "hidden";
@@ -431,36 +395,37 @@ function initAboutAnimation() {
           clone.style.wordWrap = "break-word";
           line.style.position = "relative";
           line.parentNode.insertBefore(clone, line);
-          
+
           const height = clone.offsetHeight;
           line.style.minHeight = height + "px";
-          line.style.width = originalWidth + "px"; // Фиксируем ширину
-          line.style.whiteSpace = "normal"; // Используем нормальный перенос
+          line.style.width = originalWidth + "px";
+          line.style.whiteSpace = "normal";
           line.style.wordWrap = "break-word";
-          
+
           line.textContent = "";
-          
+
           if (index === 0) {
-            scrollPosition = addTypewriterToTimeline(scrollTl, line, text, 0.08, 0);
+            scrollPosition = addTypewriterToTimeline(scrollTl, line, text, 0.04, 0);
           } else {
-            scrollPosition = addTypewriterToTimeline(scrollTl, line, text, 0.08, scrollPosition + 0.5);
+            scrollPosition = addTypewriterToTimeline(scrollTl, line, text, 0.04, scrollPosition + 0.3);
           }
-          
+
           setTimeout(() => {
             clone.remove();
           }, 500);
         });
-        
+
         scrollTl
           .to(
-            cvButton,
+            [heroSubtitle, cvButton].filter(Boolean),
             {
               opacity: 1,
               y: 0,
               duration: 0.6,
               ease: "back.out(1.7)",
+              stagger: 0.08,
             },
-            "+=0.2"
+            "+=0.15"
           )
           .to(
             profilePicture,
@@ -488,12 +453,12 @@ const isTouchDevice = () => {
 
 if (!isTouchDevice()) {
   const cards = Array.from(document.querySelectorAll(".portfolio-card"));
-  
+
   const getHeaderHeight = () => {
     const header = document.querySelector(".header");
     return header ? header.offsetHeight : 88;
   };
-  
+
   const getCenterOffset = () => {
     const headerHeight = getHeaderHeight();
     const centerPercent = ((window.innerHeight - headerHeight) / 2 + headerHeight) / window.innerHeight * 100;
@@ -502,13 +467,13 @@ if (!isTouchDevice()) {
 
   cards.forEach((item, index) => {
     const nextCard = cards[index + 1];
-    
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: item,
         start: "top 60%",
         endTrigger: nextCard || item,
-        end: nextCard 
+        end: nextCard
           ? "top 60%"
           : () => `+=${item.offsetHeight}`,
         scrub: true,
@@ -528,7 +493,7 @@ if (!isTouchDevice()) {
 
   cards.forEach((item, index) => {
     const nextCard = cards[index + 1];
-    
+
     ScrollTrigger.create({
       trigger: item,
       start: "top 60%",
@@ -590,7 +555,7 @@ function updateActiveState(sectionId) {
   });
 }
 
-// Смена темы
+// Change theme
 const getThemeBasedOnTime = () => {
   const now = new Date();
   const hours = now.getHours();
@@ -668,7 +633,6 @@ window.addEventListener("load", setWrapperHeight);
 
 // Modal for experience images
 const portfolioimages = [
-  [sib],
   [
     affiliate,
     affiliate2,
@@ -677,21 +641,6 @@ const portfolioimages = [
     affiliate5,
     affiliate6,
     affiliate7,
-  ],
-  [portfolio],
-  [copa],
-  [
-    jinn1,
-    jinn2,
-    jinn3,
-    jinn4,
-    jinn5,
-    jinn6,
-    jinn7,
-    jinn8,
-    jinn9,
-    jinn10,
-    jinnFull,
   ],
 ];
 
@@ -709,7 +658,7 @@ let scale = 1;
 let moveX = 0;
 let moveY = 0;
 
-// Создаем портал для модалки
+// Create portal for modal
 function createModalPortal() {
   let portal = document.getElementById('modal-portal');
   if (!portal) {
@@ -729,19 +678,17 @@ function createModalPortal() {
 }
 
 function openModal(images) {
-  currentIndex = 0; // Сброс индекса
-  // Сбрасываем состояние зума при открытии новой модалки
+  currentIndex = 0;
   scale = 1;
   moveX = 0;
   moveY = 0;
-  
+
   const modal = createModal(images);
   const portal = createModalPortal();
-  portal.style.pointerEvents = 'auto'; // Включаем взаимодействие с модалкой
+  portal.style.pointerEvents = 'auto';
   portal.appendChild(modal);
   modal.style.display = "flex";
-  
-  // Блокируем скролл body когда модалка открыта
+
   document.body.style.overflow = "hidden";
 
   document.addEventListener("keydown", (e) => handleKeyPress(e, images, modal));
@@ -767,7 +714,7 @@ function createModal(images) {
   let modalImg = modal.querySelector(".modal-content");
 
   closeButton.addEventListener("click", () => closeModal(modal));
-  
+
   const handlePrev = () => {
     modalImg = modal.querySelector(".modal-content");
     updateImage(images, -1, modalImg);
@@ -776,7 +723,7 @@ function createModal(images) {
     modalImg = modal.querySelector(".modal-content");
     updateImage(images, 1, modalImg);
   };
-  
+
   prevButton.addEventListener("click", handlePrev);
   nextButton.addEventListener("click", handleNext);
 
@@ -795,7 +742,7 @@ function updateImage(images, direction, modalImg) {
   const savedMoveX = moveX;
   const savedMoveY = moveY;
   const savedWrapperStyles = {};
-  
+
   const imageWrapper = modalImg.parentElement;
   if (imageWrapper && imageWrapper.classList.contains('modal-content-wrapper')) {
     savedWrapperStyles.width = imageWrapper.style.width;
@@ -804,14 +751,14 @@ function updateImage(images, direction, modalImg) {
     savedWrapperStyles.overflowY = imageWrapper.style.overflowY;
     savedWrapperStyles.overflowX = imageWrapper.style.overflowX;
   }
-  
+
   currentIndex = (currentIndex + direction + images.length) % images.length;
   modalImg.src = images[currentIndex];
-  
+
   if (!wasZoomed) {
     resetImagePosition(modalImg);
   }
-  
+
   const modal = modalImg.closest('.modal');
   setupImageInteractions(modalImg, modal, wasZoomed, savedScale, savedMoveX, savedMoveY, savedWrapperStyles);
 }
@@ -821,7 +768,7 @@ function setupImageInteractions(modalImg, modal, preserveZoom = false, savedScal
     scale = savedScale;
     moveX = savedMoveX;
     moveY = savedMoveY;
-    
+
     const imageWrapper = modalImg.parentElement;
     if (imageWrapper && imageWrapper.classList.contains('modal-content-wrapper')) {
       imageWrapper.style.width = savedWrapperStyles.width || '';
@@ -835,13 +782,13 @@ function setupImageInteractions(modalImg, modal, preserveZoom = false, savedScal
     moveX = 0;
     moveY = 0;
   }
-  
+
   modalImg.style.position = "relative";
   modalImg.style.transition = "transform 0.3s ease";
   modalImg.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
   modalImg.style.transformOrigin = preserveZoom ? 'center center' : '';
   modalImg.style.cursor = scale > 1 ? "zoom-out" : "zoom-in";
-  
+
   if (!preserveZoom) {
     const imageWrapper = modalImg.parentElement;
     if (imageWrapper && imageWrapper.classList.contains('modal-content-wrapper')) {
@@ -858,14 +805,14 @@ function setupImageInteractions(modalImg, modal, preserveZoom = false, savedScal
     modalImg._clickHandler = null;
     modalImg._clickHandlerAdded = false;
   }
-  
+
   modalImg._clickHandler = (e) => handleImageClick(modalImg, e);
-  
+
   const addClickHandler = () => {
     if (modalImg._clickHandlerAdded) {
       return true;
     }
-    
+
     if (modalImg.complete && modalImg.naturalWidth > 0 && modalImg.naturalHeight > 0) {
       setTimeout(() => {
         const rect = modalImg.getBoundingClientRect();
@@ -878,9 +825,9 @@ function setupImageInteractions(modalImg, modal, preserveZoom = false, savedScal
     }
     return false;
   };
-  
+
   addClickHandler();
-  
+
   const loadHandler = () => {
     setTimeout(() => {
       if (!modalImg._clickHandlerAdded) {
@@ -891,7 +838,7 @@ function setupImageInteractions(modalImg, modal, preserveZoom = false, savedScal
       }
     }, 100);
   };
-  
+
   if (!modalImg.complete) {
     modalImg.addEventListener("load", loadHandler, { once: true });
   } else if (preserveZoom) {
@@ -899,7 +846,7 @@ function setupImageInteractions(modalImg, modal, preserveZoom = false, savedScal
       applyZoomAfterLoad(modalImg);
     }, 100);
   }
-  
+
   setTimeout(() => {
     if (!modalImg._clickHandlerAdded && modalImg.complete && modalImg.naturalWidth > 0) {
       addClickHandler();
@@ -912,22 +859,22 @@ function applyZoomAfterLoad(modalImg) {
   if (!imageWrapper || !imageWrapper.classList.contains('modal-content-wrapper')) {
     return;
   }
-  
+
   if (!modalImg.complete || modalImg.naturalWidth === 0) {
     return;
   }
-  
+
   modalImg.style.transformOrigin = 'center center';
   modalImg.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
   updateCursor(modalImg);
-  
+
   if (scale > 1.01) {
     imageWrapper.style.width = imageWrapper.style.width || '100vw';
     imageWrapper.style.maxWidth = imageWrapper.style.maxWidth || '100vw';
-    
+
     const aspectRatio = modalImg.naturalHeight / modalImg.naturalWidth;
     const scaledHeight = window.innerWidth * aspectRatio;
-    
+
     if (scaledHeight > window.innerHeight) {
       imageWrapper.style.height = imageWrapper.style.height || '100vh';
       imageWrapper.style.overflowY = imageWrapper.style.overflowY || 'auto';
@@ -943,49 +890,49 @@ function handleImageClick(modalImg, event) {
     modalImg.addEventListener('load', (e) => handleImageClick(modalImg, e), { once: true });
     return;
   }
-  
+
   const imageWrapper = modalImg.parentElement;
-  
+
   if (!imageWrapper || !modalImg.naturalWidth || !modalImg.naturalHeight) {
     return;
   }
-  
+
   const rect = modalImg.getBoundingClientRect();
   let currentDisplayWidth = rect.width;
-  
+
   if (scale > 1.01) {
     currentDisplayWidth = currentDisplayWidth / scale;
   }
-  
+
   if (currentDisplayWidth === 0) {
     return;
   }
-  
+
   const isZoomed = scale > 1.01;
-  
+
   if (!isZoomed) {
     const targetScale = window.innerWidth / currentDisplayWidth;
     const imageRect = modalImg.getBoundingClientRect();
-    
+
     scale = Math.max(1, targetScale);
-    
+
     const imageCenterX = imageRect.left + imageRect.width / 2;
     const imageCenterY = imageRect.top + imageRect.height / 2;
-    
+
     const scaledImageHeight = imageRect.height * scale;
     const topAfterScale = imageCenterY - scaledImageHeight / 2;
-    
+
     moveY = -topAfterScale;
     moveX = 0;
-    
+
     modalImg.style.transformOrigin = 'center center';
-    
+
     imageWrapper.style.width = '100vw';
     imageWrapper.style.maxWidth = '100vw';
-    
+
     const aspectRatio = modalImg.naturalHeight / modalImg.naturalWidth;
     const scaledHeight = window.innerWidth * aspectRatio;
-    
+
     if (scaledHeight > window.innerHeight) {
       imageWrapper.style.height = '100vh';
       imageWrapper.style.overflowY = 'auto';
@@ -1002,14 +949,14 @@ function handleImageClick(modalImg, event) {
     scale = 1;
     moveX = 0;
     moveY = 0;
-    
+
     imageWrapper.style.width = '';
     imageWrapper.style.maxWidth = '';
     imageWrapper.style.height = '';
     imageWrapper.style.overflowY = '';
     imageWrapper.style.overflowX = '';
   }
-  
+
   modalImg.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
   updateCursor(modalImg);
 }
@@ -1021,7 +968,7 @@ function resetImagePosition(modalImg) {
   modalImg.style.transform = `translate(0px, 0px) scale(1)`;
   modalImg.style.transformOrigin = '';
   modalImg.style.cursor = "zoom-in";
-  
+
   const imageWrapper = modalImg.parentElement;
   if (imageWrapper && imageWrapper.classList.contains('modal-content-wrapper')) {
     imageWrapper.style.width = '';
@@ -1048,22 +995,22 @@ function handleKeyPress(e, images, modal) {
 
 function closeModal(modal) {
   document.removeEventListener("keydown", handleKeyPress);
-  
+
   scale = 1;
   moveX = 0;
   moveY = 0;
-  
+
   document.body.style.overflow = "";
-  
+
   modal.remove();
-  
+
   const portal = document.getElementById('modal-portal');
   if (portal && portal.children.length === 0) {
     portal.style.pointerEvents = 'none';
   }
 }
 
-// Обновление года в копирайте
+// Update year in copyright
 window.addEventListener("DOMContentLoaded", () => {
   const currentYearElement = document.getElementById('current-year');
   if (currentYearElement) {

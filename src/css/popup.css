@@ -13,37 +13,50 @@
 
 .pop_up_container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
     margin: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .pop_up_body {
     display: flex;
     position: relative;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    margin: auto;
-    width: 600px;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-self: center;
+    box-sizing: border-box;
+    height: auto;
+    min-width: 0;
+    width: min(600px, calc(100vw - 32px));
+    max-width: 100%;
+    max-height: calc(100vh - 24px);
+    margin: 12px auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: var(--color-background);
     border-radius: var(--border-radius);
-    padding: 50px;
+    padding: 16px 20px 14px;
 }
 
-.pop_up_body p {
+.pop_up_body > p {
+    max-width: 100%;
     font-family: var(--font-family-accent);
     font-weight: 300;
-    font-size: 2rem;
-    margin: 0 0 50px;
-    text-align: center;
-    color: var(--color-accent);
-    text-wrap: balance;
+    font-size: 1.2rem;
+    line-height: 1.45;
+    margin: 0 28px 12px 0;
+    text-align: left;
+    text-wrap: pretty;
 }
 
 .textbox :is(input, textarea) {
     padding: 10px 20px;
-    border-radius: var(--border-radius-button);
+    border-radius: 0.5rem;
     background-color: var(--color-input);
     color: var(--color-text);
 }
@@ -94,19 +107,117 @@
 }
 
 .submit {
-    margin-block: 50px;
+    margin: 0;
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: [first] 1fr [second] 1fr;
-    grid-template-rows: auto auto 130px auto auto;
-    gap: 25px;
+    grid-template-rows: auto;
+    gap: 12px;
     width: 100%;
+    min-width: 0;
+}
+
+.grid-container > * {
+    min-width: 0;
 }
 
 .item5 {
     grid-column: span 2;
+}
+
+.item-altcha {
+    grid-column: span 2;
+}
+
+.altcha-widget {
+    width: 100%;
+    --altcha-max-width: 100%;
+    --altcha-padding: 0.35rem 0.6rem;
+    --altcha-border-radius: var(--border-radius);
+    --altcha-color-base: var(--color-background);
+    --altcha-color-base-content: var(--color-text);
+    --altcha-color-primary: var(--color-accent);
+    --altcha-color-primary-content: #001d26;
+    --altcha-color-neutral: var(--color-text);
+    --altcha-checkbox-size: 18px;
+    --altcha-z-index: 100000;
+    --altcha-z-index-popover: 100001;
+}
+
+.altcha-widget .altcha {
+    width: 100%;
+}
+
+.altcha-widget .altcha-main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.altcha-widget .altcha-main > * {
+    width: auto;
+}
+
+.altcha-widget .altcha-main > input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.altcha-widget .altcha-main > *:first-child {
+    display: contents;
+}
+
+.altcha-widget .altcha-checkbox-wrap {
+    order: 1;
+    flex-grow: 0;
+}
+
+.altcha-widget .altcha-checkbox-wrap label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+.altcha-widget .altcha-footer {
+    order: 2;
+    flex: 1 1 auto;
+    min-width: 0;
+    justify-content: center;
+    font-size: 0.65rem;
+    opacity: 0.85;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.altcha-widget .altcha-footer p {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    text-align: left;
+    color: inherit;
+    width: auto;
+}
+
+.altcha-widget .altcha-checkbox-wrap + div {
+    order: 3;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.altcha-widget .altcha-logo svg {
+    width: 16px;
+    height: 16px;
 }
 
 .item6 {
@@ -122,8 +233,8 @@
 
 @media (max-width: 48rem) {
     .pop_up_body {
-        max-width: 90vw;
-        padding: 25px;
+        width: min(90vw, 600px);
+        padding: 14px 14px 12px;
     }
     .grid-container {
         grid-template-columns: 1fr;
@@ -133,11 +244,11 @@
         grid-column: span 1;
         width: 100%;
     }
-    .pop_up_body p {
-        font-size: 22px;
-        margin: 0 0 20px;
+    .pop_up_body > p {
+        font-size: 1.5rem;
+        margin: 0 0 18px;
     }
-} 
+}
 
 .textbox {
     position: relative;
@@ -150,13 +261,15 @@
 .textarea {
     resize: vertical;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     height: 100px;
 }
 
 .pop_up_close {
     position: absolute;
-    top: 1.5vh;
-    right: 2vh;
+    top: 8px;
+    right: 8px;
     border-radius: 50%;
     text-align: center;
     color: var(--color-text);
