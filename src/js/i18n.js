@@ -54,49 +54,19 @@ function applyCvLink() {
 
   if (!origin) {
     link.setAttribute("href", "/images/pdf/CV_Resume.pdf");
-    link.setAttribute("download", "CV_Resume.pdf");
-    link.removeAttribute("target");
-    link.removeAttribute("rel");
+    link.removeAttribute("download");
+    link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener noreferrer");
     return;
   }
 
   link.setAttribute(
     "href",
-    `${origin}/cv/software_engineer_${currentLocale}.pdf`
+    `${origin}/cv/amal_yuldashev_software_engineer_${currentLocale}.pdf`
   );
   link.removeAttribute("download");
   link.setAttribute("target", "_blank");
   link.setAttribute("rel", "noopener noreferrer");
-}
-
-async function downloadRemoteCv(event) {
-  const link = event.target.closest("[data-cv-link]");
-  if (!link) return;
-
-  const href = link.getAttribute("href") || "";
-  if (!href.startsWith("http")) return;
-  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-  event.preventDefault();
-
-  const filename = `software_engineer_${currentLocale}.pdf`;
-
-  try {
-    const response = await fetch(href, { mode: "cors" });
-    if (!response.ok) throw new Error("CV fetch failed");
-
-    const blob = await response.blob();
-    const objectUrl = URL.createObjectURL(blob);
-    const temp = document.createElement("a");
-    temp.href = objectUrl;
-    temp.download = filename;
-    document.body.appendChild(temp);
-    temp.click();
-    temp.remove();
-    URL.revokeObjectURL(objectUrl);
-  } catch {
-    window.open(href, "_blank", "noopener,noreferrer");
-  }
 }
 
 function applyTranslations() {
@@ -155,14 +125,8 @@ export function initI18n() {
 
 document.addEventListener("click", (event) => {
   const button = event.target.closest(".lang-switch__btn");
-  if (button?.dataset.lang) {
-    setLocale(button.dataset.lang);
-    return;
-  }
-
-  if (event.button === 0) {
-    downloadRemoteCv(event);
-  }
+  if (!button?.dataset.lang) return;
+  setLocale(button.dataset.lang);
 });
 
 if (document.readyState === "loading") {
