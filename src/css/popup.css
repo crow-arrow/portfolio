@@ -146,6 +146,11 @@
     --altcha-z-index-popover: 100001;
 }
 
+html:not(.litemode) .altcha-widget {
+    color-scheme: dark;
+    --altcha-spinner-color: #eaeaea;
+}
+
 .altcha-widget .altcha {
     width: 100%;
 }

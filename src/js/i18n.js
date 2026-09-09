@@ -106,7 +106,41 @@ export function initI18n() {
   applyTranslations();
 }
 
+function openCvPreview(href) {
+  const preview = window.open("about:blank", "_blank");
+
+  fetch(href, { headers: { Accept: "application/pdf" }, cache: "no-store" })
+    .then(async (response) => {
+      if (!response.ok) throw new Error(String(response.status));
+
+      const buffer = await response.arrayBuffer();
+      const signature = String.fromCharCode(...new Uint8Array(buffer.slice(0, 5)));
+      if (!signature.startsWith("%PDF")) {
+        throw new Error("not-pdf");
+      }
+
+      const url = URL.createObjectURL(new Blob([buffer], { type: "application/pdf" }));
+
+      if (preview && !preview.closed) {
+        preview.location.replace(url);
+        return;
+      }
+
+      window.open(url, "_blank");
+    })
+    .catch(() => {
+      if (preview && !preview.closed) preview.close();
+    });
+}
+
 document.addEventListener("click", (event) => {
+  const cvLink = event.target.closest("[data-cv-link]");
+  if (cvLink && event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+    event.preventDefault();
+    openCvPreview(cvLink.href);
+    return;
+  }
+
   const button = event.target.closest(".lang-switch__btn");
   if (!button?.dataset.lang) return;
   setLocale(button.dataset.lang);

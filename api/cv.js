@@ -57,7 +57,8 @@ function localeFromRequest(req) {
 }
 
 function sendPdf(res, file, isHead) {
-  res.setHeader("Content-Type", file.contentType);
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Length", String(file.buffer.length));
   res.setHeader("Content-Disposition", `inline; filename="${file.filename}"`);
   res.setHeader("Cache-Control", "public, max-age=86400");
   res.setHeader(
@@ -111,6 +112,8 @@ async function loadPdf(locale) {
 }
 
 export default async function handler(req, res) {
+  const locale = localeFromRequest(req);
+
   if (req.method !== "GET" && req.method !== "HEAD") {
     res.statusCode = 405;
     res.setHeader("Allow", "GET, HEAD");
@@ -132,7 +135,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const file = await loadPdf(localeFromRequest(req));
+    const file = await loadPdf(locale);
     sendPdf(res, file, req.method === "HEAD");
   } catch (error) {
     console.error("CV proxy error:", error);

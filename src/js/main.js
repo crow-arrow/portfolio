@@ -11,8 +11,25 @@ import { injectSpeedInsights } from "@vercel/speed-insights";
 import { initI18n } from "./i18n.js";
 import { initBadgeIcons } from "./badges.js";
 
+clearLegacyClientCaches().catch(() => {});
 inject();
 injectSpeedInsights();
+
+async function clearLegacyClientCaches() {
+  const hadController = Boolean(navigator.serviceWorker?.controller);
+  const registrations = "serviceWorker" in navigator
+    ? await navigator.serviceWorker.getRegistrations()
+    : [];
+  const cacheKeys = "caches" in window ? await caches.keys() : [];
+
+  await Promise.all(registrations.map((registration) => registration.unregister()));
+  await Promise.all(cacheKeys.map((key) => caches.delete(key)));
+
+  if ((hadController || registrations.length > 0) && !sessionStorage.getItem("portfolio-sw-cleared")) {
+    sessionStorage.setItem("portfolio-sw-cleared", "1");
+    window.location.reload();
+  }
+}
 
 // Visitors session time
 function getVisitStart() {
