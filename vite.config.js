@@ -11,6 +11,8 @@ const API_ENV_KEYS = [
   "CLIENT_SECRET",
   "REFRESH_TOKEN",
   "REDIRECT_URI",
+  "CV_BASE_URL",
+  "CV_FILENAME_PREFIX",
 ];
 
 function applyApiEnv(mode) {
@@ -76,6 +78,27 @@ async function apiDevMiddleware(req, res, next) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify({ error: "ALTCHA challenge failed" }));
+    }
+    return;
+  }
+
+  if (url === "/api/cv") {
+    if (req.method !== "GET" && req.method !== "HEAD") {
+      res.statusCode = 405;
+      res.end();
+      return;
+    }
+
+    try {
+      const { default: handler } = await import(`${process.cwd()}/api/cv.js`);
+      await handler(req, res);
+    } catch (error) {
+      console.error("CV API error:", error);
+      if (!res.writableEnded) {
+        res.statusCode = 502;
+        res.setHeader("Content-Type", "application/json");
+        res.end(JSON.stringify({ error: "CV is temporarily unavailable." }));
+      }
     }
     return;
   }

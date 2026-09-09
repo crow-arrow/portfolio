@@ -46,24 +46,7 @@ function applyCvLink() {
   const link = document.querySelector("[data-cv-link]");
   if (!link) return;
 
-  const origin = (
-    import.meta.env.VITE_CV_BASE_URL ||
-    link.dataset.cvBase ||
-    ""
-  ).replace(/\/$/, "");
-
-  if (!origin) {
-    link.setAttribute("href", "/images/pdf/CV_Resume.pdf");
-    link.removeAttribute("download");
-    link.setAttribute("target", "_blank");
-    link.setAttribute("rel", "noopener noreferrer");
-    return;
-  }
-
-  link.setAttribute(
-    "href",
-    `${origin}/cv/amal_yuldashev_software_engineer_${currentLocale}.pdf`
-  );
+  link.setAttribute("href", `/api/cv?lang=${currentLocale}`);
   link.removeAttribute("download");
   link.setAttribute("target", "_blank");
   link.setAttribute("rel", "noopener noreferrer");
