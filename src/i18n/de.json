@@ -77,7 +77,7 @@
     "titlePrefix": "Berufliche",
     "titleAccent": "Erfahrung",
     "schultechRole": "Full-Stack- & DevOps-Engineer",
-    "schultechDate": "August 2024 – heute",
+    "schultechDate": "Mai 2026 – heute",
     "schultech1": "<strong>DevOps & Infrastruktur:</strong> Serverinfrastruktur von Grund auf aufgebaut und betrieben; CI/CD-Pipelines für Zero-Downtime-Deployments entworfen und automatisiert.",
     "schultech2": "<strong>Observability:</strong> Systemweite Monitoring- und Alerting-Dashboards mit <strong>Grafana</strong> für Servergesundheit, Latenz und Uptime eingerichtet.",
     "schultech3": "<strong>Cloud Manager & Security:</strong> Interne Cloud-Manager-Plattform aufgebaut, inkl. Enterprise-<strong>SSO (OAuth2)</strong>, <strong>Zwei-Faktor-Authentifizierung (2FA)</strong> und strikter RBAC-Zugriffsrichtlinien.",

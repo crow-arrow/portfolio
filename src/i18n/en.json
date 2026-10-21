@@ -77,7 +77,7 @@
     "titlePrefix": "Work",
     "titleAccent": "Experience",
     "schultechRole": "Full-Stack & DevOps Engineer",
-    "schultechDate": "August 2024 – Present",
+    "schultechDate": "May 2026 – Present",
     "schultech1": "<strong>DevOps & Infrastructure:</strong> Built and maintained server infrastructure from scratch; designed and automated CI/CD pipelines for zero-downtime deployments.",
     "schultech2": "<strong>Observability:</strong> Configured system-wide monitoring and alerting dashboards using <strong>Grafana</strong> to track server health, latency, and uptime.",
     "schultech3": "<strong>Cloud Manager & Security:</strong> Built an internal Cloud Manager platform, implementing enterprise <strong>SSO (OAuth2)</strong>, <strong>two-factor authentication (2FA)</strong>, and strict RBAC access policies.",
